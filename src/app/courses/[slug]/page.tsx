@@ -56,8 +56,50 @@ export default async function CoursePage({ params }: PageProps) {
 
   if (!course) notFound();
 
+  const courseUrl = `https://cyberguard-academy.vercel.app/courses/${course.slug}`;
+
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Course',
+    name: course.title,
+    description: course.fullDescription || course.description,
+    provider: {
+      '@type': 'EducationalOrganization',
+      name: 'CyberGuard Academy',
+      url: 'https://cyberguard-academy.vercel.app',
+    },
+    educationalLevel: course.level,
+    timeRequired: course.duration,
+    courseMode: 'online and onsite',
+    inLanguage: 'ru',
+    instructor: {
+      '@type': 'Person',
+      name: course.instructor.name,
+      description: course.instructor.title,
+    },
+    offers: {
+      '@type': 'Offer',
+      price: course.price,
+      priceCurrency: course.currency,
+      availability: course.enrollmentOpen
+        ? 'https://schema.org/InStock'
+        : 'https://schema.org/OutOfStock',
+      url: courseUrl,
+    },
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: course.rating,
+      reviewCount: course.reviewCount,
+    },
+    url: courseUrl,
+  };
+
   return (
     <div className="pt-24 pb-16">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <div className="max-w-5xl mx-auto px-4">
         <nav className="mb-8 text-sm text-gray-400">
           <Link href="/" className="hover:text-white">Главная</Link> /{' '}

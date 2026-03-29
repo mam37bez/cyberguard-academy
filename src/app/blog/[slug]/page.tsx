@@ -53,8 +53,41 @@ export default async function BlogPostPage({ params }: PageProps) {
 
   if (!post) notFound();
 
+  const postUrl = `https://cyberguard-academy.vercel.app/blog/${post.slug}`;
+
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: post.title,
+    description: post.excerpt,
+    articleBody: post.content,
+    author: {
+      '@type': 'Person',
+      name: post.author,
+    },
+    publisher: {
+      '@type': 'EducationalOrganization',
+      name: 'CyberGuard Academy',
+      url: 'https://cyberguard-academy.vercel.app',
+    },
+    datePublished: post.date,
+    dateModified: post.date,
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': postUrl,
+    },
+    url: postUrl,
+    inLanguage: 'ru',
+    keywords: post.tags.join(', '),
+    articleSection: post.category,
+  };
+
   return (
     <div className="pt-24 pb-16">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <div className="max-w-4xl mx-auto px-4">
         <nav className="mb-8 text-sm text-gray-400">
           <Link href="/" className="hover:text-white">Главная</Link> /{' '}
