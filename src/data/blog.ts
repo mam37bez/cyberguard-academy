@@ -1,0 +1,8 @@
+import { BlogPost } from '@/types';
+export const blogPosts: BlogPost[] = [
+  {id:'1',slug:'kak-raspoznat-moshennikov',title:'Как распознать мошенников из колл-центра',excerpt:'Руководство по защите от телефонных мошенников.',content:'Мошенники создают срочность. Никогда не сообщайте коды из SMS. Перезвоните в банк сами.',author:'Елена Соколова',date:'2026-01-15',readTime:'8 мин',category:'Защита',tags:['мошенники','защита'],featured:true},
+  {id:'2',slug:'zaschita-detey',title:'Защита детей в интернете: Гид для родителей',excerpt:'Как обезопасить ребёнка в цифровом мире.',content:'Настройте родительский контроль. Обсуждайте правила. Используйте DNS-фильтрацию.',author:'Анна Белова',date:'2026-01-10',readTime:'12 мин',category:'Дети',tags:['дети','безопасность'],featured:true},
+  {id:'3',slug:'apt-ataki',title:'APT-атаки и защита от кибершпионажа',excerpt:'Образовательный материал о продвинутых угрозах.',content:'Обновляйте ПО, используйте 2FA, шифруйте данные, используйте VPN. Материал в образовательных целях.',author:'Алексей Морозов',date:'2026-01-05',readTime:'15 мин',category:'Безопасность',tags:['APT','защита'],featured:false},
+  {id:'4',slug:'nadezhnye-paroli',title:'Создание надёжных паролей',excerpt:'Как создавать пароли которые невозможно взломать.',content:'Минимум 16 символов, уникальный для каждого сервиса. Менеджер паролей: Bitwarden или KeePassXC.',author:'Дмитрий Козлов',date:'2025-12-28',readTime:'6 мин',category:'Основы',tags:['пароли','2FA'],featured:false},
+];
+export function getBlogPostBySlug(slug: string): BlogPost | undefined { return blogPosts.find(p=>p.slug===slug); }
