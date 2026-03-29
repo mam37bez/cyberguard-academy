@@ -27,6 +27,12 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
+  verification: {
+    google: '7OXKptXRHyST3rxYOYBpeSf4KxSu94uswVnYSfbFFr8',
+    other: {
+      'msvalidate.01': '78FE0C8D5949E66515F924B35DF18BAA',
+    },
+  },
   openGraph: {
     title: 'CyberGuard Academy',
     description: 'Школа кибербезопасности для детей и взрослых: курсы, блог и практические инструменты по информационной безопасности.',
