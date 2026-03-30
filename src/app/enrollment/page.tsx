@@ -17,7 +17,7 @@ declare global {
   }
 }
 
-const SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || '';
+const SITE_KEY = '0x4AAAAAACyDT_0NEyBK5SxM';
 
 export default function EnrollmentPage() {
   const [loading, setLoading] = useState(false);
