@@ -14,6 +14,25 @@ function clean(value: unknown): string {
   return typeof value === 'string' ? value.trim() : '';
 }
 
+async function verifyTurnstile(token: string, ip?: string | null) {
+  const secret = process.env.TURNSTILE_SECRET_KEY;
+
+  if (!secret) return false;
+
+  const formData = new FormData();
+  formData.append('secret', secret);
+  formData.append('response', token);
+  if (ip) formData.append('remoteip', ip);
+
+  const result = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+    method: 'POST',
+    body: formData,
+  });
+
+  const data = await result.json();
+  return data.success === true;
+}
+
 export async function POST(req: NextRequest) {
   try {
     const contentType = req.headers.get('content-type') || '';
@@ -29,11 +48,23 @@ export async function POST(req: NextRequest) {
     const cn = clean(body.cn);
     const ca = clean(body.ca);
     const ci = clean(body.ci);
-    const website = clean(body.website); // honeypot
+    const website = clean(body.website);
+    const turnstileToken = clean(body.turnstileToken);
     const agree = body.agree === true;
 
     if (website) {
       return NextResponse.json({ error: 'Spam detected' }, { status: 400 });
+    }
+
+    if (!turnstileToken) {
+      return NextResponse.json({ error: 'Turnstile verification required' }, { status: 400 });
+    }
+
+    const ip = req.headers.get('x-forwarded-for');
+    const isHuman = await verifyTurnstile(turnstileToken, ip);
+
+    if (!isHuman) {
+      return NextResponse.json({ error: 'Turnstile verification failed' }, { status: 400 });
     }
 
     if (!pn || !pe || !pp || !cn || !ca || !ci || !agree) {
