@@ -6,12 +6,44 @@ const MAX_PHONE = 30;
 const MAX_AGE = 20;
 const MAX_COURSE = 80;
 
+const RATE_LIMIT_MAX = 5;
+const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000;
+
+const enrollmentRateLimit = new Map<string, { count: number; resetTime: number }>();
+
 function isValidEmail(email: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
 function clean(value: unknown): string {
   return typeof value === 'string' ? value.trim() : '';
+}
+
+function getClientIp(req: NextRequest): string {
+  const forwarded = req.headers.get('x-forwarded-for');
+  if (forwarded) return forwarded.split(',')[0].trim();
+  return 'unknown';
+}
+
+function isRateLimited(ip: string): boolean {
+  const now = Date.now();
+  const entry = enrollmentRateLimit.get(ip);
+
+  if (!entry || now > entry.resetTime) {
+    enrollmentRateLimit.set(ip, {
+      count: 1,
+      resetTime: now + RATE_LIMIT_WINDOW_MS,
+    });
+    return false;
+  }
+
+  if (entry.count >= RATE_LIMIT_MAX) {
+    return true;
+  }
+
+  entry.count += 1;
+  enrollmentRateLimit.set(ip, entry);
+  return false;
 }
 
 async function verifyTurnstile(token: string, ip?: string | null) {
@@ -35,6 +67,15 @@ async function verifyTurnstile(token: string, ip?: string | null) {
 
 export async function POST(req: NextRequest) {
   try {
+    const ip = getClientIp(req);
+
+    if (isRateLimited(ip)) {
+      return NextResponse.json(
+        { error: 'Too many requests. Please try again later.' },
+        { status: 429 }
+      );
+    }
+
     const contentType = req.headers.get('content-type') || '';
     if (!contentType.includes('application/json')) {
       return NextResponse.json({ error: 'Unsupported content type' }, { status: 415 });
@@ -60,7 +101,6 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Turnstile verification required' }, { status: 400 });
     }
 
-    const ip = req.headers.get('x-forwarded-for');
     const isHuman = await verifyTurnstile(turnstileToken, ip);
 
     if (!isHuman) {
