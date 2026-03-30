@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Script from 'next/script';
 import { Card, CardContent } from '@/components/ui/Card';
 import { Input } from '@/components/ui/Input';
@@ -37,7 +37,7 @@ export default function EnrollmentPage() {
     website: '',
   });
 
-  useEffect(() => {
+  const renderTurnstile = () => {
     if (!SITE_KEY || !window.turnstile || widgetId) return;
 
     const id = window.turnstile.render('#turnstile-enrollment', {
@@ -48,7 +48,7 @@ export default function EnrollmentPage() {
     });
 
     setWidgetId(id);
-  }, [widgetId]);
+  };
 
   const ch = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value, type } = e.target;
@@ -115,6 +115,7 @@ export default function EnrollmentPage() {
             onClick={() => {
               setDone(false);
               setError('');
+              setToken('');
             }}
             variant="primary"
           >
@@ -127,7 +128,11 @@ export default function EnrollmentPage() {
 
   return (
     <>
-      <Script src="https://challenges.cloudflare.com/turnstile/v0/api.js" strategy="afterInteractive" />
+      <Script
+        src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"
+        strategy="afterInteractive"
+        onLoad={renderTurnstile}
+      />
 
       <div className="pt-24 pb-16">
         <div className="max-w-3xl mx-auto px-4">

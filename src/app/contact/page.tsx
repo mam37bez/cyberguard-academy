@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Script from 'next/script';
 import { Card, CardContent } from '@/components/ui/Card';
 import { Input } from '@/components/ui/Input';
@@ -35,7 +35,7 @@ export default function ContactPage() {
     website: '',
   });
 
-  useEffect(() => {
+  const renderTurnstile = () => {
     if (!SITE_KEY || !window.turnstile || widgetId) return;
 
     const id = window.turnstile.render('#turnstile-contact', {
@@ -46,7 +46,7 @@ export default function ContactPage() {
     });
 
     setWidgetId(id);
-  }, [widgetId]);
+  };
 
   const ch = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
     setF((p) => ({ ...p, [e.target.name]: e.target.value }));
@@ -106,6 +106,7 @@ export default function ContactPage() {
             onClick={() => {
               setDone(false);
               setError('');
+              setToken('');
             }}
             variant="primary"
           >
@@ -118,7 +119,11 @@ export default function ContactPage() {
 
   return (
     <>
-      <Script src="https://challenges.cloudflare.com/turnstile/v0/api.js" strategy="afterInteractive" />
+      <Script
+        src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"
+        strategy="afterInteractive"
+        onLoad={renderTurnstile}
+      />
 
       <div className="pt-24 pb-16">
         <div className="max-w-7xl mx-auto px-4">
