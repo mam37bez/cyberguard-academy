@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Script from 'next/script';
 import { Card, CardContent } from '@/components/ui/Card';
 import { Input } from '@/components/ui/Input';
@@ -25,6 +25,7 @@ export default function EnrollmentPage() {
   const [error, setError] = useState('');
   const [token, setToken] = useState('');
   const [widgetId, setWidgetId] = useState<string | null>(null);
+  const [scriptReady, setScriptReady] = useState(false);
 
   const [f, setF] = useState({
     pn: '',
@@ -37,18 +38,35 @@ export default function EnrollmentPage() {
     website: '',
   });
 
-  const renderTurnstile = () => {
-    if (!SITE_KEY || !window.turnstile || widgetId) return;
+  useEffect(() => {
+    if (!scriptReady || !SITE_KEY || widgetId) return;
 
-    const id = window.turnstile.render('#turnstile-enrollment', {
-      sitekey: SITE_KEY,
-      callback: (receivedToken: string) => setToken(receivedToken),
-      'expired-callback': () => setToken(''),
-      'error-callback': () => setToken(''),
-    });
+    let attempts = 0;
+    const maxAttempts = 20;
 
-    setWidgetId(id);
-  };
+    const timer = setInterval(() => {
+      const container = document.getElementById('turnstile-enrollment');
+
+      if (window.turnstile && container && !widgetId) {
+        const id = window.turnstile.render(container, {
+          sitekey: SITE_KEY,
+          callback: (receivedToken: string) => setToken(receivedToken),
+          'expired-callback': () => setToken(''),
+          'error-callback': () => setToken(''),
+        });
+
+        setWidgetId(id);
+        clearInterval(timer);
+      }
+
+      attempts += 1;
+      if (attempts >= maxAttempts) {
+        clearInterval(timer);
+      }
+    }, 500);
+
+    return () => clearInterval(timer);
+  }, [scriptReady, widgetId]);
 
   const ch = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value, type } = e.target;
@@ -131,7 +149,7 @@ export default function EnrollmentPage() {
       <Script
         src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"
         strategy="afterInteractive"
-        onLoad={renderTurnstile}
+        onLoad={() => setScriptReady(true)}
       />
 
       <div className="pt-24 pb-16">
@@ -202,7 +220,7 @@ export default function EnrollmentPage() {
                   <span className="text-sm text-gray-400">Согласен на обработку данных</span>
                 </label>
 
-                <div id="turnstile-enrollment" className="pt-2" />
+                <div id="turnstile-enrollment" className="pt-2 min-h-[70px]" />
 
                 {error && <p className="text-red-400 text-sm">{error}</p>}
 
