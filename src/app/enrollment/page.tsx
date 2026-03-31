@@ -54,7 +54,6 @@ export default function EnrollmentPage() {
           'expired-callback': () => setToken(''),
           'error-callback': () => setToken(''),
         });
-
         setWidgetId(id);
         clearInterval(timer);
       }
@@ -114,7 +113,10 @@ export default function EnrollmentPage() {
         website: '',
       });
       setToken('');
-      if (window.turnstile && widgetId) window.turnstile.reset(widgetId);
+
+      if (window.turnstile && widgetId) {
+        window.turnstile.reset(widgetId);
+      }
     } catch {
       setError('Не удалось отправить форму. Попробуйте позже.');
     } finally {
@@ -155,6 +157,7 @@ export default function EnrollmentPage() {
       <div className="pt-24 pb-16">
         <div className="max-w-3xl mx-auto px-4">
           <SectionHeading badge="Запись" title="Записаться" subtitle="Заполните форму" />
+
           <Card variant="glow">
             <CardContent>
               <form onSubmit={sub} className="space-y-8">
@@ -172,7 +175,7 @@ export default function EnrollmentPage() {
                 </div>
 
                 <div>
-                  <h3 className="text-lg font-semibold text-white mb-4">👤 Родитель</h3>
+                  <h3 className="text-lg font-semibold text-white mb-4">Родитель</h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <Input label="ФИО" name="pn" value={f.pn} onChange={ch} required />
                     <Input label="Email" name="pe" type="email" value={f.pe} onChange={ch} required />
@@ -183,7 +186,7 @@ export default function EnrollmentPage() {
                 </div>
 
                 <div>
-                  <h3 className="text-lg font-semibold text-white mb-4">👦 Ученик</h3>
+                  <h3 className="text-lg font-semibold text-white mb-4">Ученик</h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <Input label="Имя" name="cn" value={f.cn} onChange={ch} required />
                     <Input label="Возраст" name="ca" value={f.ca} onChange={ch} required />
@@ -191,7 +194,7 @@ export default function EnrollmentPage() {
                 </div>
 
                 <div>
-                  <h3 className="text-lg font-semibold text-white mb-4">📚 Курс</h3>
+                  <h3 className="text-lg font-semibold text-white mb-4">Курс</h3>
                   <select
                     name="ci"
                     value={f.ci}
@@ -225,7 +228,7 @@ export default function EnrollmentPage() {
                 {error && <p className="text-red-400 text-sm">{error}</p>}
 
                 <Button type="submit" size="lg" isLoading={loading} className="w-full">
-                  🎓 Отправить
+                  Отправить
                 </Button>
 
                 <p className="text-center text-sm text-gray-500">Пробное занятие — бесплатно!</p>

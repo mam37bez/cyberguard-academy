@@ -52,7 +52,6 @@ export default function ContactPage() {
           'expired-callback': () => setToken(''),
           'error-callback': () => setToken(''),
         });
-
         setWidgetId(id);
         clearInterval(timer);
       }
@@ -105,7 +104,10 @@ export default function ContactPage() {
         website: '',
       });
       setToken('');
-      if (window.turnstile && widgetId) window.turnstile.reset(widgetId);
+
+      if (window.turnstile && widgetId) {
+        window.turnstile.reset(widgetId);
+      }
     } catch {
       setError('Не удалось отправить форму. Попробуйте позже.');
     } finally {
@@ -146,13 +148,14 @@ export default function ContactPage() {
       <div className="pt-24 pb-16">
         <div className="max-w-7xl mx-auto px-4">
           <SectionHeading badge="Контакты" title="Свяжитесь с нами" subtitle="Мы рады помочь" />
+
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
             <div className="space-y-6">
               {[
                 { i: '📍', t: 'Адрес', v: 'г. Минск' },
                 { i: '📞', t: 'Телефон', v: '+375 (29) 123-45-67' },
-                { i: '📧', t: 'Email', v: 'info@cyberguard.academy' },
-                { i: '🕐', t: 'Время', v: 'Пн-Сб: 9-20' },
+                { i: '✉️', t: 'Email', v: 'info@cyberguard.academy' },
+                { i: '🕒', t: 'Время', v: 'Пн-Сб: 9-20' },
               ].map((x) => (
                 <Card key={x.t} variant="default">
                   <CardContent>
@@ -187,7 +190,14 @@ export default function ContactPage() {
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <Input label="Имя" name="name" value={f.name} onChange={ch} required />
-                      <Input label="Email" name="email" type="email" value={f.email} onChange={ch} required />
+                      <Input
+                        label="Email"
+                        name="email"
+                        type="email"
+                        value={f.email}
+                        onChange={ch}
+                        required
+                      />
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -195,14 +205,21 @@ export default function ContactPage() {
                       <Input label="Тема" name="subject" value={f.subject} onChange={ch} required />
                     </div>
 
-                    <Textarea label="Сообщение" name="message" value={f.message} onChange={ch} rows={5} required />
+                    <Textarea
+                      label="Сообщение"
+                      name="message"
+                      value={f.message}
+                      onChange={ch}
+                      rows={5}
+                      required
+                    />
 
                     <div id="turnstile-contact" className="pt-2 min-h-[70px]" />
 
                     {error && <p className="text-red-400 text-sm">{error}</p>}
 
                     <Button type="submit" size="lg" isLoading={loading} className="w-full">
-                      📨 Отправить
+                      Отправить
                     </Button>
                   </form>
                 </CardContent>
