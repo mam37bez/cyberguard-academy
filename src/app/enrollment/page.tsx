@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
+import Link from 'next/link';
 import Script from 'next/script';
 import { Card, CardContent } from '@/components/ui/Card';
 import { Input } from '@/components/ui/Input';
@@ -224,7 +225,12 @@ export default function EnrollmentPage() {
                     required
                     className="mt-1"
                   />
-                  <span className="text-sm text-gray-400">Согласен на обработку данных</span>
+                  <span className="text-sm text-gray-400">
+                    Согласен на обработку данных в соответствии с{' '}
+                    <Link href="/privacy" className="text-primary-400 hover:text-primary-300 underline">
+                      политикой конфиденциальности
+                    </Link>
+                  </span>
                 </label>
 
                 <div id="turnstile-enrollment" className="pt-2 min-h-[70px]" />

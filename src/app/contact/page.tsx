@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
+import Link from 'next/link';
 import Script from 'next/script';
 import { Card, CardContent } from '@/components/ui/Card';
 import { Input } from '@/components/ui/Input';
@@ -225,6 +226,14 @@ export default function ContactPage() {
                     <Button type="submit" size="lg" isLoading={loading} className="w-full">
                       Отправить
                     </Button>
+
+                    <p className="text-center text-sm text-gray-500">
+                      Отправляя сообщение, вы соглашаетесь с{' '}
+                      <Link href="/privacy" className="text-primary-400 hover:text-primary-300 underline">
+                        политикой конфиденциальности
+                      </Link>
+                      .
+                    </p>
                   </form>
                 </CardContent>
               </Card>
