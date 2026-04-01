@@ -55,6 +55,15 @@ export default async function BlogPostPage({ params }: PageProps) {
 
   const postUrl = `https://cyberguard-academy.vercel.app/blog/${post.slug}`;
 
+  const relatedPosts = blogPosts
+    .filter((p) => p.slug !== post.slug)
+    .sort((a, b) => {
+      const sameCategoryA = a.category === post.category ? 1 : 0;
+      const sameCategoryB = b.category === post.category ? 1 : 0;
+      return sameCategoryB - sameCategoryA;
+    })
+    .slice(0, 3);
+
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'BlogPosting',
@@ -88,11 +97,17 @@ export default async function BlogPostPage({ params }: PageProps) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+
       <div className="max-w-4xl mx-auto px-4">
         <nav className="mb-8 text-sm text-gray-400">
-          <Link href="/" className="hover:text-white">Главная</Link> /{' '}
-          <Link href="/blog" className="hover:text-white">Блог</Link> /{' '}
-          <span className="text-white">{post.title}</span>
+          <Link href="/" className="hover:text-white">
+            Главная
+          </Link>{' '}
+          /{' '}
+          <Link href="/blog" className="hover:text-white">
+            Блог
+          </Link>{' '}
+          / <span className="text-white">{post.title}</span>
         </nav>
 
         <div className="mb-12">
@@ -109,16 +124,46 @@ export default async function BlogPostPage({ params }: PageProps) {
 
         <div className="flex flex-wrap gap-2 mb-12">
           {post.tags.map((t) => (
-            <Badge key={t} variant="outline" size="sm">#{t}</Badge>
+            <Badge key={t} variant="outline" size="sm">
+              #{t}
+            </Badge>
           ))}
         </div>
 
-        <div className="text-center p-8 rounded-2xl bg-cyber-card border border-cyber-border">
+        <div className="text-center p-8 rounded-2xl bg-cyber-card border border-cyber-border mb-16">
           <h3 className="text-xl font-bold text-white mb-4">Хотите узнать больше?</h3>
           <Link href="/courses">
             <Button variant="primary">Смотреть курсы</Button>
           </Link>
         </div>
+
+        {relatedPosts.length > 0 && (
+          <section>
+            <h2 className="text-2xl font-bold text-white mb-6">Похожие статьи</h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {relatedPosts.map((related) => (
+                <Link key={related.id} href={`/blog/${related.slug}`}>
+                  <div className="h-full rounded-2xl border border-cyber-border bg-cyber-card p-5 transition-all duration-300 hover:border-primary-500/50 hover:shadow-lg hover:shadow-primary-500/10">
+                    <div className="flex gap-2 mb-3 flex-wrap">
+                      <Badge variant="info" size="sm">
+                        {related.category}
+                      </Badge>
+                      <Badge variant="outline" size="sm">
+                        {related.readTime}
+                      </Badge>
+                    </div>
+
+                    <h3 className="text-lg font-semibold text-white mb-3">{related.title}</h3>
+                    <p className="text-sm text-gray-400 mb-4">{related.excerpt}</p>
+                    <div className="text-xs text-gray-500">
+                      {related.author} · {formatDate(related.date)}
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </section>
+        )}
       </div>
     </div>
   );
