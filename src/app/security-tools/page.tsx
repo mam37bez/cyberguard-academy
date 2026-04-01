@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { SecurityChecker } from '@/components/security/SecurityChecker';
+import { PasswordStrengthChecker } from '@/components/security/PasswordStrengthChecker';
 import { Button } from '@/components/ui/Button';
 
 export const metadata: Metadata = {
@@ -68,6 +69,7 @@ export default function SecurityToolsPage() {
         </div>
 
         <SecurityChecker />
+        <PasswordStrengthChecker />
 
         <div className="max-w-4xl mx-auto mt-12 text-center rounded-2xl border border-cyber-border bg-cyber-card p-8">
           <h2 className="text-2xl font-bold text-white mb-4">
