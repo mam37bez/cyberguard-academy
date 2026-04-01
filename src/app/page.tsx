@@ -1,9 +1,10 @@
 import type { Metadata } from 'next';
 import { HeroSection } from '@/components/sections/HeroSection';
 import { CoursesSection } from '@/components/sections/CoursesSection';
+import { WhyUsSection } from '@/components/sections/WhyUsSection';
 import { SecuritySection } from '@/components/sections/SecuritySection';
 import { TestimonialsSection } from '@/components/sections/TestimonialsSection';
-import { WhyUsSection } from '@/components/sections/WhyUsSection';
+import { HowItWorksSection } from '@/components/sections/HowItWorksSection';
 import { FAQSection } from '@/components/sections/FAQSection';
 import { CTASection } from '@/components/sections/CTASection';
 
@@ -24,6 +25,7 @@ export default function HomePage() {
       <WhyUsSection />
       <SecuritySection />
       <TestimonialsSection />
+      <HowItWorksSection />
       <FAQSection />
       <CTASection />
     </>
