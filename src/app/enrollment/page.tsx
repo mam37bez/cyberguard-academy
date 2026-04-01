@@ -130,7 +130,7 @@ export default function EnrollmentPage() {
         <div className="max-w-2xl mx-auto px-4 text-center">
           <div className="text-6xl mb-6">🎉</div>
           <h1 className="text-3xl font-bold text-white mb-4">Заявка отправлена!</h1>
-          <p className="text-gray-400 mb-8">Перезвоним в течение 24 часов.</p>
+          <p className="text-gray-400 mb-8">Мы свяжемся с вами в течение 24 часов.</p>
           <Button
             onClick={() => {
               setDone(false);
@@ -139,7 +139,7 @@ export default function EnrollmentPage() {
             }}
             variant="primary"
           >
-            Ещё
+            Отправить ещё одну заявку
           </Button>
         </div>
       </div>
@@ -156,7 +156,11 @@ export default function EnrollmentPage() {
 
       <div className="pt-24 pb-16">
         <div className="max-w-3xl mx-auto px-4">
-          <SectionHeading badge="Запись" title="Записаться" subtitle="Заполните форму" />
+          <SectionHeading
+            badge="Запись"
+            title="Записаться на обучение"
+            subtitle="Заполните форму, и мы поможем выбрать подходящую программу"
+          />
 
           <Card variant="glow">
             <CardContent>

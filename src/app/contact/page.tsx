@@ -120,7 +120,7 @@ export default function ContactPage() {
       <div className="pt-24 pb-16">
         <div className="max-w-2xl mx-auto px-4 text-center">
           <div className="text-6xl mb-6">✅</div>
-          <h1 className="text-3xl font-bold text-white mb-4">Отправлено!</h1>
+          <h1 className="text-3xl font-bold text-white mb-4">Сообщение отправлено!</h1>
           <p className="text-gray-400 mb-8">Мы свяжемся с вами в течение 24 часов.</p>
           <Button
             onClick={() => {
@@ -147,7 +147,11 @@ export default function ContactPage() {
 
       <div className="pt-24 pb-16">
         <div className="max-w-7xl mx-auto px-4">
-          <SectionHeading badge="Контакты" title="Свяжитесь с нами" subtitle="Мы рады помочь" />
+          <SectionHeading
+            badge="Контакты"
+            title="Свяжитесь с нами"
+            subtitle="Мы рады помочь и ответить на ваши вопросы"
+          />
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
             <div className="space-y-6">
