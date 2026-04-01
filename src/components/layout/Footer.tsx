@@ -59,7 +59,7 @@ export function Footer() {
           </div>
 
           <div>
-            <h3 className="text-white font-semibold mb-4">Курсы</h3>
+            <h3 className="text-white font-semibold mb-4">Полезное</h3>
             <ul className="space-y-3">
               <li>
                 <Link
@@ -93,6 +93,16 @@ export function Footer() {
                   КиберРодитель
                 </Link>
               </li>
+              <li>
+                <Link href="/faq" className="text-gray-400 hover:text-white text-sm">
+                  FAQ
+                </Link>
+              </li>
+              <li>
+                <Link href="/privacy" className="text-gray-400 hover:text-white text-sm">
+                  Политика конфиденциальности
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -108,7 +118,9 @@ export function Footer() {
         </div>
 
         <div className="mt-12 pt-8 border-t border-cyber-border text-center">
-          <p className="text-gray-500 text-sm">© 2026 CyberGuard Academy. White Hat Education.</p>
+          <p className="text-gray-500 text-sm">
+            © 2026 CyberGuard Academy. White Hat Education.
+          </p>
         </div>
       </div>
     </footer>
