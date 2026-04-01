@@ -9,6 +9,7 @@ const nav = [
   { label: 'Курсы', href: '/courses' },
   { label: 'Безопасность', href: '/security-tools' },
   { label: 'Блог', href: '/blog' },
+  { label: 'FAQ', href: '/faq' },
   { label: 'О нас', href: '/about' },
   { label: 'Контакты', href: '/contact' },
 ];
