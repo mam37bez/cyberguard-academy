@@ -20,6 +20,39 @@ declare global {
 
 const SITE_KEY = '0x4AAAAAACyDT_0NEyBK5SxM';
 
+const locations = [
+  {
+    city: 'Минск (основная)',
+    address: 'ул. Аэродромная, 125',
+    phone: 'Уточняйте через форму',
+    email: 'Уточняйте через форму',
+  },
+  {
+    city: 'Минск / Arena City',
+    address: 'Пр. Победителей, 84, Arena City (2-й этаж)',
+    phone: 'Уточняйте через форму',
+    email: 'Уточняйте через форму',
+  },
+  {
+    city: 'Гродно',
+    address: 'ул. 17 сентября, 49А / ул. Титова, 14',
+    phone: '+375-29-739-85-88',
+    email: 'grodno@kiber-one.com',
+  },
+  {
+    city: 'Брест',
+    address: 'ул. Советская, 85 / ул. Варшавское шоссе, 43',
+    phone: '+375-29-765-22-50',
+    email: 'brest@kiber-one.com',
+  },
+  {
+    city: 'Борисов',
+    address: 'ул. Строителей, 26',
+    phone: '+375 29 633-27-79',
+    email: 'Уточняйте через форму',
+  },
+];
+
 export default function ContactPage() {
   const [loading, setLoading] = useState(false);
   const [done, setDone] = useState(false);
@@ -151,15 +184,15 @@ export default function ContactPage() {
           <SectionHeading
             badge="Контакты"
             title="Свяжитесь с нами"
-            subtitle="Мы рады помочь и ответить на ваши вопросы"
+            subtitle="Мы рады помочь, ответить на вопросы и подсказать подходящую программу"
           />
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 mb-16">
             <div className="space-y-6">
               {[
-                { i: '📍', t: 'Адрес', v: 'г. Минск' },
-                { i: '📞', t: 'Телефон', v: '+375 (29) 123-45-67' },
-                { i: '✉️', t: 'Email', v: 'info@cyberguard.academy' },
+                { i: '📍', t: 'Основная локация', v: 'г. Минск' },
+                { i: '📞', t: 'Телефон', v: 'Уточняйте через форму' },
+                { i: '✉️', t: 'Email', v: 'Уточняйте через форму' },
                 { i: '🕒', t: 'Время', v: 'Пн-Сб: 9-20' },
               ].map((x) => (
                 <Card key={x.t} variant="default">
@@ -239,6 +272,42 @@ export default function ContactPage() {
               </Card>
             </div>
           </div>
+
+          <section>
+            <SectionHeading
+              badge="Наши локации"
+              title="Где нас можно найти"
+              subtitle="Актуальные адреса филиалов и площадок. Если данных недостаточно, уточняйте детали через форму выше."
+            />
+
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+              {locations.map((location) => (
+                <Card key={location.city + location.address} variant="default">
+                  <CardContent>
+                    <div className="text-2xl mb-3">📍</div>
+                    <h3 className="text-lg font-semibold text-white mb-3">{location.city}</h3>
+
+                    <div className="space-y-3 text-sm">
+                      <div>
+                        <div className="text-gray-500 mb-1">Адрес</div>
+                        <div className="text-gray-300">{location.address}</div>
+                      </div>
+
+                      <div>
+                        <div className="text-gray-500 mb-1">Телефон</div>
+                        <div className="text-gray-300">{location.phone}</div>
+                      </div>
+
+                      <div>
+                        <div className="text-gray-500 mb-1">Email</div>
+                        <div className="text-gray-300 break-all">{location.email}</div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </section>
         </div>
       </div>
     </>
