@@ -24,32 +24,42 @@ const locations = [
   {
     city: 'Минск (основная)',
     address: 'ул. Аэродромная, 125',
-    phone: 'Уточняйте через форму',
-    email: 'Уточняйте через форму',
+    phone: null,
+    phoneLabel: 'Уточняйте через форму',
+    email: null,
+    emailLabel: 'Уточняйте через форму',
   },
   {
     city: 'Минск / Arena City',
     address: 'Пр. Победителей, 84, Arena City (2-й этаж)',
-    phone: 'Уточняйте через форму',
-    email: 'Уточняйте через форму',
+    phone: null,
+    phoneLabel: 'Уточняйте через форму',
+    email: null,
+    emailLabel: 'Уточняйте через форму',
   },
   {
     city: 'Гродно',
     address: 'ул. 17 сентября, 49А / ул. Титова, 14',
-    phone: '+375-29-739-85-88',
+    phone: '+375297398588',
+    phoneLabel: '+375-29-739-85-88',
     email: 'grodno@kiber-one.com',
+    emailLabel: 'grodno@kiber-one.com',
   },
   {
     city: 'Брест',
     address: 'ул. Советская, 85 / ул. Варшавское шоссе, 43',
-    phone: '+375-29-765-22-50',
+    phone: '+375297652250',
+    phoneLabel: '+375-29-765-22-50',
     email: 'brest@kiber-one.com',
+    emailLabel: 'brest@kiber-one.com',
   },
   {
     city: 'Борисов',
     address: 'ул. Строителей, 26',
-    phone: '+375 29 633-27-79',
-    email: 'Уточняйте через форму',
+    phone: '+375296332779',
+    phoneLabel: '+375 29 633-27-79',
+    email: null,
+    emailLabel: 'Уточняйте через форму',
   },
 ];
 
@@ -295,12 +305,34 @@ export default function ContactPage() {
 
                       <div>
                         <div className="text-gray-500 mb-1">Телефон</div>
-                        <div className="text-gray-300">{location.phone}</div>
+                        <div className="text-gray-300">
+                          {location.phone ? (
+                            <a
+                              href={`tel:${location.phone}`}
+                              className="hover:text-white underline"
+                            >
+                              {location.phoneLabel}
+                            </a>
+                          ) : (
+                            location.phoneLabel
+                          )}
+                        </div>
                       </div>
 
                       <div>
                         <div className="text-gray-500 mb-1">Email</div>
-                        <div className="text-gray-300 break-all">{location.email}</div>
+                        <div className="text-gray-300 break-all">
+                          {location.email ? (
+                            <a
+                              href={`mailto:${location.email}`}
+                              className="hover:text-white underline"
+                            >
+                              {location.emailLabel}
+                            </a>
+                          ) : (
+                            location.emailLabel
+                          )}
+                        </div>
                       </div>
                     </div>
                   </CardContent>
