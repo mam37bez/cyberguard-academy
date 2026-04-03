@@ -77,6 +77,7 @@ export default function ContactPage() {
     phone: '',
     subject: '',
     message: '',
+    branch: '',
     website: '',
   });
 
@@ -109,8 +110,9 @@ export default function ContactPage() {
     return () => clearInterval(timer);
   }, [scriptReady, widgetId]);
 
-  const ch = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
-    setF((p) => ({ ...p, [e.target.name]: e.target.value }));
+  const ch = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+  ) => setF((p) => ({ ...p, [e.target.name]: e.target.value }));
 
   const sub = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -145,6 +147,7 @@ export default function ContactPage() {
         phone: '',
         subject: '',
         message: '',
+        branch: '',
         website: '',
       });
       setToken('');
@@ -253,6 +256,23 @@ export default function ContactPage() {
                       <Input label="Тема" name="subject" value={f.subject} onChange={ch} required />
                     </div>
 
+                    <div>
+                      <label className="block text-sm font-medium text-gray-300 mb-2">
+                        Филиал для обращения
+                      </label>
+                      <select
+                        name="branch"
+                        value={f.branch}
+                        onChange={ch}
+                        required
+                        className="w-full rounded-xl bg-cyber-dark border border-cyber-border px-4 py-3 text-white focus:ring-2 focus:ring-primary-500"
+                      >
+                        <option value="">Выберите филиал...</option>
+                        <option value="grodno">Гродно</option>
+                        <option value="brest">Брест</option>
+                      </select>
+                    </div>
+
                     <Textarea
                       label="Сообщение"
                       name="message"
@@ -307,10 +327,7 @@ export default function ContactPage() {
                         <div className="text-gray-500 mb-1">Телефон</div>
                         <div className="text-gray-300">
                           {location.phone ? (
-                            <a
-                              href={`tel:${location.phone}`}
-                              className="hover:text-white underline"
-                            >
+                            <a href={`tel:${location.phone}`} className="hover:text-white underline">
                               {location.phoneLabel}
                             </a>
                           ) : (
@@ -323,10 +340,7 @@ export default function ContactPage() {
                         <div className="text-gray-500 mb-1">Email</div>
                         <div className="text-gray-300 break-all">
                           {location.email ? (
-                            <a
-                              href={`mailto:${location.email}`}
-                              className="hover:text-white underline"
-                            >
+                            <a href={`mailto:${location.email}`} className="hover:text-white underline">
                               {location.emailLabel}
                             </a>
                           ) : (

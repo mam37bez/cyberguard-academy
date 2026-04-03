@@ -35,6 +35,7 @@ export default function EnrollmentPage() {
     cn: '',
     ca: '',
     ci: '',
+    branch: '',
     agree: false,
     website: '',
   });
@@ -110,6 +111,7 @@ export default function EnrollmentPage() {
         cn: '',
         ca: '',
         ci: '',
+        branch: '',
         agree: false,
         website: '',
       });
@@ -213,6 +215,21 @@ export default function EnrollmentPage() {
                         {c.icon} {c.title}
                       </option>
                     ))}
+                  </select>
+                </div>
+
+                <div>
+                  <h3 className="text-lg font-semibold text-white mb-4">Филиал</h3>
+                  <select
+                    name="branch"
+                    value={f.branch}
+                    onChange={ch}
+                    required
+                    className="w-full rounded-xl bg-cyber-dark border border-cyber-border px-4 py-3 text-white focus:ring-2 focus:ring-primary-500"
+                  >
+                    <option value="">Выберите филиал...</option>
+                    <option value="grodno">Гродно</option>
+                    <option value="brest">Брест</option>
                   </select>
                 </div>
 
