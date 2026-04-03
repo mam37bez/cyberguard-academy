@@ -1,11 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { Resend } from 'resend';
+
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 const MAX_NAME = 120;
 const MAX_EMAIL = 150;
 const MAX_PHONE = 30;
 const MAX_AGE = 20;
 const MAX_COURSE = 80;
-
 const RATE_LIMIT_MAX = 5;
 const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000;
 
@@ -48,7 +50,6 @@ function isRateLimited(ip: string): boolean {
 
 async function verifyTurnstile(token: string, ip?: string | null) {
   const secret = process.env.TURNSTILE_SECRET_KEY;
-
   if (!secret) return false;
 
   const formData = new FormData();
@@ -63,6 +64,15 @@ async function verifyTurnstile(token: string, ip?: string | null) {
 
   const data = await result.json();
   return data.success === true;
+}
+
+function getRecipientByBranch(branch: string): string | null {
+  const normalized = branch.toLowerCase();
+
+  if (normalized === 'grodno') return 'grodno@kiber-one.com';
+  if (normalized === 'brest') return 'brest@kiber-one.com';
+
+  return null;
 }
 
 export async function POST(req: NextRequest) {
@@ -89,6 +99,7 @@ export async function POST(req: NextRequest) {
     const cn = clean(body.cn);
     const ca = clean(body.ca);
     const ci = clean(body.ci);
+    const branch = clean(body.branch);
     const website = clean(body.website);
     const turnstileToken = clean(body.turnstileToken);
     const agree = body.agree === true;
@@ -102,12 +113,11 @@ export async function POST(req: NextRequest) {
     }
 
     const isHuman = await verifyTurnstile(turnstileToken, ip);
-
     if (!isHuman) {
       return NextResponse.json({ error: 'Turnstile verification failed' }, { status: 400 });
     }
 
-    if (!pn || !pe || !pp || !cn || !ca || !ci || !agree) {
+    if (!pn || !pe || !pp || !cn || !ca || !ci || !branch || !agree) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
     }
 
@@ -126,24 +136,40 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Invalid email' }, { status: 400 });
     }
 
-    const safePayload = {
-      parentName: pn,
-      parentEmail: pe,
-      parentPhone: pp,
-      childName: cn,
-      childAge: ca,
-      courseId: ci,
-      createdAt: new Date().toISOString(),
-    };
+    const recipient = getRecipientByBranch(branch);
+    if (!recipient) {
+      return NextResponse.json({ error: 'Selected branch is not supported yet' }, { status: 400 });
+    }
 
-    console.log('Enrollment submission received:', {
-      parentEmail: safePayload.parentEmail,
-      courseId: safePayload.courseId,
-      createdAt: safePayload.createdAt,
+    await resend.emails.send({
+      from: 'CyberGuard Academy <onboarding@resend.dev>',
+      to: recipient,
+      subject: `Новая заявка на обучение: ${branch}`,
+      replyTo: pe,
+      text: `Новая заявка на обучение с сайта CyberGuard Academy
+
+Филиал: ${branch}
+Родитель: ${pn}
+Email: ${pe}
+Телефон: ${pp}
+Ученик: ${cn}
+Возраст: ${ca}
+Курс: ${ci}
+Согласие: ${agree ? 'Да' : 'Нет'}
+`,
+    });
+
+    console.log('Enrollment submission sent:', {
+      parentEmail: pe,
+      courseId: ci,
+      branch,
+      recipient,
+      createdAt: new Date().toISOString(),
     });
 
     return NextResponse.json({ success: true }, { status: 200 });
-  } catch {
+  } catch (error) {
+    console.error('Enrollment route error:', error);
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 }
