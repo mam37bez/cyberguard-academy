@@ -103,6 +103,11 @@ export function Footer() {
                   Политика конфиденциальности
                 </Link>
               </li>
+              <li>
+                <Link href="/terms" className="text-gray-400 hover:text-white text-sm">
+                  Условия использования
+                </Link>
+              </li>
             </ul>
           </div>
 
