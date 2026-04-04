@@ -258,6 +258,33 @@ function getCourseFormat(courseSlug: string) {
   return map[courseSlug] || [];
 }
 
+function getTrialLessonFlow(courseSlug: string) {
+  const map: Record<string, string[]> = {
+    'cybersecurity-junior': [
+      'Сначала мы знакомимся с ребёнком, его интересами и уровнем цифрового опыта.',
+      'Потом показываем понятный фрагмент занятия в доступной и спокойной форме.',
+      'В конце родители получают представление о формате и понимают, подходит ли программа ребёнку.',
+    ],
+    'cybersecurity-explorer': [
+      'Пробное занятие помогает понять, насколько подростку интересен формат и темы курса.',
+      'Мы показываем примеры задач, обсуждаем цифровые риски и смотрим, как ученик включается в материал.',
+      'После занятия становится понятнее, подходит ли программа по уровню и интересу.',
+    ],
+    'cybersecurity-pro': [
+      'Пробное занятие помогает оценить мотивацию ученика и глубину его интереса к теме.',
+      'Мы показываем формат работы, примеры тем и уровень подхода без перегрузки в первый контакт.',
+      'После встречи проще понять, насколько программа соответствует ожиданиям и целям.',
+    ],
+    'cybersecurity-parents': [
+      'Пробная встреча помогает родителям увидеть формат подачи материала и практическую направленность курса.',
+      'Мы обсуждаем реальные семейные риски, примеры ситуаций и то, как знания будут применяться в жизни.',
+      'После занятия становится легче понять, насколько программа полезна именно вашей семье.',
+    ],
+  };
+
+  return map[courseSlug] || [];
+}
+
 export default async function CoursePage({ params }: PageProps) {
   const { slug } = await params;
   const course = getCourseBySlug(slug);
@@ -308,6 +335,7 @@ export default async function CoursePage({ params }: PageProps) {
   const faq = getCourseFaq(course.slug);
   const whyNow = getWhyNow(course.slug);
   const format = getCourseFormat(course.slug);
+  const trialFlow = getTrialLessonFlow(course.slug);
 
   return (
     <div className="pt-24 pb-16">
@@ -414,6 +442,20 @@ export default async function CoursePage({ params }: PageProps) {
                   {format.map((item, i) => (
                     <li key={i} className="flex gap-3 text-gray-300">
                       <span className="text-primary-400">•</span>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </CardContent>
+            </Card>
+
+            <Card variant="default">
+              <CardContent>
+                <h2 className="text-xl font-bold text-white mb-4">Как проходит пробное занятие</h2>
+                <ul className="space-y-3">
+                  {trialFlow.map((item, i) => (
+                    <li key={i} className="flex gap-3 text-gray-300">
+                      <span className="text-yellow-400">•</span>
                       {item}
                     </li>
                   ))}
