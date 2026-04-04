@@ -204,6 +204,33 @@ function getCourseFaq(courseSlug: string) {
   return map[courseSlug] || [];
 }
 
+function getWhyNow(courseSlug: string) {
+  const map: Record<string, string[]> = {
+    'cybersecurity-junior': [
+      'Дети начинают пользоваться интернетом всё раньше, и безопасные привычки лучше формировать с самого начала.',
+      'Чем раньше ребёнок учится осторожности в сети, тем легче ему избегать простых ошибок и обманных сценариев.',
+      'Базовая цифровая безопасность сегодня — это такой же важный навык, как внимательность и ответственное поведение в обычной жизни.',
+    ],
+    'cybersecurity-explorer': [
+      'Подростки всё активнее используют интернет, мессенджеры, соцсети и цифровые сервисы, а значит сталкиваются с реальными рисками уже сейчас.',
+      'На этом этапе особенно важно не просто запрещать, а учить понимать угрозы, распознавать фишинг и осознанно относиться к аккаунтам и устройствам.',
+      'Чем раньше появляется системное понимание цифровой безопасности, тем увереннее ребёнок чувствует себя в интернете.',
+    ],
+    'cybersecurity-pro': [
+      'Современный цифровой мир требует не только интереса к технологиям, но и понимания реальных угроз и защитных подходов.',
+      'Если ученик уже задумывается о развитии в IT, сейчас самое время строить сильную базу в области кибербезопасности.',
+      'Ранний старт даёт больше времени на развитие аналитического мышления, технической базы и осознанного отношения к цифровым рискам.',
+    ],
+    'cybersecurity-parents': [
+      'Мошенничество, фишинг и цифровые риски меняются быстро, и откладывать понимание этих тем уже не стоит.',
+      'Родителям важно не только реагировать на проблемы, но и заранее выстраивать безопасную цифровую среду для семьи.',
+      'Чем раньше семья получает понятные правила и практические ориентиры, тем проще снизить риски в повседневной жизни.',
+    ],
+  };
+
+  return map[courseSlug] || [];
+}
+
 export default async function CoursePage({ params }: PageProps) {
   const { slug } = await params;
   const course = getCourseBySlug(slug);
@@ -252,6 +279,7 @@ export default async function CoursePage({ params }: PageProps) {
   const benefits = getCourseBenefits(course.slug);
   const outcomes = getCourseOutcomes(course.slug);
   const faq = getCourseFaq(course.slug);
+  const whyNow = getWhyNow(course.slug);
 
   return (
     <div className="pt-24 pb-16">
@@ -383,6 +411,20 @@ export default async function CoursePage({ params }: PageProps) {
                   {outcomes.map((item, i) => (
                     <li key={i} className="flex gap-3 text-gray-300">
                       <span className="text-cyber-green">✓</span>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </CardContent>
+            </Card>
+
+            <Card variant="default">
+              <CardContent>
+                <h2 className="text-xl font-bold text-white mb-4">Почему стоит начать сейчас</h2>
+                <ul className="space-y-3">
+                  {whyNow.map((item, i) => (
+                    <li key={i} className="flex gap-3 text-gray-300">
+                      <span className="text-yellow-400">•</span>
                       {item}
                     </li>
                   ))}
