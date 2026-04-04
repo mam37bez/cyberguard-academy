@@ -231,6 +231,33 @@ function getWhyNow(courseSlug: string) {
   return map[courseSlug] || [];
 }
 
+function getCourseFormat(courseSlug: string) {
+  const map: Record<string, string[]> = {
+    'cybersecurity-junior': [
+      'Занятия проходят в понятном и мягком формате с акцентом на базовые привычки цифровой безопасности.',
+      'Материал объясняется доступным языком, с примерами и сценариями, близкими детям этого возраста.',
+      'Программа строится постепенно, чтобы ребёнок уверенно осваивал тему без перегрузки.',
+    ],
+    'cybersecurity-explorer': [
+      'Обучение сочетает теорию, практические примеры и развитие цифровой внимательности.',
+      'Формат ориентирован на подростковый интерес к технологиям и помогает удерживать внимание на полезных навыках.',
+      'Программа выстроена так, чтобы шаг за шагом дать системное понимание рисков и способов защиты.',
+    ],
+    'cybersecurity-pro': [
+      'Курс проходит в более глубоком и системном формате с фокусом на современные направления кибербезопасности.',
+      'Материалы помогают не просто узнавать новые термины, а выстраивать структуру понимания защитных подходов.',
+      'Формат подходит мотивированным ученикам, которым важен серьёзный уровень погружения.',
+    ],
+    'cybersecurity-parents': [
+      'Обучение ориентировано на практическую пользу для семьи и повседневной жизни.',
+      'Материал объясняется понятным языком без излишней технической перегрузки.',
+      'Формат помогает быстро применять знания на практике: в настройках, семейных правилах и защите устройств.',
+    ],
+  };
+
+  return map[courseSlug] || [];
+}
+
 export default async function CoursePage({ params }: PageProps) {
   const { slug } = await params;
   const course = getCourseBySlug(slug);
@@ -280,6 +307,7 @@ export default async function CoursePage({ params }: PageProps) {
   const outcomes = getCourseOutcomes(course.slug);
   const faq = getCourseFaq(course.slug);
   const whyNow = getWhyNow(course.slug);
+  const format = getCourseFormat(course.slug);
 
   return (
     <div className="pt-24 pb-16">
@@ -376,6 +404,20 @@ export default async function CoursePage({ params }: PageProps) {
                     </div>
                   )}
                 </div>
+              </CardContent>
+            </Card>
+
+            <Card variant="default">
+              <CardContent>
+                <h2 className="text-xl font-bold text-white mb-4">Формат обучения</h2>
+                <ul className="space-y-3">
+                  {format.map((item, i) => (
+                    <li key={i} className="flex gap-3 text-gray-300">
+                      <span className="text-primary-400">•</span>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
               </CardContent>
             </Card>
 
