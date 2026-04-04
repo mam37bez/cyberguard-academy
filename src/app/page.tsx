@@ -7,6 +7,7 @@ import { TestimonialsSection } from '@/components/sections/TestimonialsSection';
 import { HowItWorksSection } from '@/components/sections/HowItWorksSection';
 import { FAQSection } from '@/components/sections/FAQSection';
 import { CTASection } from '@/components/sections/CTASection';
+import { ShareSiteCard } from '@/components/ShareSiteCard';
 
 export const metadata: Metadata = {
   title: 'Главная',
@@ -27,6 +28,7 @@ export default function HomePage() {
       <TestimonialsSection />
       <HowItWorksSection />
       <FAQSection />
+      <ShareSiteCard />
       <CTASection />
     </>
   );
