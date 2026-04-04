@@ -324,6 +324,35 @@ export default async function CoursePage({ params }: PageProps) {
 
             <Card variant="default">
               <CardContent>
+                <h2 className="text-xl font-bold text-white mb-4">О преподавателе</h2>
+                <div className="rounded-2xl border border-cyber-border bg-cyber-dark/40 p-6">
+                  <h3 className="text-lg font-semibold text-white mb-2">
+                    {course.instructor.name}
+                  </h3>
+                  <p className="text-primary-400 text-sm mb-3">{course.instructor.title}</p>
+                  <p className="text-gray-300 leading-relaxed mb-4">{course.instructor.bio}</p>
+
+                  {course.instructor.certifications.length > 0 && (
+                    <div>
+                      <div className="text-sm text-gray-400 mb-2">Сертификации</div>
+                      <div className="flex flex-wrap gap-2">
+                        {course.instructor.certifications.map((cert) => (
+                          <span
+                            key={cert}
+                            className="rounded-full border border-cyber-border bg-cyber-card px-3 py-1 text-xs text-gray-300"
+                          >
+                            {cert}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card variant="default">
+              <CardContent>
                 <h2 className="text-xl font-bold text-white mb-6">Программа</h2>
                 <div className="space-y-4">
                   {course.modules.map((m, i) => (
