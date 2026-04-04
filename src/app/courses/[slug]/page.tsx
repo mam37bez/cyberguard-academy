@@ -48,6 +48,162 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
+function getCourseAudience(courseSlug: string) {
+  const map: Record<string, string[]> = {
+    'cybersecurity-junior': [
+      'Детям 6–9 лет, которые только начинают знакомство с цифровой безопасностью.',
+      'Родителям, которые хотят мягко и безопасно ввести ребёнка в тему поведения в интернете.',
+      'Тем, кому нужен понятный и игровой формат обучения без перегрузки сложными терминами.',
+    ],
+    'cybersecurity-explorer': [
+      'Подросткам 10–14 лет, которым интересны технологии, интернет и цифровая защита.',
+      'Тем, кто хочет лучше понимать фишинг, сети, безопасность аккаунтов и основы Python.',
+      'Семьям, которые хотят развивать у ребёнка цифровую грамотность и внимательность к рискам.',
+    ],
+    'cybersecurity-pro': [
+      'Подросткам 14–17 лет, которые хотят глубже погрузиться в кибербезопасность.',
+      'Тем, кто рассматривает информационную безопасность как серьёзное направление развития.',
+      'Ученикам, которым интересно системно изучать веб-безопасность, сети и анализ угроз.',
+    ],
+    'cybersecurity-parents': [
+      'Родителям, которые хотят лучше понимать цифровые риски для семьи.',
+      'Тем, кто хочет научиться распознавать мошенничество и защищать детей в интернете.',
+      'Семьям, которым нужен понятный практический курс без сложной технической нагрузки.',
+    ],
+  };
+
+  return map[courseSlug] || [];
+}
+
+function getCourseBenefits(courseSlug: string) {
+  const map: Record<string, string[]> = {
+    'cybersecurity-junior': [
+      'Понимание базовых правил безопасного поведения в интернете.',
+      'Навык распознавания простых обманных сценариев и подозрительных сообщений.',
+      'Умение создавать более надёжные пароли и бережно относиться к личной информации.',
+    ],
+    'cybersecurity-explorer': [
+      'Лучшее понимание цифровых угроз, фишинга, сетей и безопасного поведения в интернете.',
+      'Базовые навыки анализа, цифровой внимательности и осознанного отношения к технологиям.',
+      'Более уверенное понимание того, как защищать аккаунты, устройства и данные.',
+    ],
+    'cybersecurity-pro': [
+      'Системное понимание ключевых направлений современной кибербезопасности.',
+      'Навыки анализа угроз, понимание веб-безопасности, сетей и инцидентного мышления.',
+      'Более сильную базу для дальнейшего развития в техническом и профессиональном направлении.',
+    ],
+    'cybersecurity-parents': [
+      'Понимание основных цифровых рисков для семьи и детей.',
+      'Навык распознавания мошенничества, подозрительных звонков и фишинга.',
+      'Практические ориентиры по защите устройств, аккаунтов и домашней цифровой среды.',
+    ],
+  };
+
+  return map[courseSlug] || [];
+}
+
+function getCourseOutcomes(courseSlug: string) {
+  const map: Record<string, string[]> = {
+    'cybersecurity-junior': [
+      'Ребёнок начинает лучше понимать, что можно и нельзя делать в интернете.',
+      'Формируются первые привычки цифровой осторожности и защиты личной информации.',
+      'Появляется понятная база для дальнейшего обучения цифровой грамотности.',
+    ],
+    'cybersecurity-explorer': [
+      'Подросток лучше ориентируется в цифровых рисках и онлайн-коммуникации.',
+      'Появляется более зрелое отношение к паролям, ссылкам, аккаунтам и устройствам.',
+      'Формируется уверенная практическая база для дальнейшего развития в теме безопасности.',
+    ],
+    'cybersecurity-pro': [
+      'Ученик получает более глубокое понимание структуры и логики кибербезопасности.',
+      'Укрепляется аналитическое мышление и понимание защитных подходов.',
+      'Появляется хороший фундамент для дальнейшего профильного обучения и саморазвития.',
+    ],
+    'cybersecurity-parents': [
+      'Родители получают более спокойное и осознанное понимание семейной цифровой безопасности.',
+      'Появляется понятный план защиты детей, устройств и аккаунтов.',
+      'Снижается уязвимость семьи к базовым мошенническим и фишинговым сценариям.',
+    ],
+  };
+
+  return map[courseSlug] || [];
+}
+
+function getCourseFaq(courseSlug: string) {
+  const map: Record<string, { question: string; answer: string }[]> = {
+    'cybersecurity-junior': [
+      {
+        question: 'Подойдёт ли курс ребёнку без технической подготовки?',
+        answer:
+          'Да. Этот курс рассчитан на новичков и объясняет цифровую безопасность в понятной и доступной форме.',
+      },
+      {
+        question: 'Не будет ли ребёнку слишком сложно?',
+        answer:
+          'Программа адаптирована под возраст и строится на понятных примерах, базовых правилах и практических навыках.',
+      },
+      {
+        question: 'Что является главным результатом курса?',
+        answer:
+          'Формирование первых безопасных привычек в интернете, понимание паролей, приватности и базовых рисков.',
+      },
+    ],
+    'cybersecurity-explorer': [
+      {
+        question: 'Нужны ли знания программирования?',
+        answer:
+          'Нет. Базовая техническая подготовка не обязательна. Главное — интерес к технологиям и готовность учиться.',
+      },
+      {
+        question: 'Подойдёт ли курс ребёнку, который уже много времени проводит в интернете?',
+        answer:
+          'Да, это как раз одна из сильных сторон курса: он помогает лучше понимать реальные цифровые риски и защиту.',
+      },
+      {
+        question: 'Что даёт курс кроме теории?',
+        answer:
+          'Он помогает выработать более зрелое и осознанное отношение к аккаунтам, устройствам, сетям и цифровой безопасности.',
+      },
+    ],
+    'cybersecurity-pro': [
+      {
+        question: 'Подойдёт ли курс тем, кто хочет развиваться в IT и безопасности?',
+        answer:
+          'Да. Это одна из самых сильных программ для тех, кто хочет глубже понимать кибербезопасность и смежные направления.',
+      },
+      {
+        question: 'Это уже серьёзный уровень?',
+        answer:
+          'Да, курс рассчитан на более глубокое погружение и подойдёт мотивированным подросткам, которым интересны технологии и защита.',
+      },
+      {
+        question: 'Что является основным результатом?',
+        answer:
+          'Сильная база по современным темам кибербезопасности и более зрелое понимание защитных подходов и цифровых угроз.',
+      },
+    ],
+    'cybersecurity-parents': [
+      {
+        question: 'Подойдёт ли курс родителям без технического опыта?',
+        answer:
+          'Да. Программа построена на понятных примерах и ориентирована на практическую защиту семьи.',
+      },
+      {
+        question: 'Будут ли даны конкретные советы для семьи?',
+        answer:
+          'Да. Курс ориентирован на реальные бытовые риски: мошенничество, защита устройств, приватность и безопасность детей.',
+      },
+      {
+        question: 'Что даёт курс в итоге?',
+        answer:
+          'Более уверенное понимание цифровых рисков и практический ориентир для защиты семьи и ребёнка в интернете.',
+      },
+    ],
+  };
+
+  return map[courseSlug] || [];
+}
+
 export default async function CoursePage({ params }: PageProps) {
   const { slug } = await params;
   const course = getCourseBySlug(slug);
@@ -92,31 +248,10 @@ export default async function CoursePage({ params }: PageProps) {
     url: courseUrl,
   };
 
-  const fitItems = [
-    `Возрастная группа: ${course.ageGroup}`,
-    `Уровень подготовки: ${
-      course.level === 'beginner'
-        ? 'подходит для старта'
-        : course.level === 'intermediate'
-        ? 'подходит при базовом понимании темы'
-        : 'подходит для более мотивированных и подготовленных учеников'
-    }`,
-    `Формат обучения: ${course.schedule}`,
-  ];
-
-  const studentGets = [
-    'Понимание реальных цифровых рисков и базовых правил защиты',
-    'Практические навыки безопасного поведения в интернете',
-    'Уверенность при работе с аккаунтами, устройствами и данными',
-    'Более осознанное отношение к паролям, ссылкам, приложениям и приватности',
-  ];
-
-  const learningResults = [
-    'Ученик лучше распознаёт типовые угрозы и попытки обмана',
-    'Понимает, как защищать аккаунты и личные данные',
-    'Развивает цифровую грамотность и безопасные привычки',
-    'Получает структурированную и понятную программу обучения',
-  ];
+  const audience = getCourseAudience(course.slug);
+  const benefits = getCourseBenefits(course.slug);
+  const outcomes = getCourseOutcomes(course.slug);
+  const faq = getCourseFaq(course.slug);
 
   return (
     <div className="pt-24 pb-16">
@@ -147,11 +282,25 @@ export default async function CoursePage({ params }: PageProps) {
           <div className="lg:col-span-2 space-y-8">
             <Card variant="default">
               <CardContent>
-                <h2 className="text-xl font-bold text-white mb-4">Кому подходит курс</h2>
+                <h2 className="text-xl font-bold text-white mb-4">Темы курса</h2>
                 <ul className="space-y-3">
-                  {fitItems.map((item, i) => (
+                  {course.topics.map((t, i) => (
                     <li key={i} className="flex gap-3 text-gray-300">
                       <span className="text-cyber-green">✓</span>
+                      {t}
+                    </li>
+                  ))}
+                </ul>
+              </CardContent>
+            </Card>
+
+            <Card variant="default">
+              <CardContent>
+                <h2 className="text-xl font-bold text-white mb-4">Кому подходит курс</h2>
+                <ul className="space-y-3">
+                  {audience.map((item, i) => (
+                    <li key={i} className="flex gap-3 text-gray-300">
+                      <span className="text-primary-400">•</span>
                       {item}
                     </li>
                   ))}
@@ -163,7 +312,7 @@ export default async function CoursePage({ params }: PageProps) {
               <CardContent>
                 <h2 className="text-xl font-bold text-white mb-4">Что получит ученик</h2>
                 <ul className="space-y-3">
-                  {studentGets.map((item, i) => (
+                  {benefits.map((item, i) => (
                     <li key={i} className="flex gap-3 text-gray-300">
                       <span className="text-cyber-green">✓</span>
                       {item}
@@ -175,27 +324,10 @@ export default async function CoursePage({ params }: PageProps) {
 
             <Card variant="default">
               <CardContent>
-                <h2 className="text-xl font-bold text-white mb-4">Темы</h2>
-                <ul className="space-y-3">
-                  {course.topics.map((t, i) => (
-                    <li key={i} className="flex gap-3 text-gray-300">
-                      <span className="text-cyber-green">•</span>
-                      {t}
-                    </li>
-                  ))}
-                </ul>
-              </CardContent>
-            </Card>
-
-            <Card variant="default">
-              <CardContent>
                 <h2 className="text-xl font-bold text-white mb-6">Программа</h2>
                 <div className="space-y-4">
                   {course.modules.map((m, i) => (
-                    <div
-                      key={m.id}
-                      className="p-4 rounded-xl bg-cyber-dark/50 border border-cyber-border"
-                    >
+                    <div key={m.id} className="p-4 rounded-xl bg-cyber-dark/50 border border-cyber-border">
                       <div className="flex gap-4">
                         <div className="w-8 h-8 rounded-lg bg-primary-500/20 text-primary-400 flex items-center justify-center font-bold">
                           {i + 1}
@@ -219,18 +351,32 @@ export default async function CoursePage({ params }: PageProps) {
               <CardContent>
                 <h2 className="text-xl font-bold text-white mb-4">Результаты обучения</h2>
                 <ul className="space-y-3">
-                  {learningResults.map((item, i) => (
+                  {outcomes.map((item, i) => (
                     <li key={i} className="flex gap-3 text-gray-300">
-                      <span className="text-cyber-green">★</span>
+                      <span className="text-cyber-green">✓</span>
                       {item}
                     </li>
                   ))}
                 </ul>
               </CardContent>
             </Card>
+
+            <Card variant="default">
+              <CardContent>
+                <h2 className="text-xl font-bold text-white mb-4">Частые вопросы по курсу</h2>
+                <div className="space-y-4">
+                  {faq.map((item, i) => (
+                    <div key={i} className="rounded-xl border border-cyber-border bg-cyber-dark/40 p-4">
+                      <h3 className="font-semibold text-white mb-2">{item.question}</h3>
+                      <p className="text-sm text-gray-300 leading-relaxed">{item.answer}</p>
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
           </div>
 
-          <div className="sticky top-28">
+          <div className="sticky top-28 h-fit">
             <Card variant="glow">
               <CardContent>
                 <div className="text-center mb-6">
@@ -244,10 +390,10 @@ export default async function CoursePage({ params }: PageProps) {
                     ['Длительность', course.duration],
                     ['Расписание', course.schedule],
                     ['Рейтинг', `${course.rating}/5`],
-                  ].map(([l, v]) => (
-                    <div key={l as string} className="flex justify-between gap-4">
-                      <span className="text-gray-400">{l}</span>
-                      <span className="text-white font-medium text-right">{v}</span>
+                  ].map(([label, value]) => (
+                    <div key={label as string} className="flex justify-between gap-4">
+                      <span className="text-gray-400">{label}</span>
+                      <span className="text-white font-medium text-right">{value}</span>
                     </div>
                   ))}
                 </div>
