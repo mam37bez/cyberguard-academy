@@ -26,9 +26,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   const url = `https://cyberguard-academy.vercel.app/courses/${course.slug}`;
   const description =
-    course.fullDescription ||
-    course.description ||
-    `Курс ${course.title} в CyberGuard Academy.`;
+    course.fullDescription || course.description || `Курс ${course.title} в CyberGuard Academy.`;
 
   return {
     title: course.title,
@@ -94,17 +92,49 @@ export default async function CoursePage({ params }: PageProps) {
     url: courseUrl,
   };
 
+  const fitItems = [
+    `Возрастная группа: ${course.ageGroup}`,
+    `Уровень подготовки: ${
+      course.level === 'beginner'
+        ? 'подходит для старта'
+        : course.level === 'intermediate'
+        ? 'подходит при базовом понимании темы'
+        : 'подходит для более мотивированных и подготовленных учеников'
+    }`,
+    `Формат обучения: ${course.schedule}`,
+  ];
+
+  const studentGets = [
+    'Понимание реальных цифровых рисков и базовых правил защиты',
+    'Практические навыки безопасного поведения в интернете',
+    'Уверенность при работе с аккаунтами, устройствами и данными',
+    'Более осознанное отношение к паролям, ссылкам, приложениям и приватности',
+  ];
+
+  const learningResults = [
+    'Ученик лучше распознаёт типовые угрозы и попытки обмана',
+    'Понимает, как защищать аккаунты и личные данные',
+    'Развивает цифровую грамотность и безопасные привычки',
+    'Получает структурированную и понятную программу обучения',
+  ];
+
   return (
     <div className="pt-24 pb-16">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+
       <div className="max-w-5xl mx-auto px-4">
         <nav className="mb-8 text-sm text-gray-400">
-          <Link href="/" className="hover:text-white">Главная</Link> /{' '}
-          <Link href="/courses" className="hover:text-white">Курсы</Link> /{' '}
-          <span className="text-white">{course.title}</span>
+          <Link href="/" className="hover:text-white">
+            Главная
+          </Link>{' '}
+          /{' '}
+          <Link href="/courses" className="hover:text-white">
+            Курсы
+          </Link>{' '}
+          / <span className="text-white">{course.title}</span>
         </nav>
 
         <div className="mb-12">
@@ -117,11 +147,39 @@ export default async function CoursePage({ params }: PageProps) {
           <div className="lg:col-span-2 space-y-8">
             <Card variant="default">
               <CardContent>
-                <h2 className="text-xl font-bold text-white mb-4">📚 Темы</h2>
+                <h2 className="text-xl font-bold text-white mb-4">Кому подходит курс</h2>
+                <ul className="space-y-3">
+                  {fitItems.map((item, i) => (
+                    <li key={i} className="flex gap-3 text-gray-300">
+                      <span className="text-cyber-green">✓</span>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </CardContent>
+            </Card>
+
+            <Card variant="default">
+              <CardContent>
+                <h2 className="text-xl font-bold text-white mb-4">Что получит ученик</h2>
+                <ul className="space-y-3">
+                  {studentGets.map((item, i) => (
+                    <li key={i} className="flex gap-3 text-gray-300">
+                      <span className="text-cyber-green">✓</span>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </CardContent>
+            </Card>
+
+            <Card variant="default">
+              <CardContent>
+                <h2 className="text-xl font-bold text-white mb-4">Темы</h2>
                 <ul className="space-y-3">
                   {course.topics.map((t, i) => (
                     <li key={i} className="flex gap-3 text-gray-300">
-                      <span className="text-cyber-green">✓</span>
+                      <span className="text-cyber-green">•</span>
                       {t}
                     </li>
                   ))}
@@ -131,10 +189,13 @@ export default async function CoursePage({ params }: PageProps) {
 
             <Card variant="default">
               <CardContent>
-                <h2 className="text-xl font-bold text-white mb-6">📋 Программа</h2>
+                <h2 className="text-xl font-bold text-white mb-6">Программа</h2>
                 <div className="space-y-4">
                   {course.modules.map((m, i) => (
-                    <div key={m.id} className="p-4 rounded-xl bg-cyber-dark/50 border border-cyber-border">
+                    <div
+                      key={m.id}
+                      className="p-4 rounded-xl bg-cyber-dark/50 border border-cyber-border"
+                    >
                       <div className="flex gap-4">
                         <div className="w-8 h-8 rounded-lg bg-primary-500/20 text-primary-400 flex items-center justify-center font-bold">
                           {i + 1}
@@ -143,14 +204,28 @@ export default async function CoursePage({ params }: PageProps) {
                           <h3 className="font-semibold text-white">{m.title}</h3>
                           <p className="text-sm text-gray-400 mt-1">{m.description}</p>
                           <div className="flex gap-4 mt-2 text-xs text-gray-500">
-                            <span>📖 {m.lessons} уроков</span>
-                            <span>⏱️ {m.duration}</span>
+                            <span>{m.lessons} уроков</span>
+                            <span>{m.duration}</span>
                           </div>
                         </div>
                       </div>
                     </div>
                   ))}
                 </div>
+              </CardContent>
+            </Card>
+
+            <Card variant="default">
+              <CardContent>
+                <h2 className="text-xl font-bold text-white mb-4">Результаты обучения</h2>
+                <ul className="space-y-3">
+                  {learningResults.map((item, i) => (
+                    <li key={i} className="flex gap-3 text-gray-300">
+                      <span className="text-cyber-green">★</span>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
               </CardContent>
             </Card>
           </div>
@@ -168,19 +243,24 @@ export default async function CoursePage({ params }: PageProps) {
                     ['Возраст', course.ageGroup],
                     ['Длительность', course.duration],
                     ['Расписание', course.schedule],
-                    ['Рейтинг', '⭐ ' + course.rating + '/5'],
+                    ['Рейтинг', `${course.rating}/5`],
                   ].map(([l, v]) => (
-                    <div key={l as string} className="flex justify-between">
+                    <div key={l as string} className="flex justify-between gap-4">
                       <span className="text-gray-400">{l}</span>
-                      <span className="text-white font-medium">{v}</span>
+                      <span className="text-white font-medium text-right">{v}</span>
                     </div>
                   ))}
                 </div>
 
                 <Link href="/enrollment" className="block">
-                  <Button variant="primary" size="lg" className="w-full">🎓 Записаться</Button>
+                  <Button variant="primary" size="lg" className="w-full">
+                    Записаться
+                  </Button>
                 </Link>
-                <p className="text-center text-xs text-gray-500 mt-4">Пробное занятие — бесплатно!</p>
+
+                <p className="text-center text-xs text-gray-500 mt-4">
+                  Пробное занятие — бесплатно!
+                </p>
               </CardContent>
             </Card>
           </div>
