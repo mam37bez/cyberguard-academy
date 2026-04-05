@@ -8,6 +8,7 @@ import { SecuritySection } from '@/components/sections/SecuritySection';
 import { TestimonialsSection } from '@/components/sections/TestimonialsSection';
 import { TrialLessonSection } from '@/components/sections/TrialLessonSection';
 import { HowItWorksSection } from '@/components/sections/HowItWorksSection';
+import { AfterSubmissionSection } from '@/components/sections/AfterSubmissionSection';
 import { FAQSection } from '@/components/sections/FAQSection';
 import { CTASection } from '@/components/sections/CTASection';
 import { ShareSiteCard } from '@/components/ShareSiteCard';
@@ -33,6 +34,7 @@ export default function HomePage() {
       <TestimonialsSection />
       <TrialLessonSection />
       <HowItWorksSection />
+      <AfterSubmissionSection />
       <FAQSection />
       <ShareSiteCard />
       <CTASection />
