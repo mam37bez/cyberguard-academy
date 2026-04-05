@@ -130,20 +130,47 @@ export default function EnrollmentPage() {
   if (done) {
     return (
       <div className="pt-24 pb-16">
-        <div className="max-w-2xl mx-auto px-4 text-center">
-          <div className="text-6xl mb-6">🎉</div>
-          <h1 className="text-3xl font-bold text-white mb-4">Заявка отправлена!</h1>
-          <p className="text-gray-400 mb-8">Мы свяжемся с вами в течение 24 часов.</p>
-          <Button
-            onClick={() => {
-              setDone(false);
-              setError('');
-              setToken('');
-            }}
-            variant="primary"
-          >
-            Отправить ещё одну заявку
-          </Button>
+        <div className="max-w-3xl mx-auto px-4">
+          <div className="rounded-2xl border border-cyber-border bg-cyber-card p-8 text-center">
+            <div className="text-6xl mb-6">🎉</div>
+            <h1 className="text-3xl font-bold text-white mb-4">Заявка отправлена!</h1>
+            <p className="text-gray-300 mb-4">
+              Мы получили вашу заявку и свяжемся с вами в течение 24 часов.
+            </p>
+            <p className="text-gray-400 text-sm mb-8">
+              Пока вы ждёте ответ, можно посмотреть выбранные курсы, открыть FAQ или
+              изучить полезные материалы по кибербезопасности.
+            </p>
+
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
+              <Link href="/courses">
+                <Button variant="primary" size="lg">
+                  Смотреть курсы
+                </Button>
+              </Link>
+              <Link href="/faq">
+                <Button variant="outline" size="lg">
+                  Открыть FAQ
+                </Button>
+              </Link>
+              <Link href="/blog">
+                <Button variant="ghost" size="lg">
+                  Читать блог
+                </Button>
+              </Link>
+            </div>
+
+            <Button
+              onClick={() => {
+                setDone(false);
+                setError('');
+                setToken('');
+              }}
+              variant="primary"
+            >
+              Отправить ещё одну заявку
+            </Button>
+          </div>
         </div>
       </div>
     );
