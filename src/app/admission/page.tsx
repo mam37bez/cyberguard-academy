@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Условия обучения и записи',
+  title: 'Условия обучения и записи — CyberGuard Academy',
   description:
     'Условия обучения и записи в CyberGuard Academy: как выбрать курс, как проходит пробное занятие, что происходит после заявки и как начинается обучение.',
   alternates: {

@@ -7,7 +7,7 @@ import { PasswordGenerator } from '@/components/security/PasswordGenerator';
 import { Button } from '@/components/ui/Button';
 
 export const metadata: Metadata = {
-  title: 'Проверка безопасности',
+  title: 'Проверка кибербезопасности — CyberGuard Academy',
   description:
     'Пройдите проверку кибербезопасности на CyberGuard Academy и получите рекомендации по защите аккаунтов, устройств и личных данных.',
   alternates: {

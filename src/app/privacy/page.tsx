@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Политика конфиденциальности',
+  title: 'Политика конфиденциальности — CyberGuard Academy',
   description:
     'Политика конфиденциальности CyberGuard Academy: как мы обрабатываем персональные данные, заявки и обращения пользователей.',
   alternates: {
@@ -21,9 +21,9 @@ export default function PrivacyPage() {
           <section>
             <h2 className="text-xl font-semibold text-white mb-3">1. Общие положения</h2>
             <p>
-              Настоящая Политика конфиденциальности описывает, каким образом CyberGuard
-              Academy обрабатывает персональные данные пользователей сайта, форм
-              обратной связи и заявок на обучение.
+              Настоящая Политика конфиденциальности описывает, каким образом
+              CyberGuard Academy обрабатывает персональные данные пользователей сайта,
+              форм обратной связи и заявок на обучение.
             </p>
           </section>
 
@@ -57,13 +57,11 @@ export default function PrivacyPage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-white mb-3">
-              4. Защита данных
-            </h2>
+            <h2 className="text-xl font-semibold text-white mb-3">4. Защита данных</h2>
             <p>
-              Мы принимаем разумные технические и организационные меры для защиты
-              данных от несанкционированного доступа, изменения, утраты или
-              неправомерного использования.
+              Мы принимаем разумные технические и организационные меры для защиты данных
+              от несанкционированного доступа, изменения, утраты или неправомерного
+              использования.
             </p>
             <p className="mt-3">
               Для защиты форм могут использоваться антиспам-механизмы, валидация
@@ -83,9 +81,7 @@ export default function PrivacyPage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-white mb-3">
-              6. Срок хранения данных
-            </h2>
+            <h2 className="text-xl font-semibold text-white mb-3">6. Срок хранения данных</h2>
             <p>
               Данные хранятся не дольше, чем это необходимо для обработки обращения,
               заявки или выполнения законных обязательств, связанных с работой сайта и
@@ -94,9 +90,7 @@ export default function PrivacyPage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-white mb-3">
-              7. Права пользователя
-            </h2>
+            <h2 className="text-xl font-semibold text-white mb-3">7. Права пользователя</h2>
             <p>Пользователь вправе:</p>
             <ul className="list-disc pl-6 space-y-2 mt-3">
               <li>запросить уточнение своих данных;</li>
@@ -107,9 +101,7 @@ export default function PrivacyPage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-white mb-3">
-              8. Изменения политики
-            </h2>
+            <h2 className="text-xl font-semibold text-white mb-3">8. Изменения политики</h2>
             <p>
               Мы можем обновлять настоящую Политику конфиденциальности по мере развития
               сайта, форм, сервисов и требований к обработке данных. Актуальная версия

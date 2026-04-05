@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'FAQ',
+  title: 'FAQ — вопросы и ответы о курсах CyberGuard Academy',
   description:
     'Ответы на частые вопросы о курсах CyberGuard Academy: возраст, формат обучения, запись, пробное занятие и программа обучения.',
   alternates: {

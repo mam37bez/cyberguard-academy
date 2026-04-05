@@ -7,7 +7,7 @@ import { blogPosts } from '@/data/blog';
 import { formatDate } from '@/lib/utils';
 
 export const metadata: Metadata = {
-  title: 'Блог',
+  title: 'Блог о кибербезопасности — CyberGuard Academy',
   description:
     'Блог CyberGuard Academy: статьи о кибербезопасности, цифровой защите, фишинге, безопасности детей в интернете и полезных практиках цифровой безопасности.',
   alternates: {

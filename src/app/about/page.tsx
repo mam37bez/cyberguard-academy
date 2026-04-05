@@ -3,9 +3,9 @@ import { Card, CardContent } from '@/components/ui/Card';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 
 export const metadata: Metadata = {
-  title: 'О нас',
+  title: 'О CyberGuard Academy — миссия, ценности и подход к обучению',
   description:
-    'Узнайте больше о CyberGuard Academy: миссия, ценности, преподаватели и подход к обучению кибербезопасности для детей и взрослых.',
+    'Узнайте больше о CyberGuard Academy: миссия, ценности, преподаватели и подход к обучению кибербезопасности для детей, подростков и родителей.',
   alternates: {
     canonical: 'https://cyberguard-academy.vercel.app/about',
   },
@@ -25,13 +25,11 @@ export default function AboutPage() {
           <div>
             <h2 className="text-2xl font-bold text-white mb-4">Миссия</h2>
             <p className="text-gray-400 mb-4">
-              Дать детям, подросткам и взрослым практические знания для защиты в
-              цифровом мире.
+              Дать детям, подросткам и взрослым практические знания для защиты в цифровом мире.
             </p>
             <p className="text-gray-400">
-              Мы придерживаемся подхода White Hat: объясняем угрозы, учим
-              безопасному поведению и развиваем цифровую грамотность без
-              романтизации атакующих практик.
+              Мы придерживаемся подхода White Hat: объясняем угрозы, учим безопасному
+              поведению и развиваем цифровую грамотность без романтизации атакующих практик.
             </p>
           </div>
 

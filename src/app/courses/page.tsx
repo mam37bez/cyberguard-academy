@@ -8,7 +8,7 @@ import { courses } from '@/data/courses';
 import { formatPrice } from '@/lib/utils';
 
 export const metadata: Metadata = {
-  title: 'Курсы',
+  title: 'Курсы кибербезопасности — CyberGuard Academy',
   description:
     'Курсы CyberGuard Academy по кибербезопасности для детей, подростков и родителей: базовый, средний и продвинутый уровни.',
   alternates: {
