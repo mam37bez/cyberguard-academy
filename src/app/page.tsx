@@ -8,6 +8,7 @@ import { HowItWorksSection } from '@/components/sections/HowItWorksSection';
 import { FAQSection } from '@/components/sections/FAQSection';
 import { CTASection } from '@/components/sections/CTASection';
 import { ShareSiteCard } from '@/components/ShareSiteCard';
+import { StudentBenefitsSection } from '@/components/sections/StudentBenefitsSection';
 
 export const metadata: Metadata = {
   title: 'Главная',
@@ -24,6 +25,7 @@ export default function HomePage() {
       <HeroSection />
       <CoursesSection />
       <WhyUsSection />
+      <StudentBenefitsSection />
       <SecuritySection />
       <TestimonialsSection />
       <HowItWorksSection />
