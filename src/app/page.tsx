@@ -13,7 +13,7 @@ import { CTASection } from '@/components/sections/CTASection';
 import { ShareSiteCard } from '@/components/ShareSiteCard';
 
 export const metadata: Metadata = {
-  title: 'Главная',
+  title: 'CyberGuard Academy — обучение кибербезопасности для детей, подростков и родителей',
   description:
     'CyberGuard Academy — обучение кибербезопасности для детей и взрослых: курсы, блог, инструменты и практические материалы по информационной безопасности.',
   alternates: {
