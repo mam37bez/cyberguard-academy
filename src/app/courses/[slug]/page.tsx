@@ -285,6 +285,33 @@ function getTrialLessonFlow(courseSlug: string) {
   return map[courseSlug] || [];
 }
 
+function getWhatNeededToStart(courseSlug: string) {
+  const map: Record<string, string[]> = {
+    'cybersecurity-junior': [
+      'Специальная техническая подготовка не требуется.',
+      'Важно только базовое знакомство ребёнка с устройствами и готовность учиться в спокойном темпе.',
+      'Для старта полезны интерес к теме, внимание и поддержка родителей.',
+    ],
+    'cybersecurity-explorer': [
+      'Предварительные глубокие технические знания не обязательны.',
+      'Желательны интерес к технологиям, интернету и готовность включаться в практические задания.',
+      'Для хорошего старта достаточно мотивации и желания лучше понимать цифровую безопасность.',
+    ],
+    'cybersecurity-pro': [
+      'Для старта важны интерес к технологиям и готовность к более серьёзному уровню погружения.',
+      'Опыт программирования может быть полезен, но не является единственным условием.',
+      'Главное — мотивация, внимательность и желание системно изучать кибербезопасность.',
+    ],
+    'cybersecurity-parents': [
+      'Технический опыт не обязателен.',
+      'Для старта достаточно желания лучше понимать цифровые риски и выстраивать безопасность семьи.',
+      'Курс рассчитан на практическое применение, а не на сложную техническую теорию.',
+    ],
+  };
+
+  return map[courseSlug] || [];
+}
+
 export default async function CoursePage({ params }: PageProps) {
   const { slug } = await params;
   const course = getCourseBySlug(slug);
@@ -336,6 +363,7 @@ export default async function CoursePage({ params }: PageProps) {
   const whyNow = getWhyNow(course.slug);
   const format = getCourseFormat(course.slug);
   const trialFlow = getTrialLessonFlow(course.slug);
+  const startNeeds = getWhatNeededToStart(course.slug);
 
   return (
     <div className="pt-24 pb-16">
@@ -456,6 +484,20 @@ export default async function CoursePage({ params }: PageProps) {
                   {trialFlow.map((item, i) => (
                     <li key={i} className="flex gap-3 text-gray-300">
                       <span className="text-yellow-400">•</span>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </CardContent>
+            </Card>
+
+            <Card variant="default">
+              <CardContent>
+                <h2 className="text-xl font-bold text-white mb-4">Что нужно для старта</h2>
+                <ul className="space-y-3">
+                  {startNeeds.map((item, i) => (
+                    <li key={i} className="flex gap-3 text-gray-300">
+                      <span className="text-primary-400">•</span>
                       {item}
                     </li>
                   ))}
