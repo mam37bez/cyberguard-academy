@@ -2,13 +2,14 @@ import type { Metadata } from 'next';
 import { HeroSection } from '@/components/sections/HeroSection';
 import { CoursesSection } from '@/components/sections/CoursesSection';
 import { WhyUsSection } from '@/components/sections/WhyUsSection';
+import { StudentBenefitsSection } from '@/components/sections/StudentBenefitsSection';
+import { FamilyBenefitsSection } from '@/components/sections/FamilyBenefitsSection';
 import { SecuritySection } from '@/components/sections/SecuritySection';
 import { TestimonialsSection } from '@/components/sections/TestimonialsSection';
 import { HowItWorksSection } from '@/components/sections/HowItWorksSection';
 import { FAQSection } from '@/components/sections/FAQSection';
 import { CTASection } from '@/components/sections/CTASection';
 import { ShareSiteCard } from '@/components/ShareSiteCard';
-import { StudentBenefitsSection } from '@/components/sections/StudentBenefitsSection';
 
 export const metadata: Metadata = {
   title: 'Главная',
@@ -26,6 +27,7 @@ export default function HomePage() {
       <CoursesSection />
       <WhyUsSection />
       <StudentBenefitsSection />
+      <FamilyBenefitsSection />
       <SecuritySection />
       <TestimonialsSection />
       <HowItWorksSection />
