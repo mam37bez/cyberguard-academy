@@ -41,8 +41,65 @@ export default function SecurityToolsPage() {
               Вы можете пройти самопроверку, сгенерировать более надёжный пароль,
               проверить его силу, оценить защищённость устройства, проверить базовую
               приватность, понять, что делать после подозрительной ссылки, а также
-              оценить безопасность семьи и почтового аккаунта.
+              посмотреть на безопасность семьи и почтового аккаунта.
             </p>
+          </div>
+        </div>
+
+        <div className="max-w-4xl mx-auto mb-10 rounded-2xl border border-cyber-border bg-cyber-card p-6 md:p-8">
+          <h2 className="text-2xl font-bold text-white mb-4">С чего начать</h2>
+          <p className="text-gray-300 mb-6">
+            Если не уверены, какой инструмент выбрать первым, начните с того сценария,
+            который ближе всего к вашей ситуации.
+          </p>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="rounded-xl border border-cyber-border bg-cyber-dark/40 p-5">
+              <h3 className="text-lg font-semibold text-white mb-2">Хочу быстро понять общий уровень</h3>
+              <p className="text-sm text-gray-300">
+                Начните с общей проверки привычек и посмотрите, где у вас есть слабые места.
+              </p>
+            </div>
+
+            <div className="rounded-xl border border-cyber-border bg-cyber-dark/40 p-5">
+              <h3 className="text-lg font-semibold text-white mb-2">Меня волнуют пароли</h3>
+              <p className="text-sm text-gray-300">
+                Сначала проверьте силу пароля, затем используйте генератор для более
+                надёжных вариантов.
+              </p>
+            </div>
+
+            <div className="rounded-xl border border-cyber-border bg-cyber-dark/40 p-5">
+              <h3 className="text-lg font-semibold text-white mb-2">Хочу проверить устройство</h3>
+              <p className="text-sm text-gray-300">
+                Используйте чеклист безопасности устройства и посмотрите, какие базовые
+                меры защиты уже включены.
+              </p>
+            </div>
+
+            <div className="rounded-xl border border-cyber-border bg-cyber-dark/40 p-5">
+              <h3 className="text-lg font-semibold text-white mb-2">Меня беспокоит приватность</h3>
+              <p className="text-sm text-gray-300">
+                Пройдите privacy checklist и оцените, насколько аккуратно настроены
+                профили, приложения и доступ к личным данным.
+              </p>
+            </div>
+
+            <div className="rounded-xl border border-cyber-border bg-cyber-dark/40 p-5">
+              <h3 className="text-lg font-semibold text-white mb-2">Я уже открыл подозрительную ссылку</h3>
+              <p className="text-sm text-gray-300">
+                Перейдите к сценарию после подозрительной ссылки и посмотрите, какие
+                шаги стоит сделать прямо сейчас.
+              </p>
+            </div>
+
+            <div className="rounded-xl border border-cyber-border bg-cyber-dark/40 p-5">
+              <h3 className="text-lg font-semibold text-white mb-2">Хочу проверить безопасность семьи</h3>
+              <p className="text-sm text-gray-300">
+                Откройте Family Security Check, если хотите посмотреть на ситуацию с
+                точки зрения родителей, ребёнка и семейных цифровых привычек.
+              </p>
+            </div>
           </div>
         </div>
 
