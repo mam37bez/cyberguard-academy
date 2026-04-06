@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { Analytics } from '@vercel/analytics/next';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import './globals.css';
@@ -9,7 +10,8 @@ export const metadata: Metadata = {
     default: 'CyberGuard Academy',
     template: '%s | CyberGuard Academy',
   },
-  description: 'CyberGuard Academy — школа кибербезопасности для детей и взрослых: курсы, блог, обучение и практические инструменты по информационной безопасности.',
+  description:
+    'CyberGuard Academy — школа кибербезопасности для детей и взрослых: курсы, блог, обучение и практические инструменты по информационной безопасности.',
   keywords: [
     'кибербезопасность',
     'информационная безопасность',
@@ -18,7 +20,7 @@ export const metadata: Metadata = {
     'cybersecurity academy',
     'ethical hacking',
     'security training',
-    'cyberguard academy'
+    'cyberguard academy',
   ],
   alternates: {
     canonical: 'https://cyberguard-academy.vercel.app',
@@ -35,7 +37,8 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: 'CyberGuard Academy',
-    description: 'Школа кибербезопасности для детей и взрослых: курсы, блог и практические инструменты по информационной безопасности.',
+    description:
+      'Школа кибербезопасности для детей и взрослых: курсы, блог и практические инструменты по информационной безопасности.',
     url: 'https://cyberguard-academy.vercel.app',
     siteName: 'CyberGuard Academy',
     locale: 'ru_RU',
@@ -44,7 +47,8 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'CyberGuard Academy',
-    description: 'Школа кибербезопасности для детей и взрослых: курсы, блог и практические инструменты по информационной безопасности.',
+    description:
+      'Школа кибербезопасности для детей и взрослых: курсы, блог и практические инструменты по информационной безопасности.',
   },
 };
 
@@ -67,6 +71,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />
+        <Analytics />
       </body>
     </html>
   );
