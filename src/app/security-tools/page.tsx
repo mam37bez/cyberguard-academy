@@ -7,7 +7,6 @@ import { PasswordGenerator } from '@/components/security/PasswordGenerator';
 import { DeviceSecurityChecklist } from '@/components/security/DeviceSecurityChecklist';
 import { PrivacyChecklist } from '@/components/security/PrivacyChecklist';
 import { SuspiciousLinkGuide } from '@/components/security/SuspiciousLinkGuide';
-import { AccountSecurityAudit } from '@/components/security/AccountSecurityAudit';
 import { Button } from '@/components/ui/Button';
 
 export const metadata: Metadata = {
@@ -38,8 +37,8 @@ export default function SecurityToolsPage() {
             </p>
             <p className="text-gray-300 leading-relaxed">
               Вы можете пройти самопроверку, сгенерировать более надёжный пароль,
-              проверить его силу, оценить защищённость устройства, цифровую
-              приватность и базовую безопасность аккаунта.
+              проверить его силу, оценить защищённость устройства, проверить базовую
+              приватность и понять, что делать после подозрительной ссылки.
             </p>
           </div>
         </div>
@@ -79,27 +78,50 @@ export default function SecurityToolsPage() {
         <DeviceSecurityChecklist />
         <PrivacyChecklist />
         <SuspiciousLinkGuide />
-        <AccountSecurityAudit />
 
-        <div className="max-w-4xl mx-auto mt-12 text-center rounded-2xl border border-cyber-border bg-cyber-card p-8">
-          <h2 className="text-2xl font-bold text-white mb-4">
-            Хотите разобраться глубже?
-          </h2>
-          <p className="text-gray-300 mb-6">
-            После самопроверки вы можете изучить материалы блога, выбрать подходящий
-            курс или связаться с нами, если хотите подобрать программу обучения.
+        <div className="max-w-4xl mx-auto mt-12 rounded-2xl border border-cyber-border bg-cyber-card p-8">
+          <h2 className="text-2xl font-bold text-white mb-4 text-center">Что изучить дальше</h2>
+          <p className="text-gray-300 mb-8 text-center">
+            Если вам были полезны эти инструменты, следующий шаг — перейти к материалам,
+            которые помогут глубже разобраться в теме и выбрать подходящий формат обучения.
           </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link href="/blog">
-              <Button variant="outline" size="lg">
-                Читать блог
-              </Button>
-            </Link>
-            <Link href="/courses">
-              <Button variant="primary" size="lg">
-                Смотреть курсы
-              </Button>
-            </Link>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="rounded-2xl border border-cyber-border bg-cyber-dark/40 p-6 text-center">
+              <div className="text-3xl mb-3">📚</div>
+              <h3 className="text-lg font-semibold text-white mb-2">Полезные статьи</h3>
+              <p className="text-sm text-gray-300 mb-4">
+                Изучите материалы блога о фишинге, паролях, защите аккаунтов,
+                смартфона и цифровой безопасности семьи.
+              </p>
+              <Link href="/blog">
+                <Button variant="outline">Открыть блог</Button>
+              </Link>
+            </div>
+
+            <div className="rounded-2xl border border-cyber-border bg-cyber-dark/40 p-6 text-center">
+              <div className="text-3xl mb-3">🎓</div>
+              <h3 className="text-lg font-semibold text-white mb-2">Курсы обучения</h3>
+              <p className="text-sm text-gray-300 mb-4">
+                Посмотрите программы для детей, подростков и родителей, если хотите
+                не только читать, но и системно изучать тему.
+              </p>
+              <Link href="/courses">
+                <Button variant="primary">Смотреть курсы</Button>
+              </Link>
+            </div>
+
+            <div className="rounded-2xl border border-cyber-border bg-cyber-dark/40 p-6 text-center">
+              <div className="text-3xl mb-3">✉️</div>
+              <h3 className="text-lg font-semibold text-white mb-2">Записаться или спросить</h3>
+              <p className="text-sm text-gray-300 mb-4">
+                Если хотите подобрать курс или уточнить детали, отправьте заявку,
+                и мы поможем выбрать следующий шаг.
+              </p>
+              <Link href="/enrollment">
+                <Button variant="outline">Оставить заявку</Button>
+              </Link>
+            </div>
           </div>
         </div>
       </div>
