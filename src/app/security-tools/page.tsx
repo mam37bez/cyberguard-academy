@@ -5,6 +5,7 @@ import { SecurityChecker } from '@/components/security/SecurityChecker';
 import { PasswordStrengthChecker } from '@/components/security/PasswordStrengthChecker';
 import { PasswordGenerator } from '@/components/security/PasswordGenerator';
 import { DeviceSecurityChecklist } from '@/components/security/DeviceSecurityChecklist';
+import { PrivacyChecklist } from '@/components/security/PrivacyChecklist';
 import { Button } from '@/components/ui/Button';
 
 export const metadata: Metadata = {
@@ -35,7 +36,8 @@ export default function SecurityToolsPage() {
             </p>
             <p className="text-gray-300 leading-relaxed">
               Вы можете пройти самопроверку, сгенерировать более надёжный пароль,
-              проверить его силу и оценить базовую защищённость устройства.
+              проверить его силу, оценить защищённость устройства и проверить
+              базовые настройки цифровой приватности.
             </p>
           </div>
         </div>
@@ -73,6 +75,7 @@ export default function SecurityToolsPage() {
         <PasswordStrengthChecker />
         <PasswordGenerator />
         <DeviceSecurityChecklist />
+        <PrivacyChecklist />
 
         <div className="max-w-4xl mx-auto mt-12 text-center rounded-2xl border border-cyber-border bg-cyber-card p-8">
           <h2 className="text-2xl font-bold text-white mb-4">
