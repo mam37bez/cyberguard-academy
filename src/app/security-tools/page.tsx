@@ -9,6 +9,7 @@ import { PrivacyChecklist } from '@/components/security/PrivacyChecklist';
 import { SuspiciousLinkGuide } from '@/components/security/SuspiciousLinkGuide';
 import { FamilySecurityCheck } from '@/components/security/FamilySecurityCheck';
 import { EmailSecurityAudit } from '@/components/security/EmailSecurityAudit';
+import { SuspiciousFileGuide } from '@/components/security/SuspiciousFileGuide';
 import { Button } from '@/components/ui/Button';
 
 export const metadata: Metadata = {
@@ -40,8 +41,8 @@ export default function SecurityToolsPage() {
             <p className="text-gray-300 leading-relaxed">
               Вы можете пройти самопроверку, сгенерировать более надёжный пароль,
               проверить его силу, оценить защищённость устройства, проверить базовую
-              приватность, понять, что делать после подозрительной ссылки, а также
-              посмотреть на безопасность семьи и почтового аккаунта.
+              приватность, понять, что делать после подозрительной ссылки или файла,
+              а также посмотреть на безопасность семьи и почтового аккаунта.
             </p>
           </div>
         </div>
@@ -94,10 +95,26 @@ export default function SecurityToolsPage() {
             </div>
 
             <div className="rounded-xl border border-cyber-border bg-cyber-dark/40 p-5">
+              <h3 className="text-lg font-semibold text-white mb-2">Я скачал подозрительный файл</h3>
+              <p className="text-sm text-gray-300">
+                Используйте сценарий после подозрительного файла, если вы уже скачивали,
+                открывали или запускали сомнительное вложение.
+              </p>
+            </div>
+
+            <div className="rounded-xl border border-cyber-border bg-cyber-dark/40 p-5">
               <h3 className="text-lg font-semibold text-white mb-2">Хочу проверить безопасность семьи</h3>
               <p className="text-sm text-gray-300">
                 Откройте Family Security Check, если хотите посмотреть на ситуацию с
                 точки зрения родителей, ребёнка и семейных цифровых привычек.
+              </p>
+            </div>
+
+            <div className="rounded-xl border border-cyber-border bg-cyber-dark/40 p-5">
+              <h3 className="text-lg font-semibold text-white mb-2">Хочу проверить почтовый аккаунт</h3>
+              <p className="text-sm text-gray-300">
+                Mini Email Security Audit поможет быстро проверить базовую защищённость
+                почты — одного из самых важных аккаунтов.
               </p>
             </div>
           </div>
@@ -138,6 +155,7 @@ export default function SecurityToolsPage() {
         <DeviceSecurityChecklist />
         <PrivacyChecklist />
         <SuspiciousLinkGuide />
+        <SuspiciousFileGuide />
         <FamilySecurityCheck />
         <EmailSecurityAudit />
 
