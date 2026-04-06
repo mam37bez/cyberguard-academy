@@ -7,6 +7,7 @@ import { PasswordGenerator } from '@/components/security/PasswordGenerator';
 import { DeviceSecurityChecklist } from '@/components/security/DeviceSecurityChecklist';
 import { PrivacyChecklist } from '@/components/security/PrivacyChecklist';
 import { SuspiciousLinkGuide } from '@/components/security/SuspiciousLinkGuide';
+import { FamilySecurityCheck } from '@/components/security/FamilySecurityCheck';
 import { Button } from '@/components/ui/Button';
 
 export const metadata: Metadata = {
@@ -38,7 +39,8 @@ export default function SecurityToolsPage() {
             <p className="text-gray-300 leading-relaxed">
               Вы можете пройти самопроверку, сгенерировать более надёжный пароль,
               проверить его силу, оценить защищённость устройства, проверить базовую
-              приватность и понять, что делать после подозрительной ссылки.
+              приватность, понять, что делать после подозрительной ссылки, и даже
+              посмотреть на цифровую безопасность семьи в целом.
             </p>
           </div>
         </div>
@@ -78,6 +80,7 @@ export default function SecurityToolsPage() {
         <DeviceSecurityChecklist />
         <PrivacyChecklist />
         <SuspiciousLinkGuide />
+        <FamilySecurityCheck />
 
         <div className="max-w-4xl mx-auto mt-12 rounded-2xl border border-cyber-border bg-cyber-card p-8">
           <h2 className="text-2xl font-bold text-white mb-4 text-center">Что изучить дальше</h2>
