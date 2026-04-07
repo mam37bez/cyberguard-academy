@@ -27,6 +27,7 @@ export default function SecurityToolsPage() {
     <div className="pt-24 pb-16">
       <div className="max-w-7xl mx-auto px-4">
         <SectionHeading
+          as="h1"
           badge="Безопасность"
           title="Проверка кибербезопасности"
           subtitle="Ответьте на вопросы, проверьте силу пароля и получите рекомендации по защите аккаунтов, устройств и личных данных"

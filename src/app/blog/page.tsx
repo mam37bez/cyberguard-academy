@@ -23,6 +23,7 @@ export default function BlogPage() {
     <div className="pt-24 pb-16">
       <div className="max-w-7xl mx-auto px-4">
         <SectionHeading
+          as="h1"
           badge="Блог"
           title="Статьи о кибербезопасности"
           subtitle="Практические материалы о защите аккаунтов, устройств, данных и безопасном поведении в интернете"

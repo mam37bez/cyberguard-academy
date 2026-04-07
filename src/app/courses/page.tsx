@@ -33,6 +33,7 @@ export default function CoursesPage() {
     <div className="pt-24 pb-16">
       <div className="max-w-7xl mx-auto px-4">
         <SectionHeading
+          as="h1"
           badge="Все программы"
           title="Курсы"
           subtitle="Выберите программу обучения по возрасту и уровню подготовки"

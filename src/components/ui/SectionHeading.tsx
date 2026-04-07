@@ -7,9 +7,19 @@ interface SectionHeadingProps {
   badge?: string;
   centered?: boolean;
   className?: string;
+  as?: 'h1' | 'h2';
 }
 
-export function SectionHeading({ title, subtitle, badge, centered = true, className }: SectionHeadingProps) {
+export function SectionHeading({
+  title,
+  subtitle,
+  badge,
+  centered = true,
+  className,
+  as = 'h2',
+}: SectionHeadingProps) {
+  const HeadingTag = as;
+
   return (
     <div className={cn('mb-16', centered && 'text-center', className)}>
       {badge && (
@@ -18,8 +28,16 @@ export function SectionHeading({ title, subtitle, badge, centered = true, classN
           {badge}
         </div>
       )}
-      <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">{title}</h2>
-      {subtitle && <p className={cn('text-lg text-gray-400 max-w-3xl', centered && 'mx-auto')}>{subtitle}</p>}
+
+      <HeadingTag className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
+        {title}
+      </HeadingTag>
+
+      {subtitle && (
+        <p className={cn('text-lg text-gray-400 max-w-3xl', centered && 'mx-auto')}>
+          {subtitle}
+        </p>
+      )}
     </div>
   );
 }
