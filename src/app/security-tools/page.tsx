@@ -177,15 +177,15 @@ export default function SecurityToolsPage() {
           </div>
         </div>
 
-        <div className="max-w-5xl mx-auto mb-10 rounded-2xl border border-cyber-border bg-cyber-card p-6 md:p-8">
-          <div className="flex items-center justify-between gap-4 mb-6">
+        <div className="max-w-5xl mx-auto mb-10 rounded-2xl border border-cyber-border bg-gradient-to-br from-cyber-card to-cyber-dark/80 p-6 md:p-8 shadow-[0_0_0_1px_rgba(59,130,246,0.03)]">
+          <div className="flex items-start justify-between gap-4 mb-6">
             <div>
               <h2 className="text-2xl font-bold text-white mb-2">Быстрый переход к инструментам</h2>
               <p className="text-gray-300">
                 Компактная навигация по основным сценариям и self-check инструментам.
               </p>
             </div>
-            <div className="hidden md:flex h-12 w-12 items-center justify-center rounded-2xl border border-primary-500/20 bg-primary-500/10 text-primary-300">
+            <div className="hidden md:flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-primary-500/20 bg-primary-500/10 text-primary-300 shadow-[0_0_24px_rgba(59,130,246,0.08)]">
               ✦
             </div>
           </div>
@@ -195,25 +195,26 @@ export default function SecurityToolsPage() {
               <a
                 key={link.href}
                 href={link.href}
-                className="group rounded-2xl border border-cyber-border bg-gradient-to-br from-cyber-dark/60 to-cyber-card p-4 transition duration-200 hover:border-primary-400/40 hover:from-primary-500/10 hover:to-cyber-card"
+                className="group relative overflow-hidden rounded-2xl border border-cyber-border bg-cyber-dark/40 p-4 transition duration-200 hover:border-primary-400/40 hover:bg-primary-500/[0.08] hover:shadow-[0_0_24px_rgba(59,130,246,0.08)]"
               >
-                <div className="flex items-start gap-3">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-primary-500/20 bg-primary-500/10 text-lg">
+                <div className="absolute inset-0 bg-gradient-to-r from-primary-500/[0.03] via-transparent to-transparent opacity-0 transition duration-200 group-hover:opacity-100" />
+
+                <div className="relative flex items-center gap-3">
+                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-primary-500/20 bg-primary-500/10 text-lg shadow-[0_0_18px_rgba(59,130,246,0.06)]">
                     {link.icon}
                   </div>
 
                   <div className="min-w-0 flex-1">
-                    <div className="flex items-start justify-between gap-3">
-                      <h3 className="text-sm font-semibold text-white leading-5">
-                        {link.title}
-                      </h3>
-                      <span className="text-primary-400 transition group-hover:translate-x-1">
-                        →
-                      </span>
-                    </div>
-                    <p className="mt-1 text-xs leading-5 text-gray-400">
+                    <h3 className="text-sm font-semibold text-white leading-5 mb-1">
+                      {link.title}
+                    </h3>
+                    <p className="text-xs leading-5 text-gray-400">
                       {link.description}
                     </p>
+                  </div>
+
+                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-primary-500/15 bg-primary-500/[0.07] text-primary-300 transition duration-200 group-hover:border-primary-400/30 group-hover:bg-primary-500/[0.14] group-hover:text-white group-hover:translate-x-0.5">
+                    →
                   </div>
                 </div>
               </a>
