@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { SecurityChecker } from '@/components/security/SecurityChecker';
 import { PasswordStrengthChecker } from '@/components/security/PasswordStrengthChecker';
@@ -11,7 +10,7 @@ import { SuspiciousFileGuide } from '@/components/security/SuspiciousFileGuide';
 import { FamilySecurityCheck } from '@/components/security/FamilySecurityCheck';
 import { EmailSecurityAudit } from '@/components/security/EmailSecurityAudit';
 import { AccountRecoveryGuide } from '@/components/security/AccountRecoveryGuide';
-import { Button } from '@/components/ui/Button';
+import { SecurityToolsCTA } from '@/components/security/SecurityToolsCTA';
 
 export const metadata: Metadata = {
   title: 'Проверка кибербезопасности — CyberGuard Academy',
@@ -73,64 +72,56 @@ export default function SecurityToolsPage() {
             <div className="rounded-xl border border-cyber-border bg-cyber-dark/40 p-5">
               <h3 className="text-lg font-semibold text-white mb-2">Хочу быстро понять общий уровень</h3>
               <p className="text-sm text-gray-300">
-                Начните с общей проверки привычек и посмотрите, где у вас есть слабые
-                места.
+                Начните с общей проверки привычек и посмотрите, где у вас есть слабые места.
               </p>
             </div>
 
             <div className="rounded-xl border border-cyber-border bg-cyber-dark/40 p-5">
               <h3 className="text-lg font-semibold text-white mb-2">Меня волнуют пароли</h3>
               <p className="text-sm text-gray-300">
-                Сначала проверьте силу пароля, затем используйте генератор для более
-                надёжных вариантов.
+                Сначала проверьте силу пароля, затем используйте генератор для более надёжных вариантов.
               </p>
             </div>
 
             <div className="rounded-xl border border-cyber-border bg-cyber-dark/40 p-5">
               <h3 className="text-lg font-semibold text-white mb-2">Хочу проверить устройство</h3>
               <p className="text-sm text-gray-300">
-                Используйте чеклист безопасности устройства и посмотрите, какие базовые
-                меры защиты уже включены.
+                Используйте чеклист безопасности устройства и посмотрите, какие базовые меры защиты уже включены.
               </p>
             </div>
 
             <div className="rounded-xl border border-cyber-border bg-cyber-dark/40 p-5">
               <h3 className="text-lg font-semibold text-white mb-2">Меня беспокоит приватность</h3>
               <p className="text-sm text-gray-300">
-                Пройдите privacy checklist и оцените, насколько аккуратно настроены
-                профили, приложения и доступ к личным данным.
+                Пройдите privacy checklist и оцените, насколько аккуратно настроены профили, приложения и доступ к личным данным.
               </p>
             </div>
 
             <div className="rounded-xl border border-cyber-border bg-cyber-dark/40 p-5">
               <h3 className="text-lg font-semibold text-white mb-2">Я уже открыл подозрительную ссылку</h3>
               <p className="text-sm text-gray-300">
-                Перейдите к сценарию после подозрительной ссылки и посмотрите, какие
-                шаги стоит сделать прямо сейчас.
+                Перейдите к сценарию после подозрительной ссылки и посмотрите, какие шаги стоит сделать прямо сейчас.
               </p>
             </div>
 
             <div className="rounded-xl border border-cyber-border bg-cyber-dark/40 p-5">
               <h3 className="text-lg font-semibold text-white mb-2">Я скачал подозрительный файл</h3>
               <p className="text-sm text-gray-300">
-                Используйте сценарий после подозрительного файла, если вы уже скачивали,
-                открывали или запускали сомнительное вложение.
+                Используйте сценарий после подозрительного файла, если вы уже скачивали, открывали или запускали сомнительное вложение.
               </p>
             </div>
 
             <div className="rounded-xl border border-cyber-border bg-cyber-dark/40 p-5">
               <h3 className="text-lg font-semibold text-white mb-2">Хочу проверить безопасность семьи</h3>
               <p className="text-sm text-gray-300">
-                Откройте Family Security Check, если хотите посмотреть на ситуацию с
-                точки зрения родителей, ребёнка и семейных цифровых привычек.
+                Откройте Family Security Check, если хотите посмотреть на ситуацию с точки зрения родителей, ребёнка и семейных цифровых привычек.
               </p>
             </div>
 
             <div className="rounded-xl border border-cyber-border bg-cyber-dark/40 p-5">
               <h3 className="text-lg font-semibold text-white mb-2">Хочу проверить почтовый аккаунт</h3>
               <p className="text-sm text-gray-300">
-                Mini Email Security Audit поможет быстро проверить базовую защищённость
-                почты — одного из самых важных аккаунтов.
+                Mini Email Security Audit поможет быстро проверить базовую защищённость почты — одного из самых важных аккаунтов.
               </p>
             </div>
           </div>
@@ -231,43 +222,7 @@ export default function SecurityToolsPage() {
             подходящий формат обучения.
           </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="rounded-2xl border border-cyber-border bg-cyber-dark/40 p-6 text-center">
-              <div className="text-3xl mb-3">📘</div>
-              <h3 className="text-lg font-semibold text-white mb-2">Полезные статьи</h3>
-              <p className="text-sm text-gray-300 mb-4">
-                Изучите материалы блога о фишинге, паролях, защите аккаунтов,
-                смартфона и цифровой безопасности семьи.
-              </p>
-              <Link href="/blog">
-                <Button variant="outline">Открыть блог</Button>
-              </Link>
-            </div>
-
-            <div className="rounded-2xl border border-cyber-border bg-cyber-dark/40 p-6 text-center">
-              <div className="text-3xl mb-3">🎓</div>
-              <h3 className="text-lg font-semibold text-white mb-2">Курсы обучения</h3>
-              <p className="text-sm text-gray-300 mb-4">
-                Посмотрите программы для детей, подростков и родителей, если хотите
-                не только читать, но и системно изучать тему.
-              </p>
-              <Link href="/courses">
-                <Button variant="primary">Смотреть курсы</Button>
-              </Link>
-            </div>
-
-            <div className="rounded-2xl border border-cyber-border bg-cyber-dark/40 p-6 text-center">
-              <div className="text-3xl mb-3">✉️</div>
-              <h3 className="text-lg font-semibold text-white mb-2">Записаться или спросить</h3>
-              <p className="text-sm text-gray-300 mb-4">
-                Если хотите подобрать курс или уточнить детали, отправьте заявку,
-                и мы поможем выбрать следующий шаг.
-              </p>
-              <Link href="/enrollment">
-                <Button variant="outline">Оставить заявку</Button>
-              </Link>
-            </div>
-          </div>
+          <SecurityToolsCTA />
         </div>
       </div>
     </div>
