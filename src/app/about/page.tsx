@@ -3,7 +3,7 @@ import { Card, CardContent } from '@/components/ui/Card';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 
 export const metadata: Metadata = {
-  title: 'О CyberGuard Academy — миссия, ценности и подход к обучению',
+  title: 'О CyberGuard Academy — миссия и ценности',
   description:
     'Узнайте больше о CyberGuard Academy: миссия, ценности, преподаватели и подход к обучению кибербезопасности для детей, подростков и родителей.',
   alternates: {
