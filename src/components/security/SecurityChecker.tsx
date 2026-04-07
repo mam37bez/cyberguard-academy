@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useMemo, useState } from 'react';
+import { track } from '@vercel/analytics';
 import { Card, CardContent } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { getSecurityLevel } from '@/lib/utils';
@@ -35,6 +36,8 @@ export function SecurityChecker() {
   const [answers, setAnswers] = useState<Record<string, boolean>>({});
   const [showResults, setShowResults] = useState(false);
   const [current, setCurrent] = useState(0);
+  const [hasTrackedStart, setHasTrackedStart] = useState(false);
+  const [hasTrackedComplete, setHasTrackedComplete] = useState(false);
 
   const answeredCount = Object.keys(answers).length;
 
@@ -54,11 +57,34 @@ export function SecurityChecker() {
   }, [weakAreas]);
 
   const handleAnswer = (questionId: string, answer: boolean) => {
-    setAnswers((prev) => ({ ...prev, [questionId]: answer }));
+    if (!hasTrackedStart) {
+      track('security_checker_started', {
+        source: 'security-tools',
+        tool: 'security-checker',
+      });
+      setHasTrackedStart(true);
+    }
+
+    const nextAnswers = { ...answers, [questionId]: answer };
+    setAnswers(nextAnswers);
 
     if (current < questions.length - 1) {
       setCurrent((prev) => prev + 1);
     } else {
+      const finalScore = Object.entries(nextAnswers).reduce((sum, [key, value]) => {
+        const question = questions.find((q) => q.id === key);
+        return sum + (value && question ? question.weight : 0);
+      }, 0);
+
+      if (!hasTrackedComplete) {
+        track('security_checker_completed', {
+          source: 'security-tools',
+          tool: 'security-checker',
+          score: String(finalScore),
+        });
+        setHasTrackedComplete(true);
+      }
+
       setShowResults(true);
     }
   };
@@ -67,6 +93,8 @@ export function SecurityChecker() {
     setAnswers({});
     setShowResults(false);
     setCurrent(0);
+    setHasTrackedStart(false);
+    setHasTrackedComplete(false);
   };
 
   if (showResults) {
@@ -93,6 +121,7 @@ export function SecurityChecker() {
                     strokeDasharray={`${score * 2.83} ${283 - score * 2.83}`}
                   />
                 </svg>
+
                 <div className="absolute inset-0 flex flex-col items-center justify-center">
                   <span className="text-4xl font-bold" style={{ color }}>
                     {score}
@@ -200,6 +229,7 @@ export function SecurityChecker() {
             >
               Да
             </Button>
+
             <Button
               size="lg"
               variant="outline"
