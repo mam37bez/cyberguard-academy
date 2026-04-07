@@ -22,16 +22,66 @@ export const metadata: Metadata = {
 };
 
 const quickLinks = [
-  { href: '#security-checker', label: 'Общая проверка' },
-  { href: '#password-strength', label: 'Проверка пароля' },
-  { href: '#password-generator', label: 'Генератор пароля' },
-  { href: '#device-security', label: 'Безопасность устройства' },
-  { href: '#privacy-checklist', label: 'Приватность' },
-  { href: '#suspicious-link', label: 'Подозрительная ссылка' },
-  { href: '#suspicious-file', label: 'Подозрительный файл' },
-  { href: '#family-security', label: 'Безопасность семьи' },
-  { href: '#email-audit', label: 'Почтовый аккаунт' },
-  { href: '#account-recovery', label: 'Восстановление аккаунта' },
+  {
+    href: '#security-checker',
+    title: 'Общая проверка',
+    description: 'Самопроверка привычек и базовой цифровой защиты',
+    icon: '🛡️',
+  },
+  {
+    href: '#password-strength',
+    title: 'Проверка пароля',
+    description: 'Оцените силу пароля и его устойчивость',
+    icon: '🔐',
+  },
+  {
+    href: '#password-generator',
+    title: 'Генератор пароля',
+    description: 'Создайте более надёжный пароль за пару секунд',
+    icon: '⚙️',
+  },
+  {
+    href: '#device-security',
+    title: 'Безопасность устройства',
+    description: 'Проверьте базовые меры защиты смартфона или ПК',
+    icon: '💻',
+  },
+  {
+    href: '#privacy-checklist',
+    title: 'Приватность',
+    description: 'Оцените настройки профилей, приложений и данных',
+    icon: '👁️',
+  },
+  {
+    href: '#suspicious-link',
+    title: 'Подозрительная ссылка',
+    description: 'Что делать после перехода по сомнительной ссылке',
+    icon: '🔗',
+  },
+  {
+    href: '#suspicious-file',
+    title: 'Подозрительный файл',
+    description: 'Шаги после скачивания или открытия вложения',
+    icon: '📎',
+  },
+  {
+    href: '#family-security',
+    title: 'Безопасность семьи',
+    description: 'Проверьте семейные привычки и цифровую защиту',
+    icon: '👨‍👩‍👧',
+  },
+  {
+    href: '#email-audit',
+    title: 'Почтовый аккаунт',
+    description: 'Мини-аудит защиты одного из главных аккаунтов',
+    icon: '✉️',
+  },
+  {
+    href: '#account-recovery',
+    title: 'Восстановление аккаунта',
+    description: 'Первые действия при потере доступа или компрометации',
+    icon: '♻️',
+  },
 ];
 
 export default function SecurityToolsPage() {
@@ -132,14 +182,30 @@ export default function SecurityToolsPage() {
           <p className="text-gray-300 mb-6">
             Выберите нужный инструмент и сразу перейдите к соответствующему разделу.
           </p>
-          <div className="flex flex-wrap gap-3">
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {quickLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
-                className="inline-flex items-center rounded-full border border-primary-500/30 bg-primary-500/10 px-4 py-2 text-sm text-primary-300 transition hover:border-primary-400 hover:bg-primary-500/20 hover:text-white"
+                className="group rounded-2xl border border-cyber-border bg-cyber-dark/40 p-5 transition hover:border-primary-400/40 hover:bg-primary-500/10"
               >
-                {link.label}
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex gap-3">
+                    <div className="text-2xl leading-none">{link.icon}</div>
+                    <div>
+                      <h3 className="text-base font-semibold text-white mb-1">
+                        {link.title}
+                      </h3>
+                      <p className="text-sm text-gray-400 leading-relaxed">
+                        {link.description}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="text-primary-400 transition group-hover:translate-x-1">
+                    →
+                  </div>
+                </div>
               </a>
             ))}
           </div>
