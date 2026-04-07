@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useMemo, useState } from 'react';
+import { track } from '@vercel/analytics';
 import { Card, CardContent } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 
@@ -27,14 +28,17 @@ function generatePassword(
     available += upper;
     passwordChars.push(randomChar(upper));
   }
+
   if (useLower) {
     available += lower;
     passwordChars.push(randomChar(lower));
   }
+
   if (useNumbers) {
     available += numbers;
     passwordChars.push(randomChar(numbers));
   }
+
   if (useSymbols) {
     available += symbols;
     passwordChars.push(randomChar(symbols));
@@ -61,15 +65,31 @@ export function PasswordGenerator() {
   const [useNumbers, setUseNumbers] = useState(true);
   const [useSymbols, setUseSymbols] = useState(true);
   const [copied, setCopied] = useState(false);
+  const [hasTrackedGenerate, setHasTrackedGenerate] = useState(false);
 
   const password = useMemo(() => {
     return generatePassword(length, useUpper, useLower, useNumbers, useSymbols);
   }, [length, useUpper, useLower, useNumbers, useSymbols]);
 
+  const trackGeneratedOnce = () => {
+    if (!hasTrackedGenerate) {
+      track('password_generated', {
+        source: 'security-tools',
+        tool: 'password-generator',
+      });
+      setHasTrackedGenerate(true);
+    }
+  };
+
   const copyPassword = async () => {
     if (!password) return;
+
     try {
       await navigator.clipboard.writeText(password);
+      track('password_copied', {
+        source: 'security-tools',
+        tool: 'password-generator',
+      });
       setCopied(true);
       setTimeout(() => setCopied(false), 1500);
     } catch {
@@ -85,7 +105,8 @@ export function PasswordGenerator() {
             <h2 className="text-2xl font-bold text-white mb-3">Генератор паролей</h2>
             <p className="text-gray-300">
               Сгенерируйте надёжный пароль для нового аккаунта или обновления старого.
-              Используйте уникальные пароли и по возможности храните их в менеджере паролей.
+              Используйте уникальные пароли и по возможности храните их в менеджере
+              паролей.
             </p>
           </div>
 
@@ -106,7 +127,10 @@ export function PasswordGenerator() {
                 min="8"
                 max="32"
                 value={length}
-                onChange={(e) => setLength(Number(e.target.value))}
+                onChange={(e) => {
+                  setLength(Number(e.target.value));
+                  trackGeneratedOnce();
+                }}
                 className="w-full"
               />
             </div>
@@ -116,7 +140,10 @@ export function PasswordGenerator() {
                 <input
                   type="checkbox"
                   checked={useUpper}
-                  onChange={(e) => setUseUpper(e.target.checked)}
+                  onChange={(e) => {
+                    setUseUpper(e.target.checked);
+                    trackGeneratedOnce();
+                  }}
                 />
                 Заглавные буквы
               </label>
@@ -125,7 +152,10 @@ export function PasswordGenerator() {
                 <input
                   type="checkbox"
                   checked={useLower}
-                  onChange={(e) => setUseLower(e.target.checked)}
+                  onChange={(e) => {
+                    setUseLower(e.target.checked);
+                    trackGeneratedOnce();
+                  }}
                 />
                 Строчные буквы
               </label>
@@ -134,7 +164,10 @@ export function PasswordGenerator() {
                 <input
                   type="checkbox"
                   checked={useNumbers}
-                  onChange={(e) => setUseNumbers(e.target.checked)}
+                  onChange={(e) => {
+                    setUseNumbers(e.target.checked);
+                    trackGeneratedOnce();
+                  }}
                 />
                 Цифры
               </label>
@@ -143,7 +176,10 @@ export function PasswordGenerator() {
                 <input
                   type="checkbox"
                   checked={useSymbols}
-                  onChange={(e) => setUseSymbols(e.target.checked)}
+                  onChange={(e) => {
+                    setUseSymbols(e.target.checked);
+                    trackGeneratedOnce();
+                  }}
                 />
                 Символы
               </label>
@@ -165,6 +201,7 @@ export function PasswordGenerator() {
                 setUseLower(true);
                 setUseNumbers(true);
                 setUseSymbols(true);
+                setHasTrackedGenerate(false);
               }}
             >
               Сбросить параметры

@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useMemo, useState } from 'react';
+import { track } from '@vercel/analytics';
 import { Card, CardContent } from '@/components/ui/Card';
 import { Input } from '@/components/ui/Input';
 
@@ -45,6 +46,7 @@ function evaluatePassword(password: string) {
 
 export function PasswordStrengthChecker() {
   const [password, setPassword] = useState('');
+  const [hasTrackedCheck, setHasTrackedCheck] = useState(false);
 
   const result = useMemo(() => evaluatePassword(password), [password]);
 
@@ -56,6 +58,18 @@ export function PasswordStrengthChecker() {
     !result.checks.symbol && 'Добавьте специальные символы.',
     !result.checks.noCommon && 'Не используйте слишком распространённые и легко угадываемые комбинации.',
   ].filter(Boolean) as string[];
+
+  const handlePasswordChange = (value: string) => {
+    setPassword(value);
+
+    if (!hasTrackedCheck && value.trim().length > 0) {
+      track('password_strength_checked', {
+        source: 'security-tools',
+        tool: 'password-strength-checker',
+      });
+      setHasTrackedCheck(true);
+    }
+  };
 
   return (
     <div className="max-w-4xl mx-auto mt-12">
@@ -75,7 +89,7 @@ export function PasswordStrengthChecker() {
               label="Пример пароля"
               type="text"
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={(e) => handlePasswordChange(e.target.value)}
               placeholder="Например: MySecurePass!2026"
             />
           </div>
@@ -103,27 +117,28 @@ export function PasswordStrengthChecker() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-6">
             <div className="rounded-xl border border-cyber-border bg-cyber-dark/50 p-4 text-sm text-gray-300">
-              {result.checks.length ? '✅' : '❌'} Длина не менее 12 символов
+              {result.checks.length ? '✅' : '⚠️'} Длина не менее 12 символов
             </div>
             <div className="rounded-xl border border-cyber-border bg-cyber-dark/50 p-4 text-sm text-gray-300">
-              {result.checks.lower ? '✅' : '❌'} Есть строчные буквы
+              {result.checks.lower ? '✅' : '⚠️'} Есть строчные буквы
             </div>
             <div className="rounded-xl border border-cyber-border bg-cyber-dark/50 p-4 text-sm text-gray-300">
-              {result.checks.upper ? '✅' : '❌'} Есть заглавные буквы
+              {result.checks.upper ? '✅' : '⚠️'} Есть заглавные буквы
             </div>
             <div className="rounded-xl border border-cyber-border bg-cyber-dark/50 p-4 text-sm text-gray-300">
-              {result.checks.number ? '✅' : '❌'} Есть цифры
+              {result.checks.number ? '✅' : '⚠️'} Есть цифры
             </div>
             <div className="rounded-xl border border-cyber-border bg-cyber-dark/50 p-4 text-sm text-gray-300">
-              {result.checks.symbol ? '✅' : '❌'} Есть спецсимволы
+              {result.checks.symbol ? '✅' : '⚠️'} Есть спецсимволы
             </div>
             <div className="rounded-xl border border-cyber-border bg-cyber-dark/50 p-4 text-sm text-gray-300">
-              {result.checks.noCommon ? '✅' : '❌'} Нет слишком популярных шаблонов
+              {result.checks.noCommon ? '✅' : '⚠️'} Нет слишком популярных шаблонов
             </div>
           </div>
 
           <div>
             <h3 className="text-lg font-semibold text-white mb-3">Рекомендации</h3>
+
             {password.length === 0 ? (
               <p className="text-gray-400 text-sm">
                 Введите пример пароля, чтобы увидеть оценку и рекомендации.
