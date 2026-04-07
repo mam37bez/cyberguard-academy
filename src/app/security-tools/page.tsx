@@ -25,61 +25,61 @@ const quickLinks = [
   {
     href: '#security-checker',
     title: 'Общая проверка',
-    description: 'Самопроверка привычек и базовой цифровой защиты',
+    description: 'Самопроверка привычек',
     icon: '🛡️',
   },
   {
     href: '#password-strength',
     title: 'Проверка пароля',
-    description: 'Оцените силу пароля и его устойчивость',
+    description: 'Оценка силы пароля',
     icon: '🔐',
   },
   {
     href: '#password-generator',
     title: 'Генератор пароля',
-    description: 'Создайте более надёжный пароль за пару секунд',
+    description: 'Создание надёжного пароля',
     icon: '⚙️',
   },
   {
     href: '#device-security',
-    title: 'Безопасность устройства',
-    description: 'Проверьте базовые меры защиты смартфона или ПК',
+    title: 'Устройство',
+    description: 'Базовая защита смартфона и ПК',
     icon: '💻',
   },
   {
     href: '#privacy-checklist',
     title: 'Приватность',
-    description: 'Оцените настройки профилей, приложений и данных',
+    description: 'Настройки профилей и данных',
     icon: '👁️',
   },
   {
     href: '#suspicious-link',
     title: 'Подозрительная ссылка',
-    description: 'Что делать после перехода по сомнительной ссылке',
+    description: 'Действия после перехода',
     icon: '🔗',
   },
   {
     href: '#suspicious-file',
     title: 'Подозрительный файл',
-    description: 'Шаги после скачивания или открытия вложения',
+    description: 'Действия после вложения',
     icon: '📎',
   },
   {
     href: '#family-security',
     title: 'Безопасность семьи',
-    description: 'Проверьте семейные привычки и цифровую защиту',
+    description: 'Семейные цифровые привычки',
     icon: '👨‍👩‍👧',
   },
   {
     href: '#email-audit',
     title: 'Почтовый аккаунт',
-    description: 'Мини-аудит защиты одного из главных аккаунтов',
+    description: 'Мини-аудит защиты почты',
     icon: '✉️',
   },
   {
     href: '#account-recovery',
     title: 'Восстановление аккаунта',
-    description: 'Первые действия при потере доступа или компрометации',
+    description: 'Первые шаги recovery',
     icon: '♻️',
   },
 ];
@@ -178,32 +178,42 @@ export default function SecurityToolsPage() {
         </div>
 
         <div className="max-w-5xl mx-auto mb-10 rounded-2xl border border-cyber-border bg-cyber-card p-6 md:p-8">
-          <h2 className="text-2xl font-bold text-white mb-4">Быстрый переход к инструментам</h2>
-          <p className="text-gray-300 mb-6">
-            Выберите нужный инструмент и сразу перейдите к соответствующему разделу.
-          </p>
+          <div className="flex items-center justify-between gap-4 mb-6">
+            <div>
+              <h2 className="text-2xl font-bold text-white mb-2">Быстрый переход к инструментам</h2>
+              <p className="text-gray-300">
+                Компактная навигация по основным сценариям и self-check инструментам.
+              </p>
+            </div>
+            <div className="hidden md:flex h-12 w-12 items-center justify-center rounded-2xl border border-primary-500/20 bg-primary-500/10 text-primary-300">
+              ✦
+            </div>
+          </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-3">
             {quickLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
-                className="group rounded-2xl border border-cyber-border bg-cyber-dark/40 p-5 transition hover:border-primary-400/40 hover:bg-primary-500/10"
+                className="group rounded-2xl border border-cyber-border bg-gradient-to-br from-cyber-dark/60 to-cyber-card p-4 transition duration-200 hover:border-primary-400/40 hover:from-primary-500/10 hover:to-cyber-card"
               >
-                <div className="flex items-start justify-between gap-4">
-                  <div className="flex gap-3">
-                    <div className="text-2xl leading-none">{link.icon}</div>
-                    <div>
-                      <h3 className="text-base font-semibold text-white mb-1">
+                <div className="flex items-start gap-3">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-primary-500/20 bg-primary-500/10 text-lg">
+                    {link.icon}
+                  </div>
+
+                  <div className="min-w-0 flex-1">
+                    <div className="flex items-start justify-between gap-3">
+                      <h3 className="text-sm font-semibold text-white leading-5">
                         {link.title}
                       </h3>
-                      <p className="text-sm text-gray-400 leading-relaxed">
-                        {link.description}
-                      </p>
+                      <span className="text-primary-400 transition group-hover:translate-x-1">
+                        →
+                      </span>
                     </div>
-                  </div>
-                  <div className="text-primary-400 transition group-hover:translate-x-1">
-                    →
+                    <p className="mt-1 text-xs leading-5 text-gray-400">
+                      {link.description}
+                    </p>
                   </div>
                 </div>
               </a>
