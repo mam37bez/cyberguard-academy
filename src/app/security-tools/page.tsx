@@ -7,9 +7,10 @@ import { PasswordGenerator } from '@/components/security/PasswordGenerator';
 import { DeviceSecurityChecklist } from '@/components/security/DeviceSecurityChecklist';
 import { PrivacyChecklist } from '@/components/security/PrivacyChecklist';
 import { SuspiciousLinkGuide } from '@/components/security/SuspiciousLinkGuide';
+import { SuspiciousFileGuide } from '@/components/security/SuspiciousFileGuide';
 import { FamilySecurityCheck } from '@/components/security/FamilySecurityCheck';
 import { EmailSecurityAudit } from '@/components/security/EmailSecurityAudit';
-import { SuspiciousFileGuide } from '@/components/security/SuspiciousFileGuide';
+import { AccountRecoveryGuide } from '@/components/security/AccountRecoveryGuide';
 import { Button } from '@/components/ui/Button';
 
 export const metadata: Metadata = {
@@ -158,6 +159,7 @@ export default function SecurityToolsPage() {
         <SuspiciousFileGuide />
         <FamilySecurityCheck />
         <EmailSecurityAudit />
+        <AccountRecoveryGuide />
 
         <div className="max-w-4xl mx-auto mt-12 rounded-2xl border border-cyber-border bg-cyber-card p-8">
           <h2 className="text-2xl font-bold text-white mb-4 text-center">Что изучить дальше</h2>
