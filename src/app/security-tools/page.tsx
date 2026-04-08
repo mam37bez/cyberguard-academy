@@ -191,7 +191,15 @@ export default function SecurityToolsPage() {
 
         <section id="suspicious-file" className="scroll-mt-28 mb-12">
           <SuspiciousFileGuide />
-        </section>
+        <InlineContextCTA
+title="Скачали или открыли подозрительное вложение?"
+description="Откройте пошаговый чеклист: что сделать сразу, как защитить почту и аккаунты, и когда нужно действовать жёстче."
+primaryHref="/blog/chto-delat-posle-podozritelnogo-fayla"
+primaryLabel="Открыть чеклист"
+secondaryHref="/enrollment"
+secondaryLabel="Запросить консультацию"
+/>
+</section>
 
         <section id="family-security" className="scroll-mt-28 mb-12">
           <FamilySecurityCheck />
