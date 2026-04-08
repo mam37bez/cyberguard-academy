@@ -56,7 +56,7 @@ const quickLinks = [
     href: '#family-security',
     title: 'Семья',
     description: 'Семейные цифровые привычки',
-    icon: '👨‍👩‍👧',
+    icon: '👨👩👧',
     target: 'family-security',
   },
   {
