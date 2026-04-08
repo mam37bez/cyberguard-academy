@@ -12,6 +12,7 @@ import { EmailSecurityAudit } from '@/components/security/EmailSecurityAudit';
 import { AccountRecoveryGuide } from '@/components/security/AccountRecoveryGuide';
 import { SecurityToolsCTA } from '@/components/security/SecurityToolsCTA';
 import { SecurityToolsQuickNav } from '@/components/security/SecurityToolsQuickNav';
+import { InlineContextCTA } from '@/components/security/InlineContextCTA';
 
 export const metadata: Metadata = {
   title: 'Проверка кибербезопасности — CyberGuard Academy',
@@ -37,14 +38,13 @@ export default function SecurityToolsPage() {
           <div className="rounded-2xl border border-cyber-border bg-cyber-card p-6 md:p-8">
             <h2 className="text-2xl font-bold text-white mb-4">Что делает этот раздел</h2>
             <p className="text-gray-300 leading-relaxed mb-4">
-              Здесь собраны простые инструменты, которые помогают оценить базовый
-              уровень цифровой безопасности и получить практические рекомендации.
+              Здесь собраны простые инструменты, которые помогают оценить базовый уровень цифровой безопасности и
+              получить практические рекомендации.
             </p>
             <p className="text-gray-300 leading-relaxed">
-              Вы можете пройти самопроверку, сгенерировать более надёжный пароль,
-              проверить его силу, оценить защищённость устройства, проверить базовую
-              приватность, понять, что делать после подозрительной ссылки или файла,
-              а также посмотреть на безопасность семьи и почтового аккаунта.
+              Вы можете пройти самопроверку, сгенерировать более надёжный пароль, проверить его силу, оценить
+              защищённость устройства, проверить базовую приватность, понять, что делать после подозрительной ссылки
+              или файла, а также посмотреть на безопасность семьи и почтового аккаунта.
             </p>
           </div>
         </div>
@@ -52,8 +52,8 @@ export default function SecurityToolsPage() {
         <div className="max-w-4xl mx-auto mb-10 rounded-2xl border border-cyber-border bg-cyber-card p-6 md:p-8">
           <h2 className="text-2xl font-bold text-white mb-4">С чего начать</h2>
           <p className="text-gray-300 mb-6">
-            Если не уверены, какой инструмент выбрать первым, начните с того сценария,
-            который ближе всего к вашей ситуации.
+            Если не уверены, какой инструмент выбрать первым, начните с того сценария, который ближе всего к вашей
+            ситуации.
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -81,7 +81,8 @@ export default function SecurityToolsPage() {
             <div className="rounded-xl border border-cyber-border bg-cyber-dark/40 p-5">
               <h3 className="text-lg font-semibold text-white mb-2">Меня беспокоит приватность</h3>
               <p className="text-sm text-gray-300">
-                Пройдите privacy checklist и оцените, насколько аккуратно настроены профили, приложения и доступ к личным данным.
+                Пройдите privacy checklist и оцените, насколько аккуратно настроены профили, приложения и доступ к
+                личным данным.
               </p>
             </div>
 
@@ -95,21 +96,24 @@ export default function SecurityToolsPage() {
             <div className="rounded-xl border border-cyber-border bg-cyber-dark/40 p-5">
               <h3 className="text-lg font-semibold text-white mb-2">Я скачал подозрительный файл</h3>
               <p className="text-sm text-gray-300">
-                Используйте сценарий после подозрительного файла, если вы уже скачивали, открывали или запускали сомнительное вложение.
+                Используйте сценарий после подозрительного файла, если вы уже скачивали, открывали или запускали
+                сомнительное вложение.
               </p>
             </div>
 
             <div className="rounded-xl border border-cyber-border bg-cyber-dark/40 p-5">
               <h3 className="text-lg font-semibold text-white mb-2">Хочу проверить безопасность семьи</h3>
               <p className="text-sm text-gray-300">
-                Откройте Family Security Check, если хотите посмотреть на ситуацию с точки зрения родителей, ребёнка и семейных цифровых привычек.
+                Откройте Family Security Check, если хотите посмотреть на ситуацию с точки зрения родителей, ребёнка и
+                семейных цифровых привычек.
               </p>
             </div>
 
             <div className="rounded-xl border border-cyber-border bg-cyber-dark/40 p-5">
               <h3 className="text-lg font-semibold text-white mb-2">Хочу проверить почтовый аккаунт</h3>
               <p className="text-sm text-gray-300">
-                Mini Email Security Audit поможет быстро проверить базовую защищённость почты — одного из самых важных аккаунтов.
+                Mini Email Security Audit поможет быстро проверить базовую защищённость почты — одного из самых важных
+                аккаунтов.
               </p>
             </div>
           </div>
@@ -119,29 +123,28 @@ export default function SecurityToolsPage() {
 
         <div className="max-w-4xl mx-auto mb-10 grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="rounded-2xl border border-cyber-border bg-cyber-card p-6">
-            <div className="text-3xl mb-3">🛡️</div>
+            <div className="text-3xl mb-3"> </div>
             <h3 className="text-lg font-semibold text-white mb-2">Проверка привычек</h3>
             <p className="text-sm text-gray-300">
-              Вопросы охватывают пароли, 2FA, обновления, защиту устройств,
-              осторожность со ссылками и базовую приватность.
+              Вопросы охватывают пароли, 2FA, обновления, защиту устройств, осторожность со ссылками и базовую
+              приватность.
             </p>
           </div>
 
           <div className="rounded-2xl border border-cyber-border bg-cyber-card p-6">
-            <div className="text-3xl mb-3">🔐</div>
+            <div className="text-3xl mb-3"> </div>
             <h3 className="text-lg font-semibold text-white mb-2">Проверка пароля</h3>
             <p className="text-sm text-gray-300">
-              Вы можете быстро оценить пример пароля и увидеть, какие свойства делают
-              его сильнее или слабее.
+              Вы можете быстро оценить пример пароля и увидеть, какие свойства делают его сильнее или слабее.
             </p>
           </div>
 
           <div className="rounded-2xl border border-cyber-border bg-cyber-card p-6">
-            <div className="text-3xl mb-3">✅</div>
+            <div className="text-3xl mb-3"> </div>
             <h3 className="text-lg font-semibold text-white mb-2">Практические советы</h3>
             <p className="text-sm text-gray-300">
-              Вместо абстрактной оценки вы получите конкретные рекомендации, которые
-              помогут улучшить повседневую цифровую безопасность.
+              Вместо абстрактной оценки вы получите конкретные рекомендации, которые помогут улучшить повседневую
+              цифровую безопасность.
             </p>
           </div>
         </div>
@@ -152,6 +155,14 @@ export default function SecurityToolsPage() {
 
         <section id="password-strength" className="scroll-mt-28 mb-12">
           <PasswordStrengthChecker />
+          <InlineContextCTA
+            title="Хотите усилить пароли и защитить аккаунты?"
+            description="Прочитайте короткий гид по надёжным паролям и посмотрите, какой курс подойдёт вашему уровню."
+            primaryHref="/blog/nadezhnye-paroli"
+            primaryLabel="Читать про надёжные пароли"
+            secondaryHref="/courses"
+            secondaryLabel="Подобрать курс"
+          />
         </section>
 
         <section id="password-generator" className="scroll-mt-28 mb-12">
@@ -168,6 +179,14 @@ export default function SecurityToolsPage() {
 
         <section id="suspicious-link" className="scroll-mt-28 mb-12">
           <SuspiciousLinkGuide />
+          <InlineContextCTA
+            title="Похоже на мошенничество? Проверьте признаки по статье"
+            description="Если был звонок/ссылка “от банка” — вот понятный разбор схем и что делать без паники."
+            primaryHref="/blog/kak-raspoznat-moshennikov"
+            primaryLabel="Читать статью"
+            secondaryHref="/enrollment"
+            secondaryLabel="Запросить консультацию"
+          />
         </section>
 
         <section id="suspicious-file" className="scroll-mt-28 mb-12">
@@ -176,6 +195,14 @@ export default function SecurityToolsPage() {
 
         <section id="family-security" className="scroll-mt-28 mb-12">
           <FamilySecurityCheck />
+          <InlineContextCTA
+            title="Безопасность детей: следующий шаг для родителей"
+            description="Гид с правилами и настройками + курс для родителей, чтобы системно снизить риски."
+            primaryHref="/blog/zaschita-detey"
+            primaryLabel="Открыть гид для родителей"
+            secondaryHref="/courses/cybersecurity-parents"
+            secondaryLabel="Курс для родителей"
+          />
         </section>
 
         <section id="email-audit" className="scroll-mt-28 mb-12">
@@ -189,11 +216,9 @@ export default function SecurityToolsPage() {
         <div className="max-w-4xl mx-auto mt-12 rounded-2xl border border-cyber-border bg-cyber-card p-8">
           <h2 className="text-2xl font-bold text-white mb-4 text-center">Что изучить дальше</h2>
           <p className="text-gray-300 mb-8 text-center">
-            Если вам были полезны эти инструменты, следующий шаг — перейти к
-            материалам, которые помогут глубже разобраться в теме и выбрать
-            подходящий формат обучения.
+            Если вам были полезны эти инструменты, следующий шаг — перейти к материалам, которые помогут глубже
+            разобраться в теме и выбрать подходящий формат обучения.
           </p>
-
           <SecurityToolsCTA />
         </div>
       </div>
