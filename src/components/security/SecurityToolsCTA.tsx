@@ -8,11 +8,11 @@ export function SecurityToolsCTA() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
       <div className="rounded-2xl border border-cyber-border bg-cyber-dark/40 p-6 text-center">
-        <div className="text-3xl mb-3">📘</div>
-        <h3 className="text-lg font-semibold text-white mb-2">Полезные статьи</h3>
+        <div className="text-3xl mb-3"> </div>
+        <h3 className="text-lg font-semibold text-white mb-2">Перейти к статьям по теме</h3>
         <p className="text-sm text-gray-300 mb-4">
-          Изучите материалы блога о фишинге, паролях, защите аккаунтов,
-          смартфона и цифровой безопасности семьи.
+          Начните с материалов о фишинге, паролях, защите аккаунтов, безопасности смартфона и цифровых
+          правилах для семьи.
         </p>
         <Link
           href="/blog"
@@ -24,16 +24,16 @@ export function SecurityToolsCTA() {
             })
           }
         >
-          <Button variant="outline">Открыть блог</Button>
+          <Button variant="outline">Перейти к статьям</Button>
         </Link>
       </div>
 
       <div className="rounded-2xl border border-cyber-border bg-cyber-dark/40 p-6 text-center">
-        <div className="text-3xl mb-3">🎓</div>
-        <h3 className="text-lg font-semibold text-white mb-2">Курсы обучения</h3>
+        <div className="text-3xl mb-3"> </div>
+        <h3 className="text-lg font-semibold text-white mb-2">Подобрать курс обучения</h3>
         <p className="text-sm text-gray-300 mb-4">
-          Посмотрите программы для детей, подростков и родителей, если хотите
-          не только читать, но и системно изучать тему.
+          Сравните программы для детей, подростков и родителей и выберите уровень, который лучше
+          подходит по возрасту и подготовке.
         </p>
         <Link
           href="/courses"
@@ -45,16 +45,16 @@ export function SecurityToolsCTA() {
             })
           }
         >
-          <Button variant="primary">Смотреть курсы</Button>
+          <Button variant="primary">Подобрать курс</Button>
         </Link>
       </div>
 
       <div className="rounded-2xl border border-cyber-border bg-cyber-dark/40 p-6 text-center">
-        <div className="text-3xl mb-3">✉️</div>
-        <h3 className="text-lg font-semibold text-white mb-2">Записаться или спросить</h3>
+        <div className="text-3xl mb-3"> </div>
+        <h3 className="text-lg font-semibold text-white mb-2">Записаться на консультацию</h3>
         <p className="text-sm text-gray-300 mb-4">
-          Если хотите подобрать курс или уточнить детали, отправьте заявку,
-          и мы поможем выбрать следующий шаг.
+          Оставьте заявку — мы поможем выбрать курс, подскажем следующий шаг и ответим на вопросы по
+          формату обучения.
         </p>
         <Link
           href="/enrollment"
@@ -66,7 +66,7 @@ export function SecurityToolsCTA() {
             })
           }
         >
-          <Button variant="outline">Оставить заявку</Button>
+          <Button variant="outline">Записаться на консультацию</Button>
         </Link>
       </div>
     </div>
