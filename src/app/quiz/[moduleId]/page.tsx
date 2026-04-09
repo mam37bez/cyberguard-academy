@@ -8,7 +8,7 @@ import { useState, useEffect } from 'react';
 export default function ModuleQuizPage() {
   const params = useParams();
   const moduleId = params.moduleId as string;
-  const module = modules.find((m) => m.id === moduleId);
+  const quizModule = modules.find((m) => m.id === moduleId);
 
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
@@ -18,12 +18,12 @@ export default function ModuleQuizPage() {
   const [isCompleted, setIsCompleted] = useState(false);
 
   useEffect(() => {
-    if (module) {
-      setAnsweredQuestions(new Array(module.questions.length).fill(false));
+    if (quizModule) {
+      setAnsweredQuestions(new Array(quizModule.questions.length).fill(false));
     }
-  }, [module]);
+  }, [quizModule]);
 
-  if (!module) {
+  if (!quizModule) {
     return (
       <div className="min-h-screen bg-gray-900 text-white flex items-center justify-center">
         <div className="text-center">
@@ -39,8 +39,8 @@ export default function ModuleQuizPage() {
     );
   }
 
-  const question = module.questions[currentQuestion];
-  const progress = ((currentQuestion + 1) / module.questions.length) * 100;
+  const question = quizModule.questions[currentQuestion];
+  const progress = ((currentQuestion + 1) / quizModule.questions.length) * 100;
 
   const handleAnswer = (answerIndex: number) => {
     if (showExplanation) return;
@@ -61,7 +61,7 @@ export default function ModuleQuizPage() {
   };
 
   const handleNext = () => {
-    if (currentQuestion < module.questions.length - 1) {
+    if (currentQuestion < quizModule.questions.length - 1) {
       setCurrentQuestion(currentQuestion + 1);
       setSelectedAnswer(null);
       setShowExplanation(false);
@@ -75,12 +75,12 @@ export default function ModuleQuizPage() {
     setSelectedAnswer(null);
     setShowExplanation(false);
     setScore(0);
-    setAnsweredQuestions(new Array(module.questions.length).fill(false));
+    setAnsweredQuestions(new Array(quizModule.questions.length).fill(false));
     setIsCompleted(false);
   };
 
   if (isCompleted) {
-    const maxScore = module.questions.reduce((sum, q) => sum + q.points, 0);
+    const maxScore = quizModule.questions.reduce((sum, q) => sum + q.points, 0);
     const percentage = Math.round((score / maxScore) * 100);
 
     return (
@@ -124,15 +124,15 @@ export default function ModuleQuizPage() {
             ← Все квизы
           </Link>
           <h1 className="text-3xl font-bold mb-2">
-            {module.icon} {module.title}
+            {quizModule.icon} {quizModule.title}
           </h1>
-          <p className="text-gray-400">{module.description}</p>
+          <p className="text-gray-400">{quizModule.description}</p>
         </div>
 
         {/* Progress Bar */}
         <div className="mb-8">
           <div className="flex justify-between text-sm text-gray-400 mb-2">
-            <span>Вопрос {currentQuestion + 1} из {module.questions.length}</span>
+            <span>Вопрос {currentQuestion + 1} из {quizModule.questions.length}</span>
             <span>Очки: {score}</span>
           </div>
           <div className="w-full bg-gray-700 rounded-full h-3">
@@ -199,7 +199,7 @@ export default function ModuleQuizPage() {
               onClick={handleNext}
               className="px-8 py-4 bg-cyan-500 hover:bg-cyan-600 rounded-xl font-bold transition-colors"
             >
-              {currentQuestion < module.questions.length - 1 ? 'Следующий вопрос →' : 'Завершить тест'}
+              {currentQuestion < quizModule.questions.length - 1 ? 'Следующий вопрос →' : 'Завершить тест'}
             </button>
           )}
         </div>
