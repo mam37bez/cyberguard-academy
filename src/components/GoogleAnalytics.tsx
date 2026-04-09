@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, Suspense } from 'react';
 import { usePathname, useSearchParams } from 'next/navigation';
 
 declare global {
@@ -10,7 +10,7 @@ declare global {
   }
 }
 
-export function GoogleAnalytics({ GA_MEASUREMENT_ID }: { GA_MEASUREMENT_ID: string }) {
+function GoogleAnalyticsScript({ GA_MEASUREMENT_ID }: { GA_MEASUREMENT_ID: string }) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
@@ -39,7 +39,7 @@ export function GoogleAnalytics({ GA_MEASUREMENT_ID }: { GA_MEASUREMENT_ID: stri
   useEffect(() => {
     if (!GA_MEASUREMENT_ID) return;
 
-    const url = pathname + searchParams.toString();
+    const url = pathname + (searchParams?.toString() || '');
     if (window.gtag) {
       window.gtag('config', GA_MEASUREMENT_ID, {
         page_path: url,
@@ -48,4 +48,12 @@ export function GoogleAnalytics({ GA_MEASUREMENT_ID }: { GA_MEASUREMENT_ID: stri
   }, [pathname, searchParams, GA_MEASUREMENT_ID]);
 
   return null;
+}
+
+export function GoogleAnalytics({ GA_MEASUREMENT_ID }: { GA_MEASUREMENT_ID: string }) {
+  return (
+    <Suspense fallback={null}>
+      <GoogleAnalyticsScript GA_MEASUREMENT_ID={GA_MEASUREMENT_ID} />
+    </Suspense>
+  );
 }
