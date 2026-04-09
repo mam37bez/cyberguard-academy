@@ -2,6 +2,13 @@
 
 import { useEffect } from 'react';
 import { usePathname } from 'next/navigation';
+import Image from 'next/image';
+
+declare global {
+  interface Window {
+    ym: any;
+  }
+}
 
 export function YandexMetrica({ YM_ID }: { YM_ID: string }) {
   const pathname = usePathname();
@@ -29,8 +36,7 @@ export function YandexMetrica({ YM_ID }: { YM_ID: string }) {
         a.parentNode.insertBefore(k, a);
     })(window, document, 'script', 'https://mc.yandex.ru/metrika/tag.js', 'ym');
 
-    // @ts-ignore
-    ym(YM_ID, 'init', {
+    window.ym(YM_ID, 'init', {
       clickmap: true,
       trackLinks: true,
       accurateTrackBounce: true,
@@ -40,9 +46,7 @@ export function YandexMetrica({ YM_ID }: { YM_ID: string }) {
   }, [YM_ID]);
 
   useEffect(() => {
-    // @ts-ignore
     if (window.ym) {
-      // @ts-ignore
       window.ym(YM_ID, 'hit', pathname);
     }
   }, [pathname, YM_ID]);
@@ -50,10 +54,13 @@ export function YandexMetrica({ YM_ID }: { YM_ID: string }) {
   return (
     <noscript>
       <div>
-        <img
+        <Image
           src={`https://mc.yandex.ru/watch/${YM_ID}`}
           style={{ position: 'absolute', left: '-9999px' }}
-          alt=""
+          alt="Yandex Metrica"
+          width={1}
+          height={1}
+          unoptimized
         />
       </div>
     </noscript>

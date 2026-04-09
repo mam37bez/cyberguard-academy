@@ -3,6 +3,13 @@
 import { useEffect } from 'react';
 import { usePathname, useSearchParams } from 'next/navigation';
 
+declare global {
+  interface Window {
+    dataLayer: any[];
+    gtag: (...args: any[]) => void;
+  }
+}
+
 export function GoogleAnalytics({ GA_MEASUREMENT_ID }: { GA_MEASUREMENT_ID: string }) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -26,17 +33,14 @@ export function GoogleAnalytics({ GA_MEASUREMENT_ID }: { GA_MEASUREMENT_ID: stri
       page_path: pathname,
     });
 
-    // @ts-ignore
     window.gtag = gtag;
-  }, [GA_MEASUREMENT_ID]);
+  }, [GA_MEASUREMENT_ID, pathname]);
 
   useEffect(() => {
     if (!GA_MEASUREMENT_ID) return;
 
     const url = pathname + searchParams.toString();
-    // @ts-ignore
     if (window.gtag) {
-      // @ts-ignore
       window.gtag('config', GA_MEASUREMENT_ID, {
         page_path: url,
       });
