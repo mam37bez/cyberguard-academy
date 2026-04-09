@@ -8,3 +8,4 @@ build/
 .vercel
 *.log
 __pycache__/
+.env*.local

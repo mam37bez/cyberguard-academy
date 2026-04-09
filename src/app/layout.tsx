@@ -4,6 +4,8 @@ import './globals.css';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { StructuredData } from '@/components/StructuredData';
+import { GoogleAnalytics } from '@/components/GoogleAnalytics';
+import { YandexMetrica } from '@/components/YandexMetrica';
 
 const inter = Inter({ subsets: ['latin', 'cyrillic'] });
 
@@ -101,10 +103,15 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const GA_ID = process.env.NEXT_PUBLIC_GA_ID || '';
+  const YM_ID = process.env.NEXT_PUBLIC_YM_ID || '';
+
   return (
     <html lang="ru">
       <body className={inter.className}>
         <StructuredData />
+        {GA_ID && <GoogleAnalytics GA_MEASUREMENT_ID={GA_ID} />}
+        {YM_ID && <YandexMetrica YM_ID={YM_ID} />}
         <Header />
         <main>{children}</main>
         <Footer />
