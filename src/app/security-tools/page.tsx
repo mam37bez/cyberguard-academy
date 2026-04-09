@@ -215,7 +215,15 @@ secondaryLabel="Запросить консультацию"
 
         <section id="email-audit" className="scroll-mt-28 mb-12">
           <EmailSecurityAudit />
-        </section>
+        <InlineContextCTA
+title="Почта — ключ к аккаунтам. Проверьте мини‑аудит за 15 минут"
+description="Короткий чеклист: 2FA, сессии, восстановление, правила пересылки и доступы. Подходит для Gmail/Outlook/Яндекс/Mail.ru."
+primaryHref="/blog/kak-zaschitit-pochtu-mini-audit"
+primaryLabel="Открыть мини‑аудит"
+secondaryHref="/security-tools#password-strength"
+secondaryLabel="Проверить пароль"
+/>
+</section>
 
         <section id="account-recovery" className="scroll-mt-28">
           <AccountRecoveryGuide />
