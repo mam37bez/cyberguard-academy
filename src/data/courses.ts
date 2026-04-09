@@ -264,7 +264,7 @@ export const courses: Course[] = [
       'Защита сети',
       'Безопасные платежи',
     ],
-    icon: '👨‍👩‍👧',
+    icon: '👨👩👧',
     color: '#f59e0b',
     featured: false,
     enrollmentOpen: true,
