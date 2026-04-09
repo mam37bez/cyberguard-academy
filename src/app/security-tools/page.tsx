@@ -219,7 +219,15 @@ secondaryLabel="Запросить консультацию"
 
         <section id="account-recovery" className="scroll-mt-28">
           <AccountRecoveryGuide />
-        </section>
+        <InlineContextCTA
+title="Подозрительный вход? Проверьте 10‑минутный чеклист"
+description="Если вы увидели уведомление о входе, которого не было, выполните быстрые шаги: пароль, 2FA, сессии и проверка почты."
+primaryHref="/blog/podozritelnyy-vkhod-10-minut"
+primaryLabel="Открыть чеклист"
+secondaryHref="/security-tools#email-audit"
+secondaryLabel="Проверить почту"
+/>
+</section>
 
         <div className="max-w-4xl mx-auto mt-12 rounded-2xl border border-cyber-border bg-cyber-card p-8">
           <h2 className="text-2xl font-bold text-white mb-4 text-center">Что изучить дальше</h2>
