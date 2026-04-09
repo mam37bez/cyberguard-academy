@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import { Header } from '@/components/layout/Header';
@@ -7,6 +7,13 @@ import { StructuredData } from '@/components/StructuredData';
 
 const inter = Inter({ subsets: ['latin', 'cyrillic'] });
 
+export const viewport: Viewport = {
+  themeColor: '#22d3ee',
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+};
+
 export const metadata: Metadata = {
   metadataBase: new URL('https://cyberguard-academy.vercel.app'),
   title: {
@@ -14,7 +21,7 @@ export const metadata: Metadata = {
     template: '%s | CyberGuard Academy',
   },
   description:
-    'CyberGuard Academy — онлайн-академия по кибербезопасности. 12 модулей, 120 интерактивных квизов. Обучение детей, подростков и родителей основам безопасности в интернете: защита от мошенников, приватность, OSINT, криптография.',
+    'CyberGuard Academy — онлайн-академия по кибербезопасности. 12 модулей, 120 интерактивных квизов. Обучение детей, подростков и родителей основам безопасности в интернете.',
   keywords: [
     'кибербезопасность',
     'обучение детей',
@@ -47,8 +54,6 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
-  
-  // Open Graph (Facebook, VK, Telegram)
   openGraph: {
     type: 'website',
     locale: 'ru_RU',
@@ -66,8 +71,6 @@ export const metadata: Metadata = {
       },
     ],
   },
-
-  // Twitter Card
   twitter: {
     card: 'summary_large_image',
     title: 'CyberGuard Academy — обучение кибербезопасности',
@@ -76,24 +79,16 @@ export const metadata: Metadata = {
     images: ['/opengraph-image'],
     creator: '@cyberguard_academy',
   },
-
-  // Verification
-  verification: {
-    google: 'ваш_google_код', // Замени после получения от Google
-    // yandex: 'ваш_yandex_код', // Если добавишь Яндекс.Вебмастер
-    // other: {
-    //   'msvalidate.01': 'ваш_bing_код', // Если добавишь Bing
-    // },
-  },
-
   alternates: {
     canonical: 'https://cyberguard-academy.vercel.app',
   },
-
-  // Other metadata
   category: 'education',
   applicationName: 'CyberGuard Academy',
-  referrer: 'origin-when-cross-origin',
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: 'black-translucent',
+    title: 'CyberGuard Academy',
+  },
   formatDetection: {
     email: false,
     address: false,
