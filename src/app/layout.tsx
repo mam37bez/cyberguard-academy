@@ -1,77 +1,118 @@
 import type { Metadata } from 'next';
-import { Analytics } from '@vercel/analytics/next';
+import { Inter } from 'next/font/google';
+import './globals.css';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
-import './globals.css';
+import { StructuredData } from '@/components/StructuredData';
+
+const inter = Inter({ subsets: ['latin', 'cyrillic'] });
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://cyberguard-academy.vercel.app'),
   title: {
-    default: 'CyberGuard Academy',
+    default: 'CyberGuard Academy — обучение кибербезопасности для детей и родителей',
     template: '%s | CyberGuard Academy',
   },
   description:
-    'CyberGuard Academy — школа кибербезопасности для детей и взрослых: курсы, блог, обучение и практические инструменты по информационной безопасности.',
+    'CyberGuard Academy — онлайн-академия по кибербезопасности. 12 модулей, 120 интерактивных квизов. Обучение детей, подростков и родителей основам безопасности в интернете: защита от мошенников, приватность, OSINT, криптография.',
   keywords: [
     'кибербезопасность',
+    'обучение детей',
+    'безопасность в интернете',
+    'квизы по безопасности',
+    'защита данных',
+    'киберакадемия',
+    'онлайн обучение',
     'информационная безопасность',
-    'курсы по кибербезопасности',
-    'обучение кибербезопасности',
-    'cybersecurity academy',
-    'ethical hacking',
-    'security training',
-    'cyberguard academy',
+    'OSINT',
+    'криптография',
+    'фишинг',
+    'мошенничество',
+    'приватность',
+    'VPN',
+    'IoT безопасность',
+    'social engineering',
   ],
-  alternates: {
-    canonical: 'https://cyberguard-academy.vercel.app',
-  },
+  authors: [{ name: 'CyberGuard Academy' }],
+  creator: 'CyberGuard Academy',
+  publisher: 'CyberGuard Academy',
   robots: {
     index: true,
     follow: true,
-  },
-  verification: {
-    google: 'ojMLWVdtKWl3ciTpJu1oIwCOEj6ge-rC0TeNXi4S2AU',
-    other: {
-      'msvalidate.01': '78FE0C8D5949E66515F924B35DF18BAA',
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
     },
   },
+  
+  // Open Graph (Facebook, VK, Telegram)
   openGraph: {
-    title: 'CyberGuard Academy',
-    description:
-      'Школа кибербезопасности для детей и взрослых: курсы, блог и практические инструменты по информационной безопасности.',
+    type: 'website',
+    locale: 'ru_RU',
     url: 'https://cyberguard-academy.vercel.app',
     siteName: 'CyberGuard Academy',
-    locale: 'ru_RU',
-    type: 'website',
+    title: 'CyberGuard Academy — обучение кибербезопасности для детей и родителей',
+    description:
+      '12 модулей и 120 интерактивных квизов по кибербезопасности. Научись защищаться от мошенников, сохранять приватность и безопасно пользоваться интернетом.',
+    images: [
+      {
+        url: '/opengraph-image',
+        width: 1200,
+        height: 630,
+        alt: 'CyberGuard Academy — обучение кибербезопасности',
+      },
+    ],
   },
+
+  // Twitter Card
   twitter: {
     card: 'summary_large_image',
-    title: 'CyberGuard Academy',
+    title: 'CyberGuard Academy — обучение кибербезопасности',
     description:
-      'Школа кибербезопасности для детей и взрослых: курсы, блог и практические инструменты по информационной безопасности.',
+      '12 модулей и 120 интерактивных квизов по кибербезопасности для детей и родителей.',
+    images: ['/opengraph-image'],
+    creator: '@cyberguard_academy',
+  },
+
+  // Verification
+  verification: {
+    google: 'ваш_google_код', // Замени после получения от Google
+    // yandex: 'ваш_yandex_код', // Если добавишь Яндекс.Вебмастер
+    // other: {
+    //   'msvalidate.01': 'ваш_bing_код', // Если добавишь Bing
+    // },
+  },
+
+  alternates: {
+    canonical: 'https://cyberguard-academy.vercel.app',
+  },
+
+  // Other metadata
+  category: 'education',
+  applicationName: 'CyberGuard Academy',
+  referrer: 'origin-when-cross-origin',
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
   },
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'EducationalOrganization',
-    name: 'CyberGuard Academy',
-    url: 'https://cyberguard-academy.vercel.app',
-    description: 'Школа кибербезопасности для детей и взрослых.',
-  };
-
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <html lang="ru" className="dark">
-      <body className="min-h-screen flex flex-col">
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
+    <html lang="ru">
+      <body className={inter.className}>
+        <StructuredData />
         <Header />
-        <main className="flex-1">{children}</main>
+        <main>{children}</main>
         <Footer />
-        <Analytics />
       </body>
     </html>
   );
