@@ -16,33 +16,43 @@ export function YandexMetrica({ YM_ID }: { YM_ID: string }) {
   useEffect(() => {
     if (!YM_ID) return;
 
-    // @ts-ignore
-    (function (m, e, t, r, i, k, a) {
+    // Yandex Metrica loader
+    (function (m: any, e: any, t: any, r: any, i: any, k: any, a: any) {
       m[i] =
         m[i] ||
         function () {
           (m[i].a = m[i].a || []).push(arguments);
         };
-      m[i].l = 1 * new Date();
-      for (var j = 0; j < document.scripts.length; j++) {
-        if (document.scripts[j].src === r) {
+      m[i].l = 1 * new Date().getTime();
+      for (var j = 0; j < e.scripts.length; j++) {
+        if (e.scripts[j].src === r) {
           return;
         }
       }
-      (k = e.createElement(t)),
-        (a = e.getElementsByTagName(t)[0]),
-        (k.async = 1),
-        (k.src = r),
-        a.parentNode.insertBefore(k, a);
-    })(window, document, 'script', 'https://mc.yandex.ru/metrika/tag.js', 'ym');
+      k = e.createElement(t);
+      a = e.getElementsByTagName(t)[0];
+      k.async = 1;
+      k.src = r;
+      a.parentNode.insertBefore(k, a);
+    })(
+      window,
+      document,
+      'script',
+      'https://mc.yandex.ru/metrika/tag.js',
+      'ym',
+      null,
+      null
+    );
 
-    window.ym(YM_ID, 'init', {
-      clickmap: true,
-      trackLinks: true,
-      accurateTrackBounce: true,
-      webvisor: true,
-      trackHash: true,
-    });
+    if (window.ym) {
+      window.ym(YM_ID, 'init', {
+        clickmap: true,
+        trackLinks: true,
+        accurateTrackBounce: true,
+        webvisor: true,
+        trackHash: true,
+      });
+    }
   }, [YM_ID]);
 
   useEffect(() => {
