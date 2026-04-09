@@ -5,6 +5,9 @@ import { cryptographyModule } from './cryptography';
 import { osintModule } from './osint';
 import { mobileSecurityModule } from './mobile-security';
 import { socialEngineeringModule } from './social-engineering';
+import { malwareAnalysisModule } from './malware-analysis';
+import { cloudSecurityModule } from './cloud-security';
+import { penetrationTestingModule } from './penetration-testing';
 
 export const modules: Module[] = [
   networkSecurityModule,
@@ -13,6 +16,9 @@ export const modules: Module[] = [
   osintModule,
   mobileSecurityModule,
   socialEngineeringModule,
+  malwareAnalysisModule,
+  cloudSecurityModule,
+  penetrationTestingModule,
 ];
 
 export { 
@@ -22,4 +28,7 @@ export {
   osintModule,
   mobileSecurityModule,
   socialEngineeringModule,
+  malwareAnalysisModule,
+  cloudSecurityModule,
+  penetrationTestingModule,
 };
