@@ -8,6 +8,9 @@ import { socialEngineeringModule } from './social-engineering';
 import { malwareAnalysisModule } from './malware-analysis';
 import { cloudSecurityModule } from './cloud-security';
 import { penetrationTestingModule } from './penetration-testing';
+import { iotSecurityModule } from './iot-security';
+import { privacyAnonymityModule } from './privacy-anonymity';
+import { digitalForensicsModule } from './digital-forensics';
 
 export const modules: Module[] = [
   networkSecurityModule,
@@ -19,6 +22,9 @@ export const modules: Module[] = [
   malwareAnalysisModule,
   cloudSecurityModule,
   penetrationTestingModule,
+  iotSecurityModule,
+  privacyAnonymityModule,
+  digitalForensicsModule,
 ];
 
 export { 
@@ -31,4 +37,7 @@ export {
   malwareAnalysisModule,
   cloudSecurityModule,
   penetrationTestingModule,
+  iotSecurityModule,
+  privacyAnonymityModule,
+  digitalForensicsModule,
 };
