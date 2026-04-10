@@ -84,6 +84,13 @@ export const metadata: Metadata = {
   alternates: {
     canonical: 'https://cyberguard-academy.vercel.app',
   },
+  verification: {
+    google: '7OXKptXRHyST3rxYOYBpeSf4KxSu94uswVnYSfbFFr8',
+    yandex: 'fe718da3690b38c2',
+    // other: {
+    //   'msvalidate.01': '78FE0C8D5949E66515F924B35DF18BAA',
+    // },
+  },
   category: 'education',
   applicationName: 'CyberGuard Academy',
   appleWebApp: {
