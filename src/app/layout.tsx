@@ -6,6 +6,7 @@ import { Footer } from '@/components/layout/Footer';
 import { StructuredData } from '@/components/StructuredData';
 import { GoogleAnalytics } from '@/components/GoogleAnalytics';
 import { YandexMetrica } from '@/components/YandexMetrica';
+import { Chatbot } from '@/components/Chatbot';
 
 const inter = Inter({ subsets: ['latin', 'cyrillic'] });
 
@@ -87,9 +88,6 @@ export const metadata: Metadata = {
   verification: {
     google: '7OXKptXRHyST3rxYOYBpeSf4KxSu94uswVnYSfbFFr8',
     yandex: 'fe718da3690b38c2',
-    // other: {
-    //   'msvalidate.01': '78FE0C8D5949E66515F924B35DF18BAA',
-    // },
   },
   category: 'education',
   applicationName: 'CyberGuard Academy',
@@ -122,6 +120,7 @@ export default function RootLayout({
         <Header />
         <main>{children}</main>
         <Footer />
+        <Chatbot />
       </body>
     </html>
   );
