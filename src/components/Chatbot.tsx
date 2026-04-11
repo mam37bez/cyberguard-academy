@@ -19,9 +19,19 @@ export function Chatbot() {
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (isOpen && messages.length === 0) {
-      addBotMessage(greetings[Math.floor(Math.random() * greetings.length)]);
-    }
+    if (!isOpen) return;
+    setMessages((prev) => {
+      if (prev.length > 0) return prev;
+      const text = greetings[Math.floor(Math.random() * greetings.length)];
+      return [
+        {
+          id: `${Date.now()}-greeting`,
+          text,
+          isBot: true,
+          timestamp: new Date(),
+        },
+      ];
+    });
   }, [isOpen]);
 
   useEffect(() => {

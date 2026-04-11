@@ -1,6 +1,7 @@
 import type { MetadataRoute } from 'next';
 import { courses } from '@/data/courses';
 import { blogPosts } from '@/data/blog';
+import { modules } from '@/data/modules';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://cyberguard-academy.vercel.app';
@@ -49,7 +50,50 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly',
       priority: 0.8,
     },
+    {
+      url: `${baseUrl}/faq`,
+      lastModified: now,
+      changeFrequency: 'monthly',
+      priority: 0.75,
+    },
+    {
+      url: `${baseUrl}/locations`,
+      lastModified: now,
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/quiz`,
+      lastModified: now,
+      changeFrequency: 'weekly',
+      priority: 0.85,
+    },
+    {
+      url: `${baseUrl}/privacy`,
+      lastModified: now,
+      changeFrequency: 'yearly',
+      priority: 0.4,
+    },
+    {
+      url: `${baseUrl}/terms`,
+      lastModified: now,
+      changeFrequency: 'yearly',
+      priority: 0.4,
+    },
+    {
+      url: `${baseUrl}/admission`,
+      lastModified: now,
+      changeFrequency: 'monthly',
+      priority: 0.65,
+    },
   ];
+
+  const quizModulePages: MetadataRoute.Sitemap = modules.map((m) => ({
+    url: `${baseUrl}/quiz/${m.id}`,
+    lastModified: now,
+    changeFrequency: 'monthly',
+    priority: 0.75,
+  }));
 
   const coursePages: MetadataRoute.Sitemap = courses.map((course) => ({
     url: `${baseUrl}/courses/${course.slug}`,
@@ -65,5 +109,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
-  return [...staticPages, ...coursePages, ...blogPages];
+  return [...staticPages, ...quizModulePages, ...coursePages, ...blogPages];
 }

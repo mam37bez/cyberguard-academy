@@ -1,7 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { Resend } from 'resend';
-
-const resend = new Resend(process.env.RESEND_API_KEY);
+import { getResendClient } from '@/lib/resend';
 
 const MAX_NAME = 120;
 const MAX_EMAIL = 150;
@@ -139,6 +137,14 @@ export async function POST(req: NextRequest) {
     const recipient = getRecipientByBranch(branch);
     if (!recipient) {
       return NextResponse.json({ error: 'Selected branch is not supported yet' }, { status: 400 });
+    }
+
+    const resend = getResendClient();
+    if (!resend) {
+      return NextResponse.json(
+        { error: 'Сервис отправки писем временно недоступен. Попробуйте позже или напишите напрямую в филиал.' },
+        { status: 503 }
+      );
     }
 
     await resend.emails.send({
