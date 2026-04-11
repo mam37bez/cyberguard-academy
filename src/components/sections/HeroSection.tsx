@@ -142,13 +142,16 @@ export function HeroSection() {
 
           <motion.div
             variants={item}
-            className="flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4"
+            className="flex w-full max-w-xl flex-col items-stretch justify-center gap-3 sm:mx-auto sm:max-w-none sm:flex-row sm:flex-wrap sm:items-center sm:justify-center sm:gap-4"
           >
-            <ButtonLink href="/courses" size="lg" variant="primary">
+            <ButtonLink href="/courses" size="lg" variant="primary" className="sm:min-w-[11rem]">
               Выбрать курс
             </ButtonLink>
-            <ButtonLink href="/security-tools" size="lg" variant="secondary">
+            <ButtonLink href="/security-tools" size="lg" variant="secondary" className="sm:min-w-[11rem]">
               Проверить безопасность
+            </ButtonLink>
+            <ButtonLink href="/quiz" size="lg" variant="outline" className="sm:min-w-[11rem]">
+              Бесплатные квизы
             </ButtonLink>
           </motion.div>
 
