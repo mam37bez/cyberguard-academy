@@ -15,7 +15,7 @@ export function Badge({ children, variant = 'default', size = 'sm', className }:
     warning: 'bg-yellow-500/20 text-yellow-300 border-yellow-500/30',
     danger: 'bg-red-500/20 text-red-300 border-red-500/30',
     info: 'bg-cyan-500/20 text-cyan-300 border-cyan-500/30',
-    outline: 'bg-transparent text-gray-400 border-gray-600',
+    outline: 'bg-transparent text-slate-400 border-white/[0.12]',
   };
   const s: Record<string, string> = { sm: 'px-2.5 py-0.5 text-xs', md: 'px-3 py-1 text-sm' };
   return <span className={cn('inline-flex items-center font-medium rounded-full border', v[variant], s[size], className)}>{children}</span>;

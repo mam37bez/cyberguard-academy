@@ -2,10 +2,12 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Badge } from '@/components/ui/Badge';
-import { Button } from '@/components/ui/Button';
+import { ButtonLink } from '@/components/ui/ButtonLink';
+import { Container } from '@/components/layout/Container';
 import { blogPosts, getBlogPostBySlug } from '@/data/blog';
 import { formatDate } from '@/lib/utils';
 import { SITE_URL } from '@/lib/site';
+import { buildBlogPostJsonLd } from '@/lib/schema/blog-post';
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -57,8 +59,6 @@ export default async function BlogPostPage({ params }: PageProps) {
 
   if (!post) notFound();
 
-  const postUrl = `${SITE_URL}/blog/${post.slug}`;
-
   const relatedPosts = blogPosts
     .filter((p) => p.slug !== post.slug)
     .sort((a, b) => {
@@ -68,32 +68,7 @@ export default async function BlogPostPage({ params }: PageProps) {
     })
     .slice(0, 3);
 
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'BlogPosting',
-    headline: post.title,
-    description: post.excerpt,
-    articleBody: post.content,
-    author: {
-      '@type': 'Person',
-      name: post.author,
-    },
-    publisher: {
-      '@type': 'EducationalOrganization',
-      name: 'CyberGuard Academy',
-      url: SITE_URL,
-    },
-    datePublished: post.date,
-    dateModified: post.date,
-    mainEntityOfPage: {
-      '@type': 'WebPage',
-      '@id': postUrl,
-    },
-    url: postUrl,
-    inLanguage: 'ru',
-    keywords: post.tags.join(', '),
-    articleSection: post.category,
-  };
+  const jsonLd = buildBlogPostJsonLd(post);
 
   return (
     <div className="pt-24 pb-16">
@@ -102,27 +77,27 @@ export default async function BlogPostPage({ params }: PageProps) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      <div className="max-w-4xl mx-auto px-4">
-        <nav className="mb-8 text-sm text-gray-400">
-          <Link href="/" className="hover:text-white">
+      <Container className="max-w-3xl">
+        <nav className="mb-8 text-sm text-slate-500">
+          <Link href="/" className="hover:text-white transition-colors focus-visible:outline-none focus-visible:text-primary-300">
             Главная
           </Link>{' '}
           /{' '}
-          <Link href="/blog" className="hover:text-white">
+          <Link href="/blog" className="hover:text-white transition-colors focus-visible:outline-none focus-visible:text-primary-300">
             Блог
           </Link>{' '}
-          / <span className="text-white">{post.title}</span>
+          / <span className="text-slate-200 line-clamp-2">{post.title}</span>
         </nav>
 
-        <div className="mb-12">
+        <div className="mb-10">
           <Badge variant="info">{post.category}</Badge>
-          <h1 className="text-3xl font-bold text-white mt-4 mb-4">{post.title}</h1>
-          <div className="text-sm text-gray-400">
+          <h1 className="text-3xl md:text-4xl font-semibold text-white mt-4 mb-4 tracking-tight leading-tight">{post.title}</h1>
+          <div className="text-sm text-slate-500">
             {post.author} · {formatDate(post.date)} · {post.readTime}
           </div>
         </div>
 
-        <article className="text-gray-300 leading-relaxed whitespace-pre-line mb-12">
+        <article className="text-slate-400 leading-relaxed whitespace-pre-line mb-12 text-[15px] md:text-base">
           {post.content}
         </article>
 
@@ -134,20 +109,24 @@ export default async function BlogPostPage({ params }: PageProps) {
           ))}
         </div>
 
-        <div className="text-center p-8 rounded-2xl bg-cyber-card border border-cyber-border mb-16">
-          <h3 className="text-xl font-bold text-white mb-4">Хотите узнать больше?</h3>
-          <Link href="/courses">
-            <Button variant="primary">Смотреть курсы</Button>
-          </Link>
+        <div className="text-center p-8 rounded-2xl bg-cyber-card/90 border border-white/[0.08] mb-16">
+          <h3 className="text-lg font-semibold text-white mb-4 tracking-tight">Хотите узнать больше?</h3>
+          <ButtonLink href="/courses" variant="primary" size="lg">
+            Смотреть курсы
+          </ButtonLink>
         </div>
 
         {relatedPosts.length > 0 && (
           <section>
-            <h2 className="text-2xl font-bold text-white mb-6">Похожие статьи</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <h2 className="text-xl font-semibold text-white mb-6 tracking-tight">Похожие статьи</h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6">
               {relatedPosts.map((related) => (
-                <Link key={related.id} href={`/blog/${related.slug}`}>
-                  <div className="h-full rounded-2xl border border-cyber-border bg-cyber-card p-5 transition-all duration-300 hover:border-primary-500/50 hover:shadow-lg hover:shadow-primary-500/10">
+                <Link
+                  key={related.id}
+                  href={`/blog/${related.slug}`}
+                  className="block rounded-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500/45 focus-visible:ring-offset-2 focus-visible:ring-offset-cyber-darker"
+                >
+                  <div className="h-full rounded-2xl border border-white/[0.06] bg-cyber-card/80 p-5 transition-all duration-300 hover:border-primary-500/30 hover:shadow-lg hover:shadow-black/20">
                     <div className="flex gap-2 mb-3 flex-wrap">
                       <Badge variant="info" size="sm">
                         {related.category}
@@ -157,9 +136,9 @@ export default async function BlogPostPage({ params }: PageProps) {
                       </Badge>
                     </div>
 
-                    <h3 className="text-lg font-semibold text-white mb-3">{related.title}</h3>
-                    <p className="text-sm text-gray-400 mb-4">{related.excerpt}</p>
-                    <div className="text-xs text-gray-500">
+                    <h3 className="text-base font-semibold text-white mb-3 tracking-tight leading-snug">{related.title}</h3>
+                    <p className="text-sm text-slate-500 mb-4 leading-relaxed line-clamp-3">{related.excerpt}</p>
+                    <div className="text-xs text-slate-600">
                       {related.author} · {formatDate(related.date)}
                     </div>
                   </div>
@@ -168,7 +147,7 @@ export default async function BlogPostPage({ params }: PageProps) {
             </div>
           </section>
         )}
-      </div>
+      </Container>
     </div>
   );
 }

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { SITE_URL } from '@/lib/site';
 import { SectionHeading } from '@/components/ui/SectionHeading';
+import { Container } from '@/components/layout/Container';
 import { Card, CardContent } from '@/components/ui/Card';
 
 export const metadata: Metadata = {
@@ -53,45 +54,47 @@ const locations = [
 export default function LocationsPage() {
   return (
     <div className="pt-24 pb-16">
-      <div className="max-w-7xl mx-auto px-4">
+      <Container>
         <SectionHeading
+          dense
+          as="h1"
           badge="Локации"
           title="Филиалы и площадки CyberGuard Academy"
-          subtitle="Здесь собраны основные города, адреса и контактные данные, связанные с обучением и записью"
+          subtitle="Основные города, адреса и контактные данные для обучения и записи"
         />
 
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
           {locations.map((location) => (
-            <Card key={location.city + location.address} variant="default">
+            <Card key={location.city + location.address} variant="default" className="border-white/[0.06]">
               <CardContent>
                 <div className="text-2xl mb-3">📍</div>
-                <h2 className="text-xl font-semibold text-white mb-4">{location.city}</h2>
+                <h2 className="text-xl font-semibold text-white mb-4 tracking-tight">{location.city}</h2>
 
                 <div className="space-y-4 text-sm">
                   <div>
-                    <div className="text-gray-500 mb-1">Адрес</div>
-                    <div className="text-gray-300">{location.address}</div>
+                    <div className="text-slate-500 mb-1">Адрес</div>
+                    <div className="text-slate-400">{location.address}</div>
                   </div>
 
                   <div>
-                    <div className="text-gray-500 mb-1">Телефон</div>
-                    <div className="text-gray-300">{location.phone}</div>
+                    <div className="text-slate-500 mb-1">Телефон</div>
+                    <div className="text-slate-400">{location.phone}</div>
                   </div>
 
                   <div>
-                    <div className="text-gray-500 mb-1">Email</div>
-                    <div className="text-gray-300 break-all">{location.email}</div>
+                    <div className="text-slate-500 mb-1">Email</div>
+                    <div className="text-slate-400 break-all">{location.email}</div>
                   </div>
 
-                  <div className="pt-2 border-t border-cyber-border">
-                    <div className="text-gray-400 text-sm leading-relaxed">{location.note}</div>
+                  <div className="pt-2 border-t border-white/[0.06]">
+                    <div className="text-slate-500 text-sm leading-relaxed">{location.note}</div>
                   </div>
                 </div>
               </CardContent>
             </Card>
           ))}
         </div>
-      </div>
+      </Container>
     </div>
   );
 }

@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getResendClient } from '@/lib/resend';
+import { isRateLimited } from '@/lib/rate-limit-memory';
 
 const MAX_NAME = 120;
 const MAX_EMAIL = 150;
@@ -23,27 +24,6 @@ function getClientIp(req: NextRequest): string {
   const forwarded = req.headers.get('x-forwarded-for');
   if (forwarded) return forwarded.split(',')[0].trim();
   return 'unknown';
-}
-
-function isRateLimited(ip: string): boolean {
-  const now = Date.now();
-  const entry = enrollmentRateLimit.get(ip);
-
-  if (!entry || now > entry.resetTime) {
-    enrollmentRateLimit.set(ip, {
-      count: 1,
-      resetTime: now + RATE_LIMIT_WINDOW_MS,
-    });
-    return false;
-  }
-
-  if (entry.count >= RATE_LIMIT_MAX) {
-    return true;
-  }
-
-  entry.count += 1;
-  enrollmentRateLimit.set(ip, entry);
-  return false;
 }
 
 async function verifyTurnstile(token: string, ip?: string | null) {
@@ -77,7 +57,7 @@ export async function POST(req: NextRequest) {
   try {
     const ip = getClientIp(req);
 
-    if (isRateLimited(ip)) {
+    if (isRateLimited(enrollmentRateLimit, ip, RATE_LIMIT_MAX, RATE_LIMIT_WINDOW_MS)) {
       return NextResponse.json(
         { error: 'Too many requests. Please try again later.' },
         { status: 429 }

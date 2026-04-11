@@ -1,8 +1,12 @@
+'use client';
+
 import React from 'react';
+import { motion } from 'framer-motion';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { ButtonLink } from '@/components/ui/ButtonLink';
 import { Section } from '@/components/layout/Section';
 import { Container } from '@/components/layout/Container';
+import { FadeInWhenVisible, useHomeStagger } from '@/components/sections/HomeMotion';
 
 const faqItems = [
   {
@@ -28,33 +32,44 @@ const faqItems = [
 ];
 
 export function FAQSection() {
+  const { container, item } = useHomeStagger();
+
   return (
     <Section className="bg-cyber-darker">
       <Container>
-        <SectionHeading
-          dense
-          badge="FAQ"
-          title="Частые вопросы"
-          subtitle="Краткие ответы на самые важные вопросы об обучении"
-        />
+        <FadeInWhenVisible>
+          <SectionHeading
+            dense
+            badge="FAQ"
+            title="Частые вопросы"
+            subtitle="Краткие ответы на самые важные вопросы об обучении"
+          />
+        </FadeInWhenVisible>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6 mb-10">
-          {faqItems.map((item) => (
-            <div
-              key={item.question}
-              className="rounded-2xl border border-white/[0.06] bg-cyber-card/80 p-6 md:p-7"
+        <motion.div
+          className="mb-10 grid grid-cols-1 gap-5 md:grid-cols-2 md:gap-6"
+          variants={container}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1, margin: '0px 0px -10% 0px' }}
+        >
+          {faqItems.map((q) => (
+            <motion.div
+              key={q.question}
+              variants={item}
+              className="rounded-2xl border border-white/[0.06] bg-cyber-card/80 p-6 transition-all duration-300 hover:-translate-y-0.5 hover:border-primary-500/25 md:p-7 motion-reduce:transform-none motion-reduce:transition-none"
             >
-              <h3 className="text-base font-semibold text-white mb-3 leading-snug tracking-tight">{item.question}</h3>
-              <p className="text-slate-500 text-sm leading-relaxed">{item.answer}</p>
-            </div>
+              <h3 className="mb-3 text-base font-semibold leading-snug tracking-tight text-white">{q.question}</h3>
+              <p className="text-sm leading-relaxed text-slate-500">{q.answer}</p>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
-        <div className="text-center">
+        <FadeInWhenVisible className="text-center" delay={0.06}>
           <ButtonLink href="/faq" variant="outline" size="lg">
             Смотреть все вопросы
           </ButtonLink>
-        </div>
+        </FadeInWhenVisible>
       </Container>
     </Section>
   );

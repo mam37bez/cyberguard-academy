@@ -2,10 +2,12 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Card, CardContent } from '@/components/ui/Card';
-import { Button } from '@/components/ui/Button';
+import { ButtonLink } from '@/components/ui/ButtonLink';
+import { Container } from '@/components/layout/Container';
 import { courses, getCourseBySlug } from '@/data/courses';
 import { formatPrice } from '@/lib/utils';
 import { SITE_URL } from '@/lib/site';
+import { buildCoursePageJsonLd } from '@/lib/schema/course-page';
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -319,43 +321,7 @@ export default async function CoursePage({ params }: PageProps) {
 
   if (!course) notFound();
 
-  const courseUrl = `${SITE_URL}/courses/${course.slug}`;
-
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'Course',
-    name: course.title,
-    description: course.fullDescription || course.description,
-    provider: {
-      '@type': 'EducationalOrganization',
-      name: 'CyberGuard Academy',
-      url: SITE_URL,
-    },
-    educationalLevel: course.level,
-    timeRequired: course.duration,
-    courseMode: 'online and onsite',
-    inLanguage: 'ru',
-    instructor: {
-      '@type': 'Person',
-      name: course.instructor.name,
-      description: course.instructor.title,
-    },
-    offers: {
-      '@type': 'Offer',
-      price: course.price,
-      priceCurrency: course.currency,
-      availability: course.enrollmentOpen
-        ? 'https://schema.org/InStock'
-        : 'https://schema.org/OutOfStock',
-      url: courseUrl,
-    },
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: course.rating,
-      reviewCount: course.reviewCount,
-    },
-    url: courseUrl,
-  };
+  const jsonLd = buildCoursePageJsonLd(course);
 
   const audience = getCourseAudience(course.slug);
   const benefits = getCourseBenefits(course.slug);
@@ -373,33 +339,35 @@ export default async function CoursePage({ params }: PageProps) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      <div className="max-w-5xl mx-auto px-4">
-        <nav className="mb-8 text-sm text-gray-400">
-          <Link href="/" className="hover:text-white">
+      <Container className="max-w-5xl">
+        <nav className="mb-8 text-sm text-slate-500">
+          <Link href="/" className="hover:text-white transition-colors focus-visible:outline-none focus-visible:text-primary-300">
             Главная
           </Link>{' '}
           /{' '}
-          <Link href="/courses" className="hover:text-white">
+          <Link href="/courses" className="hover:text-white transition-colors focus-visible:outline-none focus-visible:text-primary-300">
             Курсы
           </Link>{' '}
-          / <span className="text-white">{course.title}</span>
+          / <span className="text-slate-200">{course.title}</span>
         </nav>
 
         <div className="mb-12">
-          <span className="text-5xl">{course.icon}</span>
-          <h1 className="text-3xl md:text-4xl font-bold text-white mt-4 mb-4">{course.title}</h1>
-          <p className="text-lg text-gray-400">{course.fullDescription}</p>
+          <span className="text-5xl" aria-hidden>
+            {course.icon}
+          </span>
+          <h1 className="text-3xl md:text-4xl font-semibold text-white mt-4 mb-4 tracking-tight">{course.title}</h1>
+          <p className="text-lg text-slate-500 leading-relaxed">{course.fullDescription}</p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2 space-y-8">
             <Card variant="default">
               <CardContent>
-                <h2 className="text-xl font-bold text-white mb-4">Темы курса</h2>
+                <h2 className="text-xl font-semibold text-white mb-4 tracking-tight">Темы курса</h2>
                 <ul className="space-y-3">
                   {course.topics.map((t, i) => (
-                    <li key={i} className="flex gap-3 text-gray-300">
-                      <span className="text-cyber-green">✓</span>
+                    <li key={i} className="flex gap-3 text-slate-400">
+                      <span className="text-emerald-400/85">✓</span>
                       {t}
                     </li>
                   ))}
@@ -409,10 +377,10 @@ export default async function CoursePage({ params }: PageProps) {
 
             <Card variant="default">
               <CardContent>
-                <h2 className="text-xl font-bold text-white mb-4">Кому подходит курс</h2>
+                <h2 className="text-xl font-semibold text-white mb-4 tracking-tight">Кому подходит курс</h2>
                 <ul className="space-y-3">
                   {audience.map((item, i) => (
-                    <li key={i} className="flex gap-3 text-gray-300">
+                    <li key={i} className="flex gap-3 text-slate-400">
                       <span className="text-primary-400">•</span>
                       {item}
                     </li>
@@ -423,11 +391,11 @@ export default async function CoursePage({ params }: PageProps) {
 
             <Card variant="default">
               <CardContent>
-                <h2 className="text-xl font-bold text-white mb-4">Что получит ученик</h2>
+                <h2 className="text-xl font-semibold text-white mb-4 tracking-tight">Что получит ученик</h2>
                 <ul className="space-y-3">
                   {benefits.map((item, i) => (
-                    <li key={i} className="flex gap-3 text-gray-300">
-                      <span className="text-cyber-green">✓</span>
+                    <li key={i} className="flex gap-3 text-slate-400">
+                      <span className="text-emerald-400/85">✓</span>
                       {item}
                     </li>
                   ))}
@@ -437,22 +405,22 @@ export default async function CoursePage({ params }: PageProps) {
 
             <Card variant="default">
               <CardContent>
-                <h2 className="text-xl font-bold text-white mb-4">О преподавателе</h2>
-                <div className="rounded-2xl border border-cyber-border bg-cyber-dark/40 p-6">
+                <h2 className="text-xl font-semibold text-white mb-4 tracking-tight">О преподавателе</h2>
+                <div className="rounded-2xl border border-white/[0.06] bg-white/[0.02] p-6">
                   <h3 className="text-lg font-semibold text-white mb-2">
                     {course.instructor.name}
                   </h3>
                   <p className="text-primary-400 text-sm mb-3">{course.instructor.title}</p>
-                  <p className="text-gray-300 leading-relaxed mb-4">{course.instructor.bio}</p>
+                  <p className="text-slate-400 leading-relaxed mb-4">{course.instructor.bio}</p>
 
                   {course.instructor.certifications.length > 0 && (
                     <div>
-                      <div className="text-sm text-gray-400 mb-2">Сертификации</div>
+                      <div className="text-sm text-slate-500 mb-2">Сертификации</div>
                       <div className="flex flex-wrap gap-2">
                         {course.instructor.certifications.map((cert) => (
                           <span
                             key={cert}
-                            className="rounded-full border border-cyber-border bg-cyber-card px-3 py-1 text-xs text-gray-300"
+                            className="rounded-full border border-cyber-border bg-cyber-card px-3 py-1 text-xs text-slate-400"
                           >
                             {cert}
                           </span>
@@ -466,10 +434,10 @@ export default async function CoursePage({ params }: PageProps) {
 
             <Card variant="default">
               <CardContent>
-                <h2 className="text-xl font-bold text-white mb-4">Формат обучения</h2>
+                <h2 className="text-xl font-semibold text-white mb-4 tracking-tight">Формат обучения</h2>
                 <ul className="space-y-3">
                   {format.map((item, i) => (
-                    <li key={i} className="flex gap-3 text-gray-300">
+                    <li key={i} className="flex gap-3 text-slate-400">
                       <span className="text-primary-400">•</span>
                       {item}
                     </li>
@@ -480,10 +448,10 @@ export default async function CoursePage({ params }: PageProps) {
 
             <Card variant="default">
               <CardContent>
-                <h2 className="text-xl font-bold text-white mb-4">Как проходит пробное занятие</h2>
+                <h2 className="text-xl font-semibold text-white mb-4 tracking-tight">Как проходит пробное занятие</h2>
                 <ul className="space-y-3">
                   {trialFlow.map((item, i) => (
-                    <li key={i} className="flex gap-3 text-gray-300">
+                    <li key={i} className="flex gap-3 text-slate-400">
                       <span className="text-yellow-400">•</span>
                       {item}
                     </li>
@@ -494,10 +462,10 @@ export default async function CoursePage({ params }: PageProps) {
 
             <Card variant="default">
               <CardContent>
-                <h2 className="text-xl font-bold text-white mb-4">Что нужно для старта</h2>
+                <h2 className="text-xl font-semibold text-white mb-4 tracking-tight">Что нужно для старта</h2>
                 <ul className="space-y-3">
                   {startNeeds.map((item, i) => (
-                    <li key={i} className="flex gap-3 text-gray-300">
+                    <li key={i} className="flex gap-3 text-slate-400">
                       <span className="text-primary-400">•</span>
                       {item}
                     </li>
@@ -508,7 +476,7 @@ export default async function CoursePage({ params }: PageProps) {
 
             <Card variant="default">
               <CardContent>
-                <h2 className="text-xl font-bold text-white mb-6">Программа</h2>
+                <h2 className="text-xl font-semibold text-white mb-6 tracking-tight">Программа</h2>
                 <div className="space-y-4">
                   {course.modules.map((m, i) => (
                     <div key={m.id} className="p-4 rounded-xl bg-cyber-dark/50 border border-cyber-border">
@@ -518,8 +486,8 @@ export default async function CoursePage({ params }: PageProps) {
                         </div>
                         <div>
                           <h3 className="font-semibold text-white">{m.title}</h3>
-                          <p className="text-sm text-gray-400 mt-1">{m.description}</p>
-                          <div className="flex gap-4 mt-2 text-xs text-gray-500">
+                          <p className="text-sm text-slate-500 mt-1">{m.description}</p>
+                          <div className="flex gap-4 mt-2 text-xs text-slate-600">
                             <span>{m.lessons} уроков</span>
                             <span>{m.duration}</span>
                           </div>
@@ -533,11 +501,11 @@ export default async function CoursePage({ params }: PageProps) {
 
             <Card variant="default">
               <CardContent>
-                <h2 className="text-xl font-bold text-white mb-4">Результаты обучения</h2>
+                <h2 className="text-xl font-semibold text-white mb-4 tracking-tight">Результаты обучения</h2>
                 <ul className="space-y-3">
                   {outcomes.map((item, i) => (
-                    <li key={i} className="flex gap-3 text-gray-300">
-                      <span className="text-cyber-green">✓</span>
+                    <li key={i} className="flex gap-3 text-slate-400">
+                      <span className="text-emerald-400/85">✓</span>
                       {item}
                     </li>
                   ))}
@@ -547,10 +515,10 @@ export default async function CoursePage({ params }: PageProps) {
 
             <Card variant="default">
               <CardContent>
-                <h2 className="text-xl font-bold text-white mb-4">Почему стоит начать сейчас</h2>
+                <h2 className="text-xl font-semibold text-white mb-4 tracking-tight">Почему стоит начать сейчас</h2>
                 <ul className="space-y-3">
                   {whyNow.map((item, i) => (
-                    <li key={i} className="flex gap-3 text-gray-300">
+                    <li key={i} className="flex gap-3 text-slate-400">
                       <span className="text-yellow-400">•</span>
                       {item}
                     </li>
@@ -561,12 +529,12 @@ export default async function CoursePage({ params }: PageProps) {
 
             <Card variant="default">
               <CardContent>
-                <h2 className="text-xl font-bold text-white mb-4">Частые вопросы по курсу</h2>
+                <h2 className="text-xl font-semibold text-white mb-4 tracking-tight">Частые вопросы по курсу</h2>
                 <div className="space-y-4">
                   {faq.map((item, i) => (
-                    <div key={i} className="rounded-xl border border-cyber-border bg-cyber-dark/40 p-4">
+                    <div key={i} className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-4">
                       <h3 className="font-semibold text-white mb-2">{item.question}</h3>
-                      <p className="text-sm text-gray-300 leading-relaxed">{item.answer}</p>
+                      <p className="text-sm text-slate-400 leading-relaxed">{item.answer}</p>
                     </div>
                   ))}
                 </div>
@@ -575,11 +543,11 @@ export default async function CoursePage({ params }: PageProps) {
           </div>
 
           <div className="sticky top-28 h-fit">
-            <Card variant="glow">
+            <Card variant="glow" className="border-white/[0.06]">
               <CardContent>
                 <div className="text-center mb-6">
-                  <div className="text-4xl font-bold text-white">{formatPrice(course.price)}</div>
-                  <div className="text-gray-500">в месяц</div>
+                  <div className="text-4xl font-semibold text-white tabular-nums">{formatPrice(course.price)}</div>
+                  <div className="text-slate-600">в месяц</div>
                 </div>
 
                 <div className="space-y-3 mb-6 text-sm">
@@ -590,26 +558,24 @@ export default async function CoursePage({ params }: PageProps) {
                     ['Рейтинг', `${course.rating}/5`],
                   ].map(([label, value]) => (
                     <div key={label as string} className="flex justify-between gap-4">
-                      <span className="text-gray-400">{label}</span>
+                      <span className="text-slate-500">{label}</span>
                       <span className="text-white font-medium text-right">{value}</span>
                     </div>
                   ))}
                 </div>
 
-                <Link href="/enrollment" className="block">
-                  <Button variant="primary" size="lg" className="w-full">
-                    Записаться
-                  </Button>
-                </Link>
+                <ButtonLink href="/enrollment" variant="primary" size="lg" className="w-full justify-center">
+                  Записаться
+                </ButtonLink>
 
-                <p className="text-center text-xs text-gray-500 mt-4">
+                <p className="text-center text-xs text-slate-600 mt-4">
                   Пробное занятие — бесплатно!
                 </p>
               </CardContent>
             </Card>
           </div>
         </div>
-      </div>
+      </Container>
     </div>
   );
 }

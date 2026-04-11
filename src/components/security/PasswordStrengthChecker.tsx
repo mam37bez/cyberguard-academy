@@ -77,7 +77,7 @@ export function PasswordStrengthChecker() {
         <CardContent>
           <div className="mb-6">
             <h2 className="text-2xl font-bold text-white mb-3">Проверка силы пароля</h2>
-            <p className="text-gray-300">
+            <p className="text-slate-400">
               Введите пример пароля и посмотрите, насколько он устойчив с точки зрения
               базовых правил цифровой безопасности. Не вводите сюда реальные пароли от
               важных аккаунтов.
@@ -96,13 +96,13 @@ export function PasswordStrengthChecker() {
 
           <div className="mb-6">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-sm text-gray-400">Оценка надёжности</span>
+              <span className="text-sm text-slate-500">Оценка надёжности</span>
               <span className="text-sm font-medium" style={{ color: result.color }}>
                 {result.label}
               </span>
             </div>
 
-            <div className="w-full h-3 bg-cyber-dark rounded-full overflow-hidden">
+            <div className="w-full h-3 rounded-full bg-white/[0.06] overflow-hidden">
               <div
                 className="h-full transition-all duration-500 rounded-full"
                 style={{
@@ -112,26 +112,26 @@ export function PasswordStrengthChecker() {
               />
             </div>
 
-            <div className="mt-2 text-sm text-gray-400">{result.score} / 100</div>
+            <div className="mt-2 text-sm text-slate-500">{result.score} / 100</div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-6">
-            <div className="rounded-xl border border-cyber-border bg-cyber-dark/50 p-4 text-sm text-gray-300">
+            <div className="rounded-xl border border-white/[0.06] bg-white/[0.03] p-4 text-sm text-slate-400">
               {result.checks.length ? '✅' : '⚠️'} Длина не менее 12 символов
             </div>
-            <div className="rounded-xl border border-cyber-border bg-cyber-dark/50 p-4 text-sm text-gray-300">
+            <div className="rounded-xl border border-white/[0.06] bg-white/[0.03] p-4 text-sm text-slate-400">
               {result.checks.lower ? '✅' : '⚠️'} Есть строчные буквы
             </div>
-            <div className="rounded-xl border border-cyber-border bg-cyber-dark/50 p-4 text-sm text-gray-300">
+            <div className="rounded-xl border border-white/[0.06] bg-white/[0.03] p-4 text-sm text-slate-400">
               {result.checks.upper ? '✅' : '⚠️'} Есть заглавные буквы
             </div>
-            <div className="rounded-xl border border-cyber-border bg-cyber-dark/50 p-4 text-sm text-gray-300">
+            <div className="rounded-xl border border-white/[0.06] bg-white/[0.03] p-4 text-sm text-slate-400">
               {result.checks.number ? '✅' : '⚠️'} Есть цифры
             </div>
-            <div className="rounded-xl border border-cyber-border bg-cyber-dark/50 p-4 text-sm text-gray-300">
+            <div className="rounded-xl border border-white/[0.06] bg-white/[0.03] p-4 text-sm text-slate-400">
               {result.checks.symbol ? '✅' : '⚠️'} Есть спецсимволы
             </div>
-            <div className="rounded-xl border border-cyber-border bg-cyber-dark/50 p-4 text-sm text-gray-300">
+            <div className="rounded-xl border border-white/[0.06] bg-white/[0.03] p-4 text-sm text-slate-400">
               {result.checks.noCommon ? '✅' : '⚠️'} Нет слишком популярных шаблонов
             </div>
           </div>
@@ -140,20 +140,20 @@ export function PasswordStrengthChecker() {
             <h3 className="text-lg font-semibold text-white mb-3">Рекомендации</h3>
 
             {password.length === 0 ? (
-              <p className="text-gray-400 text-sm">
+              <p className="text-slate-500 text-sm">
                 Введите пример пароля, чтобы увидеть оценку и рекомендации.
               </p>
             ) : recommendations.length > 0 ? (
               <ul className="space-y-2">
                 {recommendations.map((item, index) => (
-                  <li key={index} className="flex gap-3 text-sm text-gray-300">
+                  <li key={index} className="flex gap-3 text-sm text-slate-400">
                     <span className="text-yellow-400">•</span>
                     <span>{item}</span>
                   </li>
                 ))}
               </ul>
             ) : (
-              <div className="rounded-xl border border-cyber-green/20 bg-cyber-green/10 p-4 text-sm text-cyber-green">
+              <div className="rounded-xl border border-emerald-500/20 bg-emerald-500/10 p-4 text-sm text-emerald-400/90">
                 Отличный результат. Такой пароль выглядит значительно надёжнее базовых
                 и слабых комбинаций.
               </div>

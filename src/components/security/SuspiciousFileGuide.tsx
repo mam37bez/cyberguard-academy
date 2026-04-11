@@ -102,14 +102,14 @@ export function SuspiciousFileGuide() {
             <h2 className="text-2xl font-bold text-white mb-3">
               Что делать после подозрительного файла или вложения
             </h2>
-            <p className="text-gray-300">
+            <p className="text-slate-400">
               Если вы скачали, открыли или даже запустили подозрительный файл, этот
               мини-гайд поможет быстро оценить ситуацию и понять, какие шаги сделать дальше.
             </p>
           </div>
 
           <div className="space-y-6 mb-8">
-            <div className="rounded-2xl border border-cyber-border bg-cyber-dark/40 p-5">
+            <div className="rounded-2xl border border-white/[0.06] bg-white/[0.02] p-5">
               <div className="text-white font-medium mb-4">1. Вы скачивали подозрительный файл или вложение?</div>
               <div className="flex flex-wrap gap-3">
                 <Button type="button" variant="secondary" onClick={() => setAnswers((p) => ({ ...p, downloaded: true }))}>
@@ -121,7 +121,7 @@ export function SuspiciousFileGuide() {
               </div>
             </div>
 
-            <div className="rounded-2xl border border-cyber-border bg-cyber-dark/40 p-5">
+            <div className="rounded-2xl border border-white/[0.06] bg-white/[0.02] p-5">
               <div className="text-white font-medium mb-4">2. Вы открывали этот файл или вложение?</div>
               <div className="flex flex-wrap gap-3">
                 <Button type="button" variant="secondary" onClick={() => setAnswers((p) => ({ ...p, opened: true }))}>
@@ -133,7 +133,7 @@ export function SuspiciousFileGuide() {
               </div>
             </div>
 
-            <div className="rounded-2xl border border-cyber-border bg-cyber-dark/40 p-5">
+            <div className="rounded-2xl border border-white/[0.06] bg-white/[0.02] p-5">
               <div className="text-white font-medium mb-4">3. Вы запускали приложение, файл или давали ему активные разрешения?</div>
               <div className="flex flex-wrap gap-3">
                 <Button type="button" variant="secondary" onClick={() => setAnswers((p) => ({ ...p, ranApp: true }))}>
@@ -151,12 +151,12 @@ export function SuspiciousFileGuide() {
               <div className="text-lg font-semibold mb-3" style={{ color: result.color }}>
                 {result.level}
               </div>
-              <p className="text-gray-300 mb-5">{result.summary}</p>
+              <p className="text-slate-400 mb-5">{result.summary}</p>
 
               <h3 className="text-white font-semibold mb-3">Что сделать сейчас</h3>
               <ul className="space-y-2">
                 {result.actions.map((action, index) => (
-                  <li key={index} className="flex gap-3 text-sm text-gray-300">
+                  <li key={index} className="flex gap-3 text-sm text-slate-400">
                     <span className="text-yellow-400">•</span>
                     <span>{action}</span>
                   </li>

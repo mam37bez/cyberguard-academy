@@ -26,7 +26,7 @@ export function InlineContextCTA({
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             <div>
               <h3 className="text-lg font-semibold text-white mb-1">{title}</h3>
-              <p className="text-sm text-gray-300">{description}</p>
+              <p className="text-sm text-slate-400">{description}</p>
             </div>
             <div className="flex flex-col sm:flex-row gap-2 shrink-0">
               {secondaryHref && secondaryLabel && (

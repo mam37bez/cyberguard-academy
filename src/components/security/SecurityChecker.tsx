@@ -126,7 +126,7 @@ export function SecurityChecker() {
                   <span className="text-4xl font-bold" style={{ color }}>
                     {score}
                   </span>
-                  <span className="text-sm text-gray-400">из 100</span>
+                  <span className="text-sm text-slate-500">из 100</span>
                 </div>
               </div>
 
@@ -137,7 +137,7 @@ export function SecurityChecker() {
                 Уровень: {label}
               </div>
 
-              <p className="text-gray-400 max-w-2xl mx-auto">
+              <p className="text-slate-500 max-w-2xl mx-auto">
                 Эта оценка показывает общий уровень базовой цифровой безопасности и помогает
                 понять, какие привычки уже работают хорошо, а где есть точки роста.
               </p>
@@ -150,10 +150,10 @@ export function SecurityChecker() {
                   {weakAreas.map((item) => (
                     <div
                       key={item.id}
-                      className="rounded-xl border border-cyber-border bg-cyber-dark/50 p-4"
+                      className="rounded-xl border border-white/[0.06] bg-white/[0.03] p-4"
                     >
                       <div className="text-xs text-primary-400 mb-2">{item.category}</div>
-                      <div className="text-sm text-gray-300">{item.text}</div>
+                      <div className="text-sm text-slate-400">{item.text}</div>
                     </div>
                   ))}
                 </div>
@@ -161,7 +161,7 @@ export function SecurityChecker() {
                 <h4 className="text-lg font-semibold text-white mb-4">Рекомендации</h4>
                 <ul className="space-y-3">
                   {recommendations.map((rec, i) => (
-                    <li key={i} className="flex gap-3 text-sm text-gray-300">
+                    <li key={i} className="flex gap-3 text-sm text-slate-400">
                       <span className="text-yellow-400">•</span>
                       <span>{rec}</span>
                     </li>
@@ -171,10 +171,10 @@ export function SecurityChecker() {
             )}
 
             {score === 100 && (
-              <div className="text-center p-6 rounded-xl bg-cyber-green/10 border border-cyber-green/20 mb-6">
+              <div className="text-center p-6 rounded-xl bg-emerald-500/10 border border-emerald-500/20 mb-6">
                 <span className="text-4xl block mb-2">🏆</span>
-                <p className="text-cyber-green font-semibold">Отличный результат!</p>
-                <p className="text-sm text-gray-300 mt-2">
+                <p className="text-emerald-400/90 font-semibold">Отличный результат!</p>
+                <p className="text-sm text-slate-400 mt-2">
                   У вас уже сформированы очень хорошие базовые привычки цифровой безопасности.
                 </p>
               </div>
@@ -199,16 +199,16 @@ export function SecurityChecker() {
       <Card variant="glow">
         <CardContent>
           <div className="mb-8">
-            <div className="flex justify-between text-sm text-gray-400 mb-2">
+            <div className="flex justify-between text-sm text-slate-500 mb-2">
               <span>
                 Вопрос {current + 1} из {questions.length}
               </span>
               <span>{progress}%</span>
             </div>
 
-            <div className="w-full h-2 bg-cyber-dark rounded-full overflow-hidden">
+            <div className="w-full h-2 rounded-full bg-white/[0.06] overflow-hidden">
               <div
-                className="h-full bg-gradient-to-r from-primary-500 to-cyber-green rounded-full transition-all duration-500"
+                className="h-full bg-gradient-to-r from-primary-500 to-emerald-500 rounded-full transition-all duration-500"
                 style={{ width: `${progress}%` }}
               />
             </div>

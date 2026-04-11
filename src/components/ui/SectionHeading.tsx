@@ -32,7 +32,7 @@ export function SectionHeading({
         </div>
       )}
 
-      <HeadingTag className="text-3xl md:text-4xl lg:text-[2.5rem] font-semibold text-white mb-3 tracking-tight">
+      <HeadingTag className="text-3xl md:text-4xl lg:text-[2.5rem] font-semibold text-white mb-3 tracking-tight text-balance">
         {title}
       </HeadingTag>
 

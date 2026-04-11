@@ -9,8 +9,8 @@ const variantClasses = {
   secondary:
     'bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-300 border border-emerald-500/25 hover:border-emerald-400/40 focus-visible:ring-emerald-500/60',
   outline:
-    'border-2 border-cyber-border hover:border-primary-500 text-gray-300 hover:text-white hover:bg-primary-500/10 focus-visible:ring-primary-500',
-  ghost: 'text-gray-400 hover:text-white hover:bg-white/5 focus-visible:ring-white/30',
+    'border border-white/[0.12] hover:border-primary-500/50 text-slate-300 hover:text-white hover:bg-primary-500/10 focus-visible:ring-primary-500',
+  ghost: 'text-slate-400 hover:text-white hover:bg-white/[0.05] focus-visible:ring-primary-500/50',
 } as const;
 
 const sizeClasses = {

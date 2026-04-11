@@ -1,5 +1,8 @@
 import type { Metadata } from 'next';
 import { SITE_URL } from '@/lib/site';
+import { Container } from '@/components/layout/Container';
+import { SectionHeading } from '@/components/ui/SectionHeading';
+import { ButtonLink } from '@/components/ui/ButtonLink';
 
 export const metadata: Metadata = {
   title: 'Политика конфиденциальности — CyberGuard Academy',
@@ -13,14 +16,18 @@ export const metadata: Metadata = {
 export default function PrivacyPage() {
   return (
     <div className="pt-24 pb-16">
-      <div className="max-w-4xl mx-auto px-4">
-        <h1 className="text-3xl md:text-4xl font-bold text-white mb-6">
-          Политика конфиденциальности
-        </h1>
+      <Container>
+        <SectionHeading
+          dense
+          as="h1"
+          badge="Документы"
+          title="Политика конфиденциальности"
+          subtitle="Как CyberGuard Academy обрабатывает персональные данные, заявки и обращения пользователей"
+        />
 
-        <div className="space-y-8 text-gray-300 leading-relaxed">
+        <div className="max-w-4xl mx-auto space-y-8 text-slate-400 leading-relaxed">
           <section>
-            <h2 className="text-xl font-semibold text-white mb-3">1. Общие положения</h2>
+            <h2 className="text-xl font-semibold text-white mb-3 tracking-tight">1. Общие положения</h2>
             <p>
               Настоящая Политика конфиденциальности описывает, каким образом
               CyberGuard Academy обрабатывает персональные данные пользователей сайта,
@@ -29,7 +36,7 @@ export default function PrivacyPage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-white mb-3">
+            <h2 className="text-xl font-semibold text-white mb-3 tracking-tight">
               2. Какие данные мы можем получать
             </h2>
             <p>Через формы на сайте мы можем получать следующие данные:</p>
@@ -44,7 +51,7 @@ export default function PrivacyPage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-white mb-3">
+            <h2 className="text-xl font-semibold text-white mb-3 tracking-tight">
               3. Зачем мы используем данные
             </h2>
             <p>Персональные данные могут использоваться для следующих целей:</p>
@@ -58,7 +65,7 @@ export default function PrivacyPage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-white mb-3">4. Защита данных</h2>
+            <h2 className="text-xl font-semibold text-white mb-3 tracking-tight">4. Защита данных</h2>
             <p>
               Мы принимаем разумные технические и организационные меры для защиты данных
               от несанкционированного доступа, изменения, утраты или неправомерного
@@ -71,7 +78,7 @@ export default function PrivacyPage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-white mb-3">
+            <h2 className="text-xl font-semibold text-white mb-3 tracking-tight">
               5. Передача данных третьим лицам
             </h2>
             <p>
@@ -82,7 +89,7 @@ export default function PrivacyPage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-white mb-3">6. Срок хранения данных</h2>
+            <h2 className="text-xl font-semibold text-white mb-3 tracking-tight">6. Срок хранения данных</h2>
             <p>
               Данные хранятся не дольше, чем это необходимо для обработки обращения,
               заявки или выполнения законных обязательств, связанных с работой сайта и
@@ -91,7 +98,7 @@ export default function PrivacyPage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-white mb-3">7. Права пользователя</h2>
+            <h2 className="text-xl font-semibold text-white mb-3 tracking-tight">7. Права пользователя</h2>
             <p>Пользователь вправе:</p>
             <ul className="list-disc pl-6 space-y-2 mt-3">
               <li>запросить уточнение своих данных;</li>
@@ -102,7 +109,7 @@ export default function PrivacyPage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-white mb-3">8. Изменения политики</h2>
+            <h2 className="text-xl font-semibold text-white mb-3 tracking-tight">8. Изменения политики</h2>
             <p>
               Мы можем обновлять настоящую Политику конфиденциальности по мере развития
               сайта, форм, сервисов и требований к обработке данных. Актуальная версия
@@ -111,14 +118,19 @@ export default function PrivacyPage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-white mb-3">9. Контакты</h2>
+            <h2 className="text-xl font-semibold text-white mb-3 tracking-tight">9. Контакты</h2>
             <p>
               Если у вас есть вопросы по поводу обработки данных, используйте страницу
               контактов сайта CyberGuard Academy.
             </p>
           </section>
+          <div className="flex flex-wrap gap-3 pt-2">
+            <ButtonLink href="/contact" variant="primary" size="md">
+              Связаться с нами
+            </ButtonLink>
+          </div>
         </div>
-      </div>
+      </Container>
     </div>
   );
 }

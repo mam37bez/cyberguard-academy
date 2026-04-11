@@ -16,6 +16,17 @@
   body {
     @apply bg-cyber-darker text-white font-sans antialiased;
     overflow-x: hidden;
+    text-rendering: optimizeLegibility;
+    background-image:
+      radial-gradient(ellipse 100% 60% at 50% -15%, rgba(99, 102, 241, 0.14), transparent 55%),
+      radial-gradient(ellipse 70% 45% at 100% 0%, rgba(0, 212, 255, 0.06), transparent 50%),
+      radial-gradient(ellipse 55% 40% at 0% 100%, rgba(79, 70, 229, 0.08), transparent 45%);
+    background-attachment: fixed;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    body {
+      background-attachment: scroll;
+    }
   }
   ::selection {
     @apply bg-primary-500/30 text-white;

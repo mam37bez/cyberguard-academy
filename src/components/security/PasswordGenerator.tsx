@@ -103,15 +103,15 @@ export function PasswordGenerator() {
         <CardContent>
           <div className="mb-6">
             <h2 className="text-2xl font-bold text-white mb-3">Генератор паролей</h2>
-            <p className="text-gray-300">
+            <p className="text-slate-400">
               Сгенерируйте надёжный пароль для нового аккаунта или обновления старого.
               Используйте уникальные пароли и по возможности храните их в менеджере
               паролей.
             </p>
           </div>
 
-          <div className="rounded-2xl border border-cyber-border bg-cyber-dark/50 p-5 mb-6">
-            <div className="text-sm text-gray-400 mb-2">Сгенерированный пароль</div>
+          <div className="rounded-2xl border border-white/[0.06] bg-white/[0.03] p-5 mb-6">
+            <div className="text-sm text-slate-500 mb-2">Сгенерированный пароль</div>
             <div className="break-all text-lg md:text-xl font-mono text-white">
               {password || 'Выберите хотя бы один тип символов'}
             </div>
@@ -119,7 +119,7 @@ export function PasswordGenerator() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
             <div>
-              <label className="block text-sm font-medium text-gray-300 mb-2">
+              <label className="block text-sm font-medium text-slate-400 mb-2">
                 Длина пароля: {length}
               </label>
               <input
@@ -136,7 +136,7 @@ export function PasswordGenerator() {
             </div>
 
             <div className="grid grid-cols-2 gap-3">
-              <label className="flex items-center gap-3 text-sm text-gray-300">
+              <label className="flex items-center gap-3 text-sm text-slate-400">
                 <input
                   type="checkbox"
                   checked={useUpper}
@@ -148,7 +148,7 @@ export function PasswordGenerator() {
                 Заглавные буквы
               </label>
 
-              <label className="flex items-center gap-3 text-sm text-gray-300">
+              <label className="flex items-center gap-3 text-sm text-slate-400">
                 <input
                   type="checkbox"
                   checked={useLower}
@@ -160,7 +160,7 @@ export function PasswordGenerator() {
                 Строчные буквы
               </label>
 
-              <label className="flex items-center gap-3 text-sm text-gray-300">
+              <label className="flex items-center gap-3 text-sm text-slate-400">
                 <input
                   type="checkbox"
                   checked={useNumbers}
@@ -172,7 +172,7 @@ export function PasswordGenerator() {
                 Цифры
               </label>
 
-              <label className="flex items-center gap-3 text-sm text-gray-300">
+              <label className="flex items-center gap-3 text-sm text-slate-400">
                 <input
                   type="checkbox"
                   checked={useSymbols}

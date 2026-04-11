@@ -102,14 +102,14 @@ export function SuspiciousLinkGuide() {
             <h2 className="text-2xl font-bold text-white mb-3">
               Что делать после подозрительной ссылки
             </h2>
-            <p className="text-gray-300">
+            <p className="text-slate-400">
               Ответьте на несколько коротких вопросов, чтобы понять уровень риска и
               получить базовые рекомендации по дальнейшим действиям.
             </p>
           </div>
 
           <div className="space-y-6 mb-8">
-            <div className="rounded-2xl border border-cyber-border bg-cyber-dark/40 p-5">
+            <div className="rounded-2xl border border-white/[0.06] bg-white/[0.02] p-5">
               <div className="text-white font-medium mb-4">1. Вы открывали подозрительную ссылку?</div>
               <div className="flex flex-wrap gap-3">
                 <Button type="button" variant="secondary" onClick={() => setAnswers((p) => ({ ...p, openedLink: true }))}>
@@ -121,7 +121,7 @@ export function SuspiciousLinkGuide() {
               </div>
             </div>
 
-            <div className="rounded-2xl border border-cyber-border bg-cyber-dark/40 p-5">
+            <div className="rounded-2xl border border-white/[0.06] bg-white/[0.02] p-5">
               <div className="text-white font-medium mb-4">
                 2. Вы вводили на странице пароль, код, данные карты или другую важную информацию?
               </div>
@@ -135,7 +135,7 @@ export function SuspiciousLinkGuide() {
               </div>
             </div>
 
-            <div className="rounded-2xl border border-cyber-border bg-cyber-dark/40 p-5">
+            <div className="rounded-2xl border border-white/[0.06] bg-white/[0.02] p-5">
               <div className="text-white font-medium mb-4">
                 3. Вы скачивали файл, приложение или документ после перехода?
               </div>
@@ -155,12 +155,12 @@ export function SuspiciousLinkGuide() {
               <div className="text-lg font-semibold mb-3" style={{ color: result.color }}>
                 {result.level}
               </div>
-              <p className="text-gray-300 mb-5">{result.summary}</p>
+              <p className="text-slate-400 mb-5">{result.summary}</p>
 
               <h3 className="text-white font-semibold mb-3">Что сделать сейчас</h3>
               <ul className="space-y-2">
                 {result.actions.map((action, index) => (
-                  <li key={index} className="flex gap-3 text-sm text-gray-300">
+                  <li key={index} className="flex gap-3 text-sm text-slate-400">
                     <span className="text-yellow-400">•</span>
                     <span>{action}</span>
                   </li>

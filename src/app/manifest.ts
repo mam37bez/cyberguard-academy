@@ -2,10 +2,12 @@ import { MetadataRoute } from 'next';
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
+    id: '/',
     name: 'CyberGuard Academy',
     short_name: 'CyberGuard',
     description: 'Обучение кибербезопасности для детей и родителей — 12 модулей, 120 квизов',
     start_url: '/',
+    scope: '/',
     display: 'standalone',
     background_color: '#0f172a',
     theme_color: '#22d3ee',

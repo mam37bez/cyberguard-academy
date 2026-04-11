@@ -3,8 +3,9 @@ import { SITE_URL } from '@/lib/site';
 import Link from 'next/link';
 import { Card, CardContent } from '@/components/ui/Card';
 import { Badge } from '@/components/ui/Badge';
-import { Button } from '@/components/ui/Button';
+import { ButtonLink } from '@/components/ui/ButtonLink';
 import { SectionHeading } from '@/components/ui/SectionHeading';
+import { Container } from '@/components/layout/Container';
 import { blogPosts } from '@/data/blog';
 import { formatDate } from '@/lib/utils';
 
@@ -24,8 +25,6 @@ type BlogPageProps = {
 };
 
 export default async function BlogPage({ searchParams }: BlogPageProps) {
-  // Next.js 15 типизирует searchParams как Promise.
-  // await безопасен: если придёт обычный объект, await просто вернёт его как значение.
   const sp = searchParams ? await searchParams : undefined;
 
   const activeCategory =
@@ -67,70 +66,74 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
     },
   ];
 
+  const postCardLinkClass =
+    'block h-full rounded-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500/45 focus-visible:ring-offset-2 focus-visible:ring-offset-cyber-darker';
+
   return (
     <div className="pt-24 pb-16">
-      <div className="max-w-7xl mx-auto px-4">
+      <Container>
         <SectionHeading
+          dense
           as="h1"
           badge="Блог"
           title="Статьи о кибербезопасности"
           subtitle="Практические материалы о защите аккаунтов, устройств, данных и безопасном поведении в интернете"
         />
 
-        {/* С чего начать */}
         <div className="max-w-5xl mx-auto mb-10">
-          <Card variant="gradient">
+          <Card variant="gradient" className="border-white/[0.06]">
             <CardContent className="p-6 md:p-8">
-              <h2 className="text-2xl font-bold text-white mb-3">С чего начать изучение</h2>
-              <p className="text-gray-300 mb-6">
+              <h2 className="text-xl font-semibold text-white mb-3 tracking-tight">С чего начать изучение</h2>
+              <p className="text-slate-500 text-sm mb-6 leading-relaxed">
                 Если вы пришли после инструментов — выберите тему ниже. Если вы новичок — начните с базовой статьи и
                 пройдите самопроверку.
               </p>
               <div className="flex flex-col sm:flex-row gap-3">
-                <Link href="/security-tools">
-                  <Button variant="outline">Пройти инструменты</Button>
-                </Link>
-                <Link href="/blog/chto-takoe-kiberbezopasnost">
-                  <Button variant="primary">Начать с основ</Button>
-                </Link>
-                <Link href="/courses">
-                  <Button variant="ghost">Подобрать курс</Button>
-                </Link>
+                <ButtonLink href="/security-tools" variant="outline" size="md">
+                  Пройти инструменты
+                </ButtonLink>
+                <ButtonLink href="/blog/chto-takoe-kiberbezopasnost" variant="primary" size="md">
+                  Начать с основ
+                </ButtonLink>
+                <ButtonLink href="/courses" variant="ghost" size="md">
+                  Подобрать курс
+                </ButtonLink>
               </div>
             </CardContent>
           </Card>
         </div>
 
-        {/* Популярные темы */}
-        <div className="max-w-5xl mx-auto mb-12 rounded-2xl border border-cyber-border bg-cyber-card p-6 md:p-8">
+        <div className="max-w-5xl mx-auto mb-12 rounded-2xl border border-white/[0.06] bg-cyber-card/90 p-6 md:p-8">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             <div>
-              <h2 className="text-xl font-bold text-white mb-1">Популярные темы</h2>
-              <p className="text-sm text-gray-300">
+              <h2 className="text-lg font-semibold text-white mb-1 tracking-tight">Популярные темы</h2>
+              <p className="text-sm text-slate-500 leading-relaxed">
                 Быстро отфильтруйте статьи по направлению. Это удобно на телефоне и помогает не теряться в списке.
               </p>
             </div>
 
             {activeCategory && (
               <div className="shrink-0">
-                <Link href="/blog">
-                  <Button variant="outline" size="sm">
-                    Сбросить фильтр
-                  </Button>
-                </Link>
+                <ButtonLink href="/blog" variant="outline" size="sm">
+                  Сбросить фильтр
+                </ButtonLink>
               </div>
             )}
           </div>
 
           <div className="flex flex-wrap gap-2 mt-6">
-            <Link href="/blog">
+            <Link href="/blog" className="rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500/40">
               <Badge variant={activeCategory ? 'outline' : 'info'} size="sm">
                 Все
               </Badge>
             </Link>
 
             {categories.map((c) => (
-              <Link key={c} href={'/blog?category=' + encodeURIComponent(c)}>
+              <Link
+                key={c}
+                href={'/blog?category=' + encodeURIComponent(c)}
+                className="rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500/40"
+              >
                 <Badge variant={activeCategory === c ? 'info' : 'outline'} size="sm">
                   {c}
                 </Badge>
@@ -139,32 +142,27 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
           </div>
 
           {activeCategory && (
-            <p className="text-xs text-gray-400 mt-4">
-              Фильтр: <span className="text-gray-200 font-medium">{activeCategory}</span>
+            <p className="text-xs text-slate-600 mt-4">
+              Фильтр: <span className="text-slate-300 font-medium">{activeCategory}</span>
             </p>
           )}
         </div>
 
-        {/* Связки tools → статьи */}
         <section className="max-w-5xl mx-auto mb-14">
-          <h2 className="text-2xl font-bold text-white mb-6">Если вы пришли из инструментов</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <h2 className="text-xl font-semibold text-white mb-6 tracking-tight">Если вы пришли из инструментов</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6">
             {toolToArticle.map((x) => (
-              <Card key={x.title} variant="default" className="h-full">
+              <Card key={x.title} variant="default" className="h-full border-white/[0.06]">
                 <CardContent className="flex flex-col h-full">
-                  <h3 className="text-lg font-semibold text-white mb-2">{x.title}</h3>
-                  <p className="text-sm text-gray-400 mb-6">{x.note}</p>
+                  <h3 className="text-base font-semibold text-white mb-2 tracking-tight">{x.title}</h3>
+                  <p className="text-sm text-slate-500 mb-6 leading-relaxed">{x.note}</p>
                   <div className="mt-auto flex flex-col gap-2">
-                    <Link href={x.toolHref}>
-                      <Button variant="outline" size="sm">
-                        {x.toolLabel}
-                      </Button>
-                    </Link>
-                    <Link href={x.postHref}>
-                      <Button variant="primary" size="sm">
-                        {x.postLabel}
-                      </Button>
-                    </Link>
+                    <ButtonLink href={x.toolHref} variant="outline" size="sm">
+                      {x.toolLabel}
+                    </ButtonLink>
+                    <ButtonLink href={x.postHref} variant="primary" size="sm">
+                      {x.postLabel}
+                    </ButtonLink>
                   </div>
                 </CardContent>
               </Card>
@@ -172,20 +170,19 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
           </div>
         </section>
 
-        {/* Featured */}
         {featuredPosts.length > 0 && (
           <section className="mb-16">
-            <div className="flex items-center gap-3 mb-6">
-              <h2 className="text-2xl font-bold text-white">Рекомендуемые материалы</h2>
+            <div className="flex flex-wrap items-center gap-3 mb-6">
+              <h2 className="text-xl font-semibold text-white tracking-tight">Рекомендуемые материалы</h2>
               <Badge variant="warning" size="sm">
                 Featured
               </Badge>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
               {featuredPosts.map((p) => (
-                <Link key={p.id} href={'/blog/' + p.slug}>
-                  <Card variant="gradient" className="h-full">
+                <Link key={p.id} href={'/blog/' + p.slug} className={postCardLinkClass}>
+                  <Card variant="gradient" className="h-full border-white/[0.06] transition-colors hover:border-primary-500/25">
                     <CardContent className="flex flex-col h-full">
                       <div className="flex gap-2 mb-4 flex-wrap">
                         <Badge variant="info" size="sm">
@@ -199,10 +196,10 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                         </Badge>
                       </div>
 
-                      <h2 className="text-xl font-bold text-white mb-3">{p.title}</h2>
-                      <p className="text-gray-300 text-sm mb-4 flex-1">{p.excerpt}</p>
+                      <h2 className="text-xl font-semibold text-white mb-3 tracking-tight">{p.title}</h2>
+                      <p className="text-slate-500 text-sm mb-4 flex-1 leading-relaxed">{p.excerpt}</p>
 
-                      <div className="flex justify-between text-xs text-gray-500 mt-auto">
+                      <div className="flex justify-between text-xs text-slate-600 mt-auto">
                         <span>{p.author}</span>
                         <span>{formatDate(p.date)}</span>
                       </div>
@@ -214,14 +211,15 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
           </section>
         )}
 
-        {/* Regular */}
         {regularPosts.length > 0 ? (
           <section>
-            <h2 className="text-2xl font-bold text-white mb-6">{activeCategory ? 'Статьи по теме' : 'Все статьи'}</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <h2 className="text-xl font-semibold text-white mb-6 tracking-tight">
+              {activeCategory ? 'Статьи по теме' : 'Все статьи'}
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
               {regularPosts.map((p) => (
-                <Link key={p.id} href={'/blog/' + p.slug}>
-                  <Card variant="default" className="h-full">
+                <Link key={p.id} href={'/blog/' + p.slug} className={postCardLinkClass}>
+                  <Card variant="default" className="h-full border-white/[0.06] transition-colors hover:border-primary-500/25">
                     <CardContent className="flex flex-col h-full">
                       <div className="flex gap-2 mb-4 flex-wrap">
                         <Badge variant="info" size="sm">
@@ -232,10 +230,10 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                         </Badge>
                       </div>
 
-                      <h2 className="text-xl font-bold text-white mb-3">{p.title}</h2>
-                      <p className="text-gray-400 text-sm mb-4 flex-1">{p.excerpt}</p>
+                      <h2 className="text-xl font-semibold text-white mb-3 tracking-tight">{p.title}</h2>
+                      <p className="text-slate-500 text-sm mb-4 flex-1 leading-relaxed">{p.excerpt}</p>
 
-                      <div className="flex justify-between text-xs text-gray-500 mt-auto">
+                      <div className="flex justify-between text-xs text-slate-600 mt-auto">
                         <span>{p.author}</span>
                         <span>{formatDate(p.date)}</span>
                       </div>
@@ -247,20 +245,20 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
           </section>
         ) : (
           <section className="max-w-5xl mx-auto">
-            <Card variant="default">
+            <Card variant="default" className="border-white/[0.06]">
               <CardContent>
-                <h2 className="text-xl font-bold text-white mb-2">По этому фильтру статей пока нет</h2>
-                <p className="text-gray-400 mb-4">
+                <h2 className="text-lg font-semibold text-white mb-2 tracking-tight">По этому фильтру статей пока нет</h2>
+                <p className="text-slate-500 text-sm mb-4 leading-relaxed">
                   Попробуйте выбрать другую тему или сбросить фильтр, чтобы увидеть все материалы.
                 </p>
-                <Link href="/blog">
-                  <Button variant="outline">Сбросить фильтр</Button>
-                </Link>
+                <ButtonLink href="/blog" variant="outline" size="md">
+                  Сбросить фильтр
+                </ButtonLink>
               </CardContent>
             </Card>
           </section>
         )}
-      </div>
+      </Container>
     </div>
   );
 }

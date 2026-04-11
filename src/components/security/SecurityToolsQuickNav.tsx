@@ -77,11 +77,11 @@ const quickLinks = [
 
 export function SecurityToolsQuickNav() {
   return (
-    <div className="max-w-5xl mx-auto mb-10 rounded-2xl border border-cyber-border bg-gradient-to-br from-cyber-card to-cyber-dark/80 p-6 md:p-8">
+    <div className="max-w-5xl mx-auto mb-10 rounded-2xl border border-white/[0.06] bg-gradient-to-br from-cyber-card/95 to-cyber-darker/90 p-6 md:p-8">
       <div className="flex items-start justify-between gap-4 mb-6">
         <div>
-          <h2 className="text-2xl font-bold text-white mb-2">Быстрый переход к инструментам</h2>
-          <p className="text-gray-300">
+          <h2 className="text-2xl font-semibold tracking-tight text-white mb-2">Быстрый переход к инструментам</h2>
+          <p className="text-slate-400">
             Выберите нужный инструмент и сразу перейдите к нужному блоку.
           </p>
         </div>
@@ -101,7 +101,7 @@ export function SecurityToolsQuickNav() {
                 placement: 'quick-nav',
               })
             }
-            className="group relative overflow-hidden rounded-2xl border border-cyber-border bg-cyber-dark/40 p-4 transition duration-200 hover:border-primary-400/40 hover:bg-primary-500/[0.08] hover:shadow-[0_0_24px_rgba(59,130,246,0.08)]"
+            className="group relative overflow-hidden rounded-2xl border border-white/[0.06] bg-white/[0.02] p-4 transition duration-200 hover:border-primary-400/40 hover:bg-primary-500/[0.08] hover:shadow-[0_0_24px_rgba(59,130,246,0.08)]"
           >
             <div className="absolute inset-0 bg-gradient-to-br from-primary-500/[0.04] via-transparent to-transparent opacity-0 transition duration-200 group-hover:opacity-100" />
 
@@ -119,7 +119,7 @@ export function SecurityToolsQuickNav() {
                 <h3 className="text-sm font-semibold text-white leading-5 mb-1">
                   {link.title}
                 </h3>
-                <p className="text-xs leading-5 text-gray-400">
+                <p className="text-xs leading-5 text-slate-500">
                   {link.description}
                 </p>
               </div>

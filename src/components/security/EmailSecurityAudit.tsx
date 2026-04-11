@@ -45,7 +45,7 @@ export function EmailSecurityAudit() {
         <CardContent>
           <div className="mb-6">
             <h2 className="text-2xl font-bold text-white mb-3">Mini Email Security Audit</h2>
-            <p className="text-gray-300">
+            <p className="text-slate-400">
               Проверьте, насколько надёжно защищён ваш основной почтовый аккаунт.
               Почта часто является ключом к восстановлению доступа ко многим другим
               сервисам, поэтому её защита особенно важна.
@@ -54,13 +54,13 @@ export function EmailSecurityAudit() {
 
           <div className="mb-6">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-sm text-gray-400">Уровень защищённости почты</span>
+              <span className="text-sm text-slate-500">Уровень защищённости почты</span>
               <span className="text-sm text-white font-medium">{progress}%</span>
             </div>
 
-            <div className="w-full h-3 bg-cyber-dark rounded-full overflow-hidden">
+            <div className="w-full h-3 rounded-full bg-white/[0.06] overflow-hidden">
               <div
-                className="h-full bg-gradient-to-r from-primary-500 to-cyber-green rounded-full transition-all duration-500"
+                className="h-full bg-gradient-to-r from-primary-500 to-emerald-500 rounded-full transition-all duration-500"
                 style={{ width: `${progress}%` }}
               />
             </div>
@@ -70,7 +70,7 @@ export function EmailSecurityAudit() {
             {items.map((item) => (
               <label
                 key={item.id}
-                className="flex items-start gap-3 rounded-xl border border-cyber-border bg-cyber-dark/40 p-4 cursor-pointer"
+                className="flex items-start gap-3 rounded-xl border border-white/[0.06] bg-white/[0.02] p-4 cursor-pointer"
               >
                 <input
                   type="checkbox"
@@ -78,7 +78,7 @@ export function EmailSecurityAudit() {
                   onChange={() => toggleItem(item.id)}
                   className="mt-1"
                 />
-                <span className="text-sm text-gray-300 leading-relaxed">{item.label}</span>
+                <span className="text-sm text-slate-400 leading-relaxed">{item.label}</span>
               </label>
             ))}
           </div>
@@ -88,14 +88,14 @@ export function EmailSecurityAudit() {
             {weakAreas.length > 0 ? (
               <ul className="space-y-2">
                 {weakAreas.map((item) => (
-                  <li key={item.id} className="flex gap-3 text-sm text-gray-300">
+                  <li key={item.id} className="flex gap-3 text-sm text-slate-400">
                     <span className="text-yellow-400">•</span>
                     <span>{item.label}</span>
                   </li>
                 ))}
               </ul>
             ) : (
-              <div className="rounded-xl border border-cyber-green/20 bg-cyber-green/10 p-4 text-sm text-cyber-green">
+              <div className="rounded-xl border border-emerald-500/20 bg-emerald-500/10 p-4 text-sm text-emerald-400/90">
                 Отлично! Базовая защита почтового аккаунта выглядит хорошо настроенной.
               </div>
             )}

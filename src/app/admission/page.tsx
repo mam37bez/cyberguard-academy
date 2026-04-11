@@ -1,5 +1,8 @@
 import type { Metadata } from 'next';
 import { SITE_URL } from '@/lib/site';
+import { Container } from '@/components/layout/Container';
+import { SectionHeading } from '@/components/ui/SectionHeading';
+import { ButtonLink } from '@/components/ui/ButtonLink';
 
 export const metadata: Metadata = {
   title: 'Условия обучения и записи — CyberGuard Academy',
@@ -13,20 +16,18 @@ export const metadata: Metadata = {
 export default function AdmissionPage() {
   return (
     <div className="pt-24 pb-16">
-      <div className="max-w-4xl mx-auto px-4">
-        <h1 className="text-3xl md:text-4xl font-bold text-white mb-6">
-          Условия обучения и записи
-        </h1>
+      <Container>
+        <SectionHeading
+          dense
+          as="h1"
+          badge="Запись"
+          title="Условия обучения и записи"
+          subtitle="Как проходит запись, как выбрать курс, что такое пробное занятие и что происходит после отправки заявки"
+        />
 
-        <p className="text-gray-400 mb-10">
-          На этой странице собрана базовая информация о том, как проходит запись,
-          как выбрать подходящий курс, что такое пробное занятие и что происходит после
-          отправки заявки.
-        </p>
-
-        <div className="space-y-8 text-gray-300 leading-relaxed">
+        <div className="max-w-4xl mx-auto space-y-8 text-slate-400 leading-relaxed">
           <section>
-            <h2 className="text-xl font-semibold text-white mb-3">1. Как выбрать курс</h2>
+            <h2 className="text-xl font-semibold text-white mb-3 tracking-tight">1. Как выбрать курс</h2>
             <p>
               На сайте представлены программы для детей, подростков и родителей.
               При выборе курса стоит ориентироваться на возраст, интерес к теме,
@@ -39,7 +40,7 @@ export default function AdmissionPage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-white mb-3">2. Как проходит запись</h2>
+            <h2 className="text-xl font-semibold text-white mb-3 tracking-tight">2. Как проходит запись</h2>
             <p>
               Для записи на курс пользователь заполняет форму на сайте. В заявке
               указываются базовые контактные данные, информация об ученике и выбранном
@@ -52,7 +53,7 @@ export default function AdmissionPage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-white mb-3">
+            <h2 className="text-xl font-semibold text-white mb-3 tracking-tight">
               3. Что такое пробное занятие
             </h2>
             <p>
@@ -67,7 +68,7 @@ export default function AdmissionPage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-white mb-3">
+            <h2 className="text-xl font-semibold text-white mb-3 tracking-tight">
               4. Что происходит после заявки
             </h2>
             <p>После отправки заявки обычно происходит следующий процесс:</p>
@@ -80,7 +81,7 @@ export default function AdmissionPage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-white mb-3">
+            <h2 className="text-xl font-semibold text-white mb-3 tracking-tight">
               5. Формат и ожидания от обучения
             </h2>
             <p>
@@ -94,7 +95,7 @@ export default function AdmissionPage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-white mb-3">
+            <h2 className="text-xl font-semibold text-white mb-3 tracking-tight">
               6. Кому особенно полезно обучение
             </h2>
             <p>
@@ -106,7 +107,7 @@ export default function AdmissionPage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-white mb-3">
+            <h2 className="text-xl font-semibold text-white mb-3 tracking-tight">
               7. Что важно понимать заранее
             </h2>
             <p>
@@ -118,14 +119,26 @@ export default function AdmissionPage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-white mb-3">8. Контакты</h2>
+            <h2 className="text-xl font-semibold text-white mb-3 tracking-tight">8. Контакты</h2>
             <p>
               Если у вас есть вопросы по записи, курсам, пробному занятию или выбору
               программы, используйте страницу контактов CyberGuard Academy.
             </p>
           </section>
+
+          <div className="flex flex-wrap gap-3 pt-4">
+            <ButtonLink href="/enrollment" variant="primary" size="md">
+              Записаться
+            </ButtonLink>
+            <ButtonLink href="/contact" variant="secondary" size="md">
+              Контакты
+            </ButtonLink>
+            <ButtonLink href="/courses" variant="secondary" size="md">
+              Курсы
+            </ButtonLink>
+          </div>
         </div>
-      </div>
+      </Container>
     </div>
   );
 }

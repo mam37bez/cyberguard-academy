@@ -1,7 +1,11 @@
+'use client';
+
 import React from 'react';
+import { motion } from 'framer-motion';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { Section } from '@/components/layout/Section';
 import { Container } from '@/components/layout/Container';
+import { FadeInWhenVisible, useHomeStagger } from '@/components/sections/HomeMotion';
 
 const steps = [
   {
@@ -31,30 +35,41 @@ const steps = [
 ];
 
 export function AfterSubmissionSection() {
+  const { container, item } = useHomeStagger();
+
   return (
-    <Section className="bg-cyber-darker relative overflow-hidden">
+    <Section className="relative overflow-hidden bg-cyber-darker">
       <div className="absolute inset-0 bg-glow-gradient opacity-15" aria-hidden />
 
       <Container className="relative z-10">
-        <SectionHeading
-          dense
-          badge="После заявки"
-          title="Что происходит после отправки формы"
-          subtitle="Мы стараемся сделать путь от заявки до старта обучения максимально понятным и спокойным"
-        />
+        <FadeInWhenVisible>
+          <SectionHeading
+            dense
+            badge="После заявки"
+            title="Что происходит после отправки формы"
+            subtitle="Мы стараемся сделать путь от заявки до старта обучения максимально понятным и спокойным"
+          />
+        </FadeInWhenVisible>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6">
-          {steps.map((item) => (
-            <div
-              key={item.step}
-              className="rounded-2xl border border-white/[0.06] bg-cyber-card/80 p-6 transition-all duration-300 hover:border-primary-500/30 hover:shadow-lg hover:shadow-black/20 motion-reduce:transition-none"
+        <motion.div
+          className="grid grid-cols-1 gap-5 md:grid-cols-2 md:gap-6 lg:grid-cols-4"
+          variants={container}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.12, margin: '0px 0px -10% 0px' }}
+        >
+          {steps.map((s) => (
+            <motion.div
+              key={s.step}
+              variants={item}
+              className="rounded-2xl border border-white/[0.06] bg-cyber-card/80 p-6 transition-all duration-300 hover:-translate-y-0.5 hover:border-primary-500/30 hover:shadow-lg hover:shadow-black/20 motion-reduce:transform-none motion-reduce:transition-none"
             >
-              <div className="text-xs font-mono text-primary-300/90 mb-3 tracking-wider">{item.step}</div>
-              <h3 className="text-lg font-semibold text-white mb-3 tracking-tight">{item.title}</h3>
-              <p className="text-sm text-slate-500 leading-relaxed">{item.description}</p>
-            </div>
+              <div className="mb-3 font-mono text-xs tracking-wider text-primary-300/90">{s.step}</div>
+              <h3 className="mb-3 text-lg font-semibold tracking-tight text-white">{s.title}</h3>
+              <p className="text-sm leading-relaxed text-slate-500">{s.description}</p>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </Container>
     </Section>
   );

@@ -2,6 +2,12 @@ import React from 'react';
 import Link from 'next/link';
 import { Container } from '@/components/layout/Container';
 
+const footerLink =
+  'text-sm text-slate-500 hover:text-white transition-colors rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500/50 focus-visible:text-primary-200';
+
+const footerAccentLink =
+  'text-primary-400/90 hover:text-primary-300 underline-offset-2 hover:underline rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500/45';
+
 export function Footer() {
   return (
     <footer className="bg-cyber-darker border-t border-white/[0.06]">
@@ -44,10 +50,7 @@ export function Footer() {
                 { href: '/contact', label: 'Контакты' },
               ].map((item) => (
                 <li key={item.href}>
-                  <Link
-                    href={item.href}
-                    className="text-sm text-slate-500 hover:text-white transition-colors focus-visible:outline-none focus-visible:text-primary-300"
-                  >
+                  <Link href={item.href} className={footerLink}>
                     {item.label}
                   </Link>
                 </li>
@@ -68,10 +71,7 @@ export function Footer() {
                 { href: '/terms', label: 'Условия использования' },
               ].map((item) => (
                 <li key={item.href}>
-                  <Link
-                    href={item.href}
-                    className="text-sm text-slate-500 hover:text-white transition-colors"
-                  >
+                  <Link href={item.href} className={footerLink}>
                     {item.label}
                   </Link>
                 </li>
@@ -85,19 +85,19 @@ export function Footer() {
               <li>
                 <span className="text-slate-600 block text-xs uppercase tracking-wide mb-1">Город</span>
                 Минск и другие{' '}
-                <Link href="/locations" className="text-primary-400/90 hover:text-primary-300 underline-offset-2 hover:underline">
+                <Link href="/locations" className={footerAccentLink}>
                   локации
                 </Link>
               </li>
               <li>
                 <span className="text-slate-600 block text-xs uppercase tracking-wide mb-1">Заявка и вопросы</span>
-                <Link href="/contact" className="text-primary-400/90 hover:text-primary-300 underline-offset-2 hover:underline">
+                <Link href="/contact" className={footerAccentLink}>
                   Форма обратной связи
                 </Link>
               </li>
               <li>
                 <span className="text-slate-600 block text-xs uppercase tracking-wide mb-1">Запись на курс</span>
-                <Link href="/enrollment" className="text-primary-400/90 hover:text-primary-300 underline-offset-2 hover:underline">
+                <Link href="/enrollment" className={footerAccentLink}>
                   Онлайн-запись
                 </Link>
               </li>

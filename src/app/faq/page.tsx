@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
 import { SITE_URL } from '@/lib/site';
+import { Container } from '@/components/layout/Container';
+import { SectionHeading } from '@/components/ui/SectionHeading';
 
 export const metadata: Metadata = {
   title: 'FAQ — вопросы и ответы о курсах CyberGuard Academy',
@@ -73,28 +75,27 @@ export default function FaqPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
-      <div className="max-w-4xl mx-auto px-4">
-        <h1 className="text-3xl md:text-4xl font-bold text-white mb-6">
-          Частые вопросы
-        </h1>
+      <Container>
+        <SectionHeading
+          dense
+          as="h1"
+          badge="FAQ"
+          title="Частые вопросы"
+          subtitle="Ответы о курсах, записи, формате обучения и подходе CyberGuard Academy"
+        />
 
-        <p className="text-gray-400 mb-10">
-          Ниже собраны ответы на частые вопросы о курсах, записи, формате обучения и
-          подходе CyberGuard Academy.
-        </p>
-
-        <div className="space-y-6">
+        <div className="max-w-4xl mx-auto space-y-6">
           {faqItems.map((item) => (
             <div
               key={item.question}
-              className="rounded-2xl border border-cyber-border bg-cyber-card p-6"
+              className="rounded-2xl border border-white/[0.06] bg-cyber-card/90 p-6"
             >
-              <h2 className="text-lg font-semibold text-white mb-3">{item.question}</h2>
-              <p className="text-gray-300 leading-relaxed">{item.answer}</p>
+              <h2 className="text-lg font-semibold text-white mb-3 tracking-tight">{item.question}</h2>
+              <p className="text-slate-400 leading-relaxed">{item.answer}</p>
             </div>
           ))}
         </div>
-      </div>
+      </Container>
     </div>
   );
 }

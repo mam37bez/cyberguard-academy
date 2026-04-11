@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
+import { buttonVariants } from '@/lib/button-variants';
 import { Container } from '@/components/layout/Container';
 
 const nav = [
@@ -25,6 +26,20 @@ export function Header() {
     window.addEventListener('scroll', h);
     return () => window.removeEventListener('scroll', h);
   }, []);
+
+  useEffect(() => {
+    if (!mobileOpen) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setMobileOpen(false);
+    };
+    window.addEventListener('keydown', onKey);
+    return () => {
+      document.body.style.overflow = prev;
+      window.removeEventListener('keydown', onKey);
+    };
+  }, [mobileOpen]);
 
   return (
     <header
@@ -66,10 +81,7 @@ export function Header() {
           </nav>
 
           <div className="hidden lg:block">
-            <Link
-              href="/enrollment"
-              className="inline-flex items-center justify-center px-5 py-2.5 bg-gradient-to-r from-primary-600 to-primary-500 text-white text-sm font-semibold rounded-xl shadow-md shadow-primary-900/25 transition-all hover:from-primary-500 hover:to-primary-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-400 focus-visible:ring-offset-2 focus-visible:ring-offset-cyber-darker"
-            >
+            <Link href="/enrollment" className={buttonVariants({ variant: 'primary', size: 'sm' })}>
               Записаться
             </Link>
           </div>
@@ -117,7 +129,7 @@ export function Header() {
 
             <Link
               href="/enrollment"
-              className="block mt-3 px-6 py-3 bg-gradient-to-r from-primary-600 to-primary-500 text-white text-center text-sm font-semibold rounded-xl shadow-md shadow-primary-900/20"
+              className={cn(buttonVariants({ variant: 'primary', size: 'md' }), 'mt-3 w-full text-center')}
               onClick={() => setMobileOpen(false)}
             >
               Записаться

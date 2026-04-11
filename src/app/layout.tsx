@@ -10,7 +10,7 @@ import { YandexMetrica } from '@/components/YandexMetrica';
 import { Chatbot } from '@/components/Chatbot';
 import { SITE_URL } from '@/lib/site';
 
-const inter = Inter({ subsets: ['latin', 'cyrillic'] });
+const inter = Inter({ subsets: ['latin', 'cyrillic'], display: 'swap', variable: '--font-inter' });
 
 export const viewport: Viewport = {
   themeColor: '#22d3ee',
@@ -86,6 +86,10 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: SITE_URL,
+    languages: {
+      'ru-RU': SITE_URL,
+      ru: SITE_URL,
+    },
   },
   verification: {
     google: '7OXKptXRHyST3rxYOYBpeSf4KxSu94uswVnYSfbFFr8',
@@ -110,17 +114,26 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const GA_ID = process.env.NEXT_PUBLIC_GA_ID || '';
-  const YM_ID = process.env.NEXT_PUBLIC_YM_ID || '';
+  const GA_ID = (process.env.NEXT_PUBLIC_GA_ID || '').trim();
+  const ymRaw = process.env.NEXT_PUBLIC_YM_ID || '';
+  const YM_ID = ymRaw.replace(/^id\s*=\s*/i, '').trim();
 
   return (
-    <html lang="ru">
+    <html lang="ru" className={inter.variable}>
       <body className={inter.className}>
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:inline-flex focus:items-center focus:rounded-xl focus:bg-primary-600 focus:px-4 focus:py-2.5 focus:text-sm focus:font-semibold focus:text-white focus:shadow-lg focus:outline-none focus:ring-2 focus:ring-cyan-300/60 focus:ring-offset-2 focus:ring-offset-cyber-darker"
+        >
+          Перейти к содержимому
+        </a>
         <StructuredData />
         {GA_ID && <GoogleAnalytics GA_MEASUREMENT_ID={GA_ID} />}
         {YM_ID && <YandexMetrica YM_ID={YM_ID} />}
         <Header />
-        <main className="min-h-[45vh]">{children}</main>
+        <main id="main-content" className="min-h-[45vh]" tabIndex={-1}>
+          {children}
+        </main>
         <Footer />
         <Chatbot />
         <Analytics />

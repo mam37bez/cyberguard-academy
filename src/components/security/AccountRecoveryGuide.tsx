@@ -102,14 +102,14 @@ export function AccountRecoveryGuide() {
         <CardContent>
           <div className="mb-6">
             <h2 className="text-2xl font-bold text-white mb-3">Mini Account Recovery Guide</h2>
-            <p className="text-gray-300">
+            <p className="text-slate-400">
               Если вы потеряли доступ к аккаунту или подозреваете взлом, этот мини-гайд
               поможет быстро сориентироваться и понять, какие шаги сделать в первую очередь.
             </p>
           </div>
 
           <div className="space-y-6 mb-8">
-            <div className="rounded-2xl border border-cyber-border bg-cyber-dark/40 p-5">
+            <div className="rounded-2xl border border-white/[0.06] bg-white/[0.02] p-5">
               <div className="text-white font-medium mb-4">1. Вы потеряли доступ к аккаунту?</div>
               <div className="flex flex-wrap gap-3">
                 <Button type="button" variant="secondary" onClick={() => setAnswers((p) => ({ ...p, lostAccess: true }))}>
@@ -121,7 +121,7 @@ export function AccountRecoveryGuide() {
               </div>
             </div>
 
-            <div className="rounded-2xl border border-cyber-border bg-cyber-dark/40 p-5">
+            <div className="rounded-2xl border border-white/[0.06] bg-white/[0.02] p-5">
               <div className="text-white font-medium mb-4">2. Есть подозрение, что под угрозой могла оказаться почта?</div>
               <div className="flex flex-wrap gap-3">
                 <Button type="button" variant="secondary" onClick={() => setAnswers((p) => ({ ...p, emailCompromised: true }))}>
@@ -133,7 +133,7 @@ export function AccountRecoveryGuide() {
               </div>
             </div>
 
-            <div className="rounded-2xl border border-cyber-border bg-cyber-dark/40 p-5">
+            <div className="rounded-2xl border border-white/[0.06] bg-white/[0.02] p-5">
               <div className="text-white font-medium mb-4">3. Использовался ли такой же пароль в других сервисах?</div>
               <div className="flex flex-wrap gap-3">
                 <Button type="button" variant="secondary" onClick={() => setAnswers((p) => ({ ...p, samePasswordUsed: true }))}>
@@ -151,12 +151,12 @@ export function AccountRecoveryGuide() {
               <div className="text-lg font-semibold mb-3" style={{ color: result.color }}>
                 {result.level}
               </div>
-              <p className="text-gray-300 mb-5">{result.summary}</p>
+              <p className="text-slate-400 mb-5">{result.summary}</p>
 
               <h3 className="text-white font-semibold mb-3">Что сделать сейчас</h3>
               <ul className="space-y-2">
                 {result.actions.map((action, index) => (
-                  <li key={index} className="flex gap-3 text-sm text-gray-300">
+                  <li key={index} className="flex gap-3 text-sm text-slate-400">
                     <span className="text-yellow-400">•</span>
                     <span>{action}</span>
                   </li>

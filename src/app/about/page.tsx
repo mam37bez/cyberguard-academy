@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { SITE_URL } from '@/lib/site';
 import { Card, CardContent } from '@/components/ui/Card';
 import { SectionHeading } from '@/components/ui/SectionHeading';
+import { Container } from '@/components/layout/Container';
 
 export const metadata: Metadata = {
   title: 'О CyberGuard Academy — миссия и ценности',
@@ -15,24 +16,24 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <div className="pt-24 pb-16">
-      <div className="max-w-7xl mx-auto px-4">
+      <Container>
         <SectionHeading
+          dense
           as="h1"
           badge="О нас"
           title="CyberGuard Academy"
           subtitle="Мы учим защищать, а не атаковать."
         />
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-20">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 mb-16">
           <div>
-            <h2 className="text-2xl font-bold text-white mb-4">Миссия</h2>
-            <p className="text-gray-400 mb-4">
-              Дать детям, подросткам и взрослым практические знания для защиты в
-              цифровом мире.
+            <h2 className="text-xl font-semibold text-white mb-4 tracking-tight">Миссия</h2>
+            <p className="text-slate-500 leading-relaxed mb-4">
+              Дать детям, подросткам и взрослым практические знания для защиты в цифровом мире.
             </p>
-            <p className="text-gray-400">
-              Мы придерживаемся подхода White Hat: объясняем угрозы, учим безопасному
-              поведению и развиваем цифровую грамотность без романтизации атакующих практик.
+            <p className="text-slate-500 leading-relaxed">
+              Мы придерживаемся подхода White Hat: объясняем угрозы, учим безопасному поведению и развиваем цифровую
+              грамотность без романтизации атакующих практик.
             </p>
           </div>
 
@@ -43,18 +44,18 @@ export default function AboutPage() {
               { i: '⚖️', t: 'Этика', d: 'White Hat и ответственное отношение к знаниям' },
               { i: '🌍', t: 'Доступность', d: 'Понятный язык и практический подход' },
             ].map((x) => (
-              <Card key={x.t} variant="default">
+              <Card key={x.t} variant="default" className="border-white/[0.06]">
                 <CardContent>
-                  <div className="text-3xl mb-2">{x.i}</div>
-                  <h3 className="font-bold text-white mb-1">{x.t}</h3>
-                  <p className="text-gray-400 text-sm">{x.d}</p>
+                  <div className="text-2xl mb-2">{x.i}</div>
+                  <h3 className="font-semibold text-white text-sm mb-1 tracking-tight">{x.t}</h3>
+                  <p className="text-slate-500 text-xs leading-relaxed">{x.d}</p>
                 </CardContent>
               </Card>
             ))}
           </div>
         </div>
 
-        <div className="p-12 rounded-2xl bg-gradient-to-br from-primary-900/30 to-cyber-card border border-primary-500/20">
+        <div className="p-8 md:p-12 rounded-2xl bg-gradient-to-br from-primary-950/40 to-cyber-card border border-white/[0.08]">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             {[
               { v: '4', l: 'Программы обучения' },
@@ -63,15 +64,15 @@ export default function AboutPage() {
               { v: '100%', l: 'Фокус на защите' },
             ].map((s) => (
               <div key={s.l}>
-                <div className="text-3xl font-bold bg-gradient-to-r from-cyber-green to-cyber-blue bg-clip-text text-transparent mb-1">
+                <div className="text-2xl md:text-3xl font-semibold bg-gradient-to-r from-primary-200 to-cyber-blue bg-clip-text text-transparent mb-1 tabular-nums">
                   {s.v}
                 </div>
-                <div className="text-sm text-gray-400">{s.l}</div>
+                <div className="text-xs text-slate-500 uppercase tracking-wide">{s.l}</div>
               </div>
             ))}
           </div>
         </div>
-      </div>
+      </Container>
     </div>
   );
 }

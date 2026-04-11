@@ -7,10 +7,10 @@ import { Button } from '@/components/ui/Button';
 export function SecurityToolsCTA() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-      <div className="rounded-2xl border border-cyber-border bg-cyber-dark/40 p-6 text-center">
+      <div className="rounded-2xl border border-white/[0.06] bg-white/[0.02] p-6 text-center">
         <div className="text-3xl mb-3"> </div>
         <h3 className="text-lg font-semibold text-white mb-2">Перейти к статьям по теме</h3>
-        <p className="text-sm text-gray-300 mb-4">
+        <p className="text-sm text-slate-400 mb-4">
           Начните с материалов о фишинге, паролях, защите аккаунтов, безопасности смартфона и цифровых
           правилах для семьи.
         </p>
@@ -28,10 +28,10 @@ export function SecurityToolsCTA() {
         </Link>
       </div>
 
-      <div className="rounded-2xl border border-cyber-border bg-cyber-dark/40 p-6 text-center">
+      <div className="rounded-2xl border border-white/[0.06] bg-white/[0.02] p-6 text-center">
         <div className="text-3xl mb-3"> </div>
         <h3 className="text-lg font-semibold text-white mb-2">Подобрать курс обучения</h3>
-        <p className="text-sm text-gray-300 mb-4">
+        <p className="text-sm text-slate-400 mb-4">
           Сравните программы для детей, подростков и родителей и выберите уровень, который лучше
           подходит по возрасту и подготовке.
         </p>
@@ -49,10 +49,10 @@ export function SecurityToolsCTA() {
         </Link>
       </div>
 
-      <div className="rounded-2xl border border-cyber-border bg-cyber-dark/40 p-6 text-center">
+      <div className="rounded-2xl border border-white/[0.06] bg-white/[0.02] p-6 text-center">
         <div className="text-3xl mb-3"> </div>
         <h3 className="text-lg font-semibold text-white mb-2">Записаться на консультацию</h3>
-        <p className="text-sm text-gray-300 mb-4">
+        <p className="text-sm text-slate-400 mb-4">
           Оставьте заявку — мы поможем выбрать курс, подскажем следующий шаг и ответим на вопросы по
           формату обучения.
         </p>

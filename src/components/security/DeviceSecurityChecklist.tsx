@@ -49,7 +49,7 @@ export function DeviceSecurityChecklist() {
             <h2 className="text-2xl font-bold text-white mb-3">
               Чеклист безопасности устройства
             </h2>
-            <p className="text-gray-300">
+            <p className="text-slate-400">
               Быстро проверьте базовые меры защиты на смартфоне, планшете или
               компьютере. Отметьте пункты, которые уже выполняются, и посмотрите,
               что ещё можно улучшить.
@@ -58,13 +58,13 @@ export function DeviceSecurityChecklist() {
 
           <div className="mb-6">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-sm text-gray-400">Заполненность чеклиста</span>
+              <span className="text-sm text-slate-500">Заполненность чеклиста</span>
               <span className="text-sm text-white font-medium">{progress}%</span>
             </div>
 
-            <div className="w-full h-3 bg-cyber-dark rounded-full overflow-hidden">
+            <div className="w-full h-3 rounded-full bg-white/[0.06] overflow-hidden">
               <div
-                className="h-full bg-gradient-to-r from-primary-500 to-cyber-green rounded-full transition-all duration-500"
+                className="h-full bg-gradient-to-r from-primary-500 to-emerald-500 rounded-full transition-all duration-500"
                 style={{ width: `${progress}%` }}
               />
             </div>
@@ -74,7 +74,7 @@ export function DeviceSecurityChecklist() {
             {checklistItems.map((item) => (
               <label
                 key={item.id}
-                className="flex items-start gap-3 rounded-xl border border-cyber-border bg-cyber-dark/40 p-4 cursor-pointer"
+                className="flex items-start gap-3 rounded-xl border border-white/[0.06] bg-white/[0.02] p-4 cursor-pointer"
               >
                 <input
                   type="checkbox"
@@ -82,7 +82,7 @@ export function DeviceSecurityChecklist() {
                   onChange={() => toggleItem(item.id)}
                   className="mt-1"
                 />
-                <span className="text-sm text-gray-300 leading-relaxed">{item.label}</span>
+                <span className="text-sm text-slate-400 leading-relaxed">{item.label}</span>
               </label>
             ))}
           </div>
@@ -92,14 +92,14 @@ export function DeviceSecurityChecklist() {
             {recommendations.length > 0 ? (
               <ul className="space-y-2">
                 {recommendations.map((item, index) => (
-                  <li key={index} className="flex gap-3 text-sm text-gray-300">
+                  <li key={index} className="flex gap-3 text-sm text-slate-400">
                     <span className="text-yellow-400">•</span>
                     <span>{item}</span>
                   </li>
                 ))}
               </ul>
             ) : (
-              <div className="rounded-xl border border-cyber-green/20 bg-cyber-green/10 p-4 text-sm text-cyber-green">
+              <div className="rounded-xl border border-emerald-500/20 bg-emerald-500/10 p-4 text-sm text-emerald-400/90">
                 Отлично! Базовые меры безопасности устройства выглядят хорошо настроенными.
               </div>
             )}

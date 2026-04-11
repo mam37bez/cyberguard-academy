@@ -1,5 +1,8 @@
 import type { Metadata } from 'next';
 import { SITE_URL } from '@/lib/site';
+import { Container } from '@/components/layout/Container';
+import { SectionHeading } from '@/components/ui/SectionHeading';
+import { ButtonLink } from '@/components/ui/ButtonLink';
 
 export const metadata: Metadata = {
   title: 'Условия использования — CyberGuard Academy',
@@ -13,20 +16,18 @@ export const metadata: Metadata = {
 export default function TermsPage() {
   return (
     <div className="pt-24 pb-16">
-      <div className="max-w-4xl mx-auto px-4">
-        <h1 className="text-3xl md:text-4xl font-bold text-white mb-6">
-          Условия использования
-        </h1>
+      <Container>
+        <SectionHeading
+          dense
+          as="h1"
+          badge="Документы"
+          title="Условия использования"
+          subtitle="Правила использования сайта, материалов, форм и образовательных разделов CyberGuard Academy"
+        />
 
-        <p className="text-gray-400 mb-10">
-          На этой странице собраны основные правила использования сайта CyberGuard Academy,
-          его материалов, форм обратной связи, образовательных разделов и интерактивных
-          инструментов.
-        </p>
-
-        <div className="space-y-8 text-gray-300 leading-relaxed">
+        <div className="max-w-4xl mx-auto space-y-8 text-slate-400 leading-relaxed">
           <section>
-            <h2 className="text-xl font-semibold text-white mb-3">1. Общие положения</h2>
+            <h2 className="text-xl font-semibold text-white mb-3 tracking-tight">1. Общие положения</h2>
             <p>
               Настоящие Условия использования регулируют работу с сайтом CyberGuard
               Academy, его страницами, формами, материалами и информацией, доступной
@@ -35,7 +36,7 @@ export default function TermsPage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-white mb-3">
+            <h2 className="text-xl font-semibold text-white mb-3 tracking-tight">
               2. Информационный характер материалов
             </h2>
             <p>
@@ -51,7 +52,7 @@ export default function TermsPage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-white mb-3">3. Использование сайта</h2>
+            <h2 className="text-xl font-semibold text-white mb-3 tracking-tight">3. Использование сайта</h2>
             <p>Пользователь обязуется использовать сайт добросовестно и законно.</p>
             <ul className="list-disc pl-6 space-y-2 mt-3">
               <li>не предпринимать действий, нарушающих работу сайта;</li>
@@ -62,7 +63,7 @@ export default function TermsPage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-white mb-3">4. Формы связи и заявки</h2>
+            <h2 className="text-xl font-semibold text-white mb-3 tracking-tight">4. Формы связи и заявки</h2>
             <p>
               Отправляя данные через формы на сайте, пользователь подтверждает, что
               указывает достоверную информацию и использует формы по назначению: для
@@ -75,7 +76,7 @@ export default function TermsPage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-white mb-3">
+            <h2 className="text-xl font-semibold text-white mb-3 tracking-tight">
               5. Образовательные материалы и блог
             </h2>
             <p>
@@ -90,7 +91,7 @@ export default function TermsPage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-white mb-3">
+            <h2 className="text-xl font-semibold text-white mb-3 tracking-tight">
               6. Ограничение ответственности
             </h2>
             <p>
@@ -106,7 +107,7 @@ export default function TermsPage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-white mb-3">
+            <h2 className="text-xl font-semibold text-white mb-3 tracking-tight">
               7. Ссылки на другие страницы сайта
             </h2>
             <p>
@@ -118,7 +119,7 @@ export default function TermsPage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-white mb-3">8. Изменение условий</h2>
+            <h2 className="text-xl font-semibold text-white mb-3 tracking-tight">8. Изменение условий</h2>
             <p>
               CyberGuard Academy вправе обновлять данные Условия использования по мере
               развития сайта, образовательных программ, сервисов и юридических
@@ -127,14 +128,23 @@ export default function TermsPage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-white mb-3">9. Контакты</h2>
+            <h2 className="text-xl font-semibold text-white mb-3 tracking-tight">9. Контакты</h2>
             <p>
               Если у вас есть вопросы по использованию сайта, форм, материалов или
               условий, используйте страницу контактов CyberGuard Academy.
             </p>
           </section>
+
+          <div className="flex flex-wrap gap-3 pt-2">
+            <ButtonLink href="/contact" variant="primary" size="md">
+              Связаться с нами
+            </ButtonLink>
+            <ButtonLink href="/privacy" variant="secondary" size="md">
+              Конфиденциальность
+            </ButtonLink>
+          </div>
         </div>
-      </div>
+      </Container>
     </div>
   );
 }

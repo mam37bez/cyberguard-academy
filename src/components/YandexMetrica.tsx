@@ -10,11 +10,16 @@ declare global {
   }
 }
 
+function normalizeYmCounterId(raw: string): string {
+  return raw.replace(/^id\s*=\s*/i, '').trim();
+}
+
 export function YandexMetrica({ YM_ID }: { YM_ID: string }) {
   const pathname = usePathname();
+  const counterId = normalizeYmCounterId(YM_ID);
 
   useEffect(() => {
-    if (!YM_ID) return;
+    if (!counterId) return;
 
     // Yandex Metrica loader
     (function (m: any, e: any, t: any, r: any, i: any, k: any, a: any) {
@@ -45,7 +50,7 @@ export function YandexMetrica({ YM_ID }: { YM_ID: string }) {
     );
 
     if (window.ym) {
-      window.ym(YM_ID, 'init', {
+      window.ym(counterId, 'init', {
         clickmap: true,
         trackLinks: true,
         accurateTrackBounce: true,
@@ -53,19 +58,18 @@ export function YandexMetrica({ YM_ID }: { YM_ID: string }) {
         trackHash: true,
       });
     }
-  }, [YM_ID]);
+  }, [counterId]);
 
   useEffect(() => {
-    if (window.ym) {
-      window.ym(YM_ID, 'hit', pathname);
-    }
-  }, [pathname, YM_ID]);
+    if (!counterId || !window.ym) return;
+    window.ym(counterId, 'hit', pathname);
+  }, [pathname, counterId]);
 
   return (
     <noscript>
       <div>
         <Image
-          src={`https://mc.yandex.ru/watch/${YM_ID}`}
+          src={`https://mc.yandex.ru/watch/${counterId}`}
           style={{ position: 'absolute', left: '-9999px' }}
           alt="Yandex Metrica"
           width={1}
