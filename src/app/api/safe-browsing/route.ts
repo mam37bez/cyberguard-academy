@@ -1,10 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { isRateLimited } from '@/lib/rate-limit-memory';
+import { checkRateLimit } from '@/lib/rate-limit';
 
 const SAFE_BROWSING_URL = 'https://safebrowsing.googleapis.com/v4/threatMatches:find';
 
-/** Лимит на IP: защита квоты Google и злоупотреблений (на serverless действует в пределах инстанса). */
-const RATE_MAP = new Map<string, { count: number; resetTime: number }>();
+/** Лимит на IP: при REDIS_URL — общий для всех инстансов; иначе in-memory в пределах инстанса. */
 const RATE_MAX = 30;
 const RATE_WINDOW_MS = 60 * 60 * 1000;
 
@@ -91,7 +90,7 @@ export async function POST(req: NextRequest) {
   }
 
   const ip = getClientIp(req);
-  if (isRateLimited(RATE_MAP, `sb:${ip}`, RATE_MAX, RATE_WINDOW_MS)) {
+  if (await checkRateLimit('safe-browsing', ip, RATE_MAX, RATE_WINDOW_MS)) {
     return NextResponse.json(
       {
         ok: false,

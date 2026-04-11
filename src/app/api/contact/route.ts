@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getResendClient } from '@/lib/resend';
-import { isRateLimited } from '@/lib/rate-limit-memory';
+import { checkRateLimit } from '@/lib/rate-limit';
 
 const MAX_NAME = 100;
 const MAX_EMAIL = 150;
@@ -9,8 +9,6 @@ const MAX_SUBJECT = 150;
 const MAX_MESSAGE = 5000;
 const RATE_LIMIT_MAX = 5;
 const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000;
-
-const contactRateLimit = new Map<string, { count: number; resetTime: number }>();
 
 function isValidEmail(email: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -58,7 +56,7 @@ export async function POST(req: NextRequest) {
   try {
     const ip = getClientIp(req);
 
-    if (isRateLimited(contactRateLimit, ip, RATE_LIMIT_MAX, RATE_LIMIT_WINDOW_MS)) {
+    if (await checkRateLimit('contact', ip, RATE_LIMIT_MAX, RATE_LIMIT_WINDOW_MS)) {
       return NextResponse.json(
         { error: 'Too many requests. Please try again later.' },
         { status: 429 }
