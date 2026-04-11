@@ -7,7 +7,9 @@ import { PasswordStrengthChecker } from '@/components/security/PasswordStrengthC
 import { PasswordGenerator } from '@/components/security/PasswordGenerator';
 import { DeviceSecurityChecklist } from '@/components/security/DeviceSecurityChecklist';
 import { PrivacyChecklist } from '@/components/security/PrivacyChecklist';
+import { UrlQuickCheck } from '@/components/security/UrlQuickCheck';
 import { SuspiciousLinkGuide } from '@/components/security/SuspiciousLinkGuide';
+import { PhoneScamAdvisor } from '@/components/security/PhoneScamAdvisor';
 import { SuspiciousFileGuide } from '@/components/security/SuspiciousFileGuide';
 import { FamilySecurityCheck } from '@/components/security/FamilySecurityCheck';
 import { EmailSecurityAudit } from '@/components/security/EmailSecurityAudit';
@@ -180,6 +182,10 @@ export default function SecurityToolsPage() {
           <PrivacyChecklist />
         </section>
 
+        <section id="url-quick-check" className="scroll-mt-28 mb-12">
+          <UrlQuickCheck />
+        </section>
+
         <section id="suspicious-link" className="scroll-mt-28 mb-12">
           <SuspiciousLinkGuide />
           <InlineContextCTA
@@ -190,6 +196,10 @@ export default function SecurityToolsPage() {
             secondaryHref="/enrollment"
             secondaryLabel="Запросить консультацию"
           />
+        </section>
+
+        <section id="phone-scam-advisor" className="scroll-mt-28 mb-12">
+          <PhoneScamAdvisor />
         </section>
 
         <section id="suspicious-file" className="scroll-mt-28 mb-12">

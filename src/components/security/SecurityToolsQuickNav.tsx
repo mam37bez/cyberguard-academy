@@ -39,11 +39,25 @@ const quickLinks = [
     target: 'privacy-checklist',
   },
   {
+    href: '#url-quick-check',
+    title: 'Разбор ссылки',
+    description: 'Эвристики без перехода',
+    icon: '🔍',
+    target: 'url-quick-check',
+  },
+  {
     href: '#suspicious-link',
     title: 'Ссылка',
     description: 'Действия после перехода',
     icon: '🔗',
     target: 'suspicious-link',
+  },
+  {
+    href: '#phone-scam-advisor',
+    title: 'Звонок',
+    description: 'Вымогатели и «службы»',
+    icon: '📞',
+    target: 'phone-scam-advisor',
   },
   {
     href: '#suspicious-file',
