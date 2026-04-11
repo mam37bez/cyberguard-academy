@@ -15,7 +15,15 @@ export function Card({ children, className, variant = 'default', hover = true }:
     gradient: 'bg-gradient-to-br from-cyber-card to-cyber-dark border border-cyber-border',
   };
   return (
-    <div className={cn('rounded-2xl p-6 transition-all duration-300', v[variant], hover && 'hover:border-primary-500/50 hover:shadow-lg hover:shadow-primary-500/10 hover:-translate-y-1', className)}>
+    <div
+      className={cn(
+        'rounded-2xl p-6 transition-all duration-300',
+        v[variant],
+        hover &&
+          'hover:border-primary-500/40 hover:shadow-lg hover:shadow-primary-900/20 hover:-translate-y-0.5 motion-reduce:transform-none',
+        className,
+      )}
+    >
       {children}
     </div>
   );

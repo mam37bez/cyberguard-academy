@@ -3,84 +3,79 @@
 import Link from 'next/link';
 import { modules } from '@/data/modules';
 import { motion } from 'framer-motion';
+import { Container } from '@/components/layout/Container';
 
 export function QuizPageClient() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-900 via-gray-800 to-black text-white py-20">
-      <div className="container mx-auto px-4 max-w-6xl">
+    <div className="min-h-screen bg-cyber-darker text-white py-16 md:py-20">
+      <Container className="max-w-6xl">
         <motion.div
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: -20 }}
+          className="text-center mb-12 md:mb-14"
+          initial={{ opacity: 0, y: -12 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.45 }}
         >
-          <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
-            🎯 Интерактивные Квизы
+          <p className="text-xs font-semibold uppercase tracking-widest text-primary-400/90 mb-3">Практика</p>
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight text-white mb-4">
+            Интерактивные{' '}
+            <span className="bg-gradient-to-r from-primary-300 to-cyber-blue bg-clip-text text-transparent">квизы</span>
           </h1>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            Проверь свои знания в кибербезопасности! Выбери модуль и пройди тест.
+          <p className="text-base md:text-lg text-slate-500 max-w-2xl mx-auto leading-relaxed">
+            Проверьте знания по кибербезопасности: выберите модуль и ответьте на вопросы с пояснениями.
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
           {modules.map((module, index) => (
             <motion.div
               key={module.id}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{
-                duration: 0.5,
-                delay: index * 0.1,
+                duration: 0.4,
+                delay: Math.min(index * 0.05, 0.4),
                 ease: 'easeOut',
               }}
-              whileHover={{
-                scale: 1.05,
-                transition: { duration: 0.2 },
-              }}
-              whileTap={{ scale: 0.98 }}
+              whileHover={{ y: -2 }}
+              className="motion-reduce:transform-none"
             >
               <Link
                 href={`/quiz/${module.id}`}
-                className="group relative bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-6 border border-gray-700 hover:border-cyan-500 transition-all duration-300 hover:shadow-2xl hover:shadow-cyan-500/20 block h-full"
+                className="group relative flex flex-col h-full rounded-2xl p-6 bg-cyber-card border border-cyber-border hover:border-primary-500/35 transition-all duration-300 hover:shadow-lg hover:shadow-primary-900/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500/50 focus-visible:ring-offset-2 focus-visible:ring-offset-cyber-darker"
               >
-                <motion.div
-                  className="text-6xl mb-4"
-                  whileHover={{ scale: 1.2, rotate: 5 }}
-                  transition={{ type: 'spring', stiffness: 300 }}
-                >
+                <div className="text-4xl sm:text-5xl mb-4 opacity-95 group-hover:scale-[1.03] transition-transform duration-300 motion-reduce:transform-none">
                   {module.icon}
-                </motion.div>
+                </div>
 
-                <h2 className="text-2xl font-bold mb-3 group-hover:text-cyan-400 transition-colors">
+                <h2 className="text-xl font-semibold mb-2 text-white group-hover:text-primary-200 transition-colors">
                   {module.title}
                 </h2>
 
-                <p className="text-gray-400 text-sm mb-4 line-clamp-2">{module.description}</p>
+                <p className="text-slate-500 text-sm mb-4 line-clamp-2 leading-relaxed flex-1">{module.description}</p>
 
-                <div className="flex items-center gap-4 text-sm flex-wrap">
+                <div className="flex items-center gap-3 text-xs flex-wrap">
                   <span
-                    className={`px-3 py-1 rounded-full font-medium ${
+                    className={`px-2.5 py-1 rounded-full font-medium border ${
                       module.difficulty === 'beginner'
-                        ? 'bg-green-500/20 text-green-400 border border-green-500/30'
+                        ? 'bg-emerald-500/10 text-emerald-300/95 border-emerald-500/20'
                         : module.difficulty === 'intermediate'
-                          ? 'bg-yellow-500/20 text-yellow-400 border border-yellow-500/30'
-                          : 'bg-red-500/20 text-red-400 border border-red-500/30'
+                          ? 'bg-amber-500/10 text-amber-200/90 border-amber-500/20'
+                          : 'bg-rose-500/10 text-rose-200/90 border-rose-500/20'
                     }`}
                   >
-                    {module.difficulty === 'beginner' && '🟢 Начальный'}
-                    {module.difficulty === 'intermediate' && '🟡 Средний'}
-                    {module.difficulty === 'advanced' && '🔴 Продвинутый'}
+                    {module.difficulty === 'beginner' && 'Начальный'}
+                    {module.difficulty === 'intermediate' && 'Средний'}
+                    {module.difficulty === 'advanced' && 'Продвинутый'}
                   </span>
 
-                  <span className="text-gray-500">⏱️ {module.estimatedTime}</span>
+                  <span className="text-slate-600">{module.estimatedTime}</span>
                 </div>
 
-                <div className="mt-4 pt-4 border-t border-gray-700">
-                  <p className="text-gray-400 text-sm">📝 {module.questions.length} вопросов</p>
-                </div>
-
-                <div className="absolute top-6 right-6 text-gray-600 group-hover:text-cyan-400 transition-colors">
-                  →
+                <div className="mt-4 pt-4 border-t border-white/[0.06] flex items-center justify-between gap-2">
+                  <p className="text-slate-500 text-sm">{module.questions.length} вопросов</p>
+                  <span className="text-slate-600 group-hover:text-primary-400 transition-colors text-lg" aria-hidden>
+                    →
+                  </span>
                 </div>
               </Link>
             </motion.div>
@@ -88,58 +83,40 @@ export function QuizPageClient() {
         </div>
 
         <motion.div
-          className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6 text-center"
-          initial={{ opacity: 0, y: 20 }}
+          className="mt-14 md:mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-5 text-center"
+          initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.8 }}
+          transition={{ duration: 0.45, delay: 0.15 }}
         >
-          <motion.div
-            className="bg-gray-800/50 rounded-xl p-6 border border-gray-700"
-            whileHover={{ scale: 1.05, borderColor: '#22d3ee' }}
-            transition={{ duration: 0.2 }}
-          >
-            <div className="text-4xl font-bold text-cyan-400 mb-2">{modules.length}</div>
-            <div className="text-gray-400">Модулей</div>
-          </motion.div>
-
-          <motion.div
-            className="bg-gray-800/50 rounded-xl p-6 border border-gray-700"
-            whileHover={{ scale: 1.05, borderColor: '#22d3ee' }}
-            transition={{ duration: 0.2 }}
-          >
-            <div className="text-4xl font-bold text-cyan-400 mb-2">
-              {modules.reduce((sum, m) => sum + m.questions.length, 0)}
-            </div>
-            <div className="text-gray-400">Вопросов</div>
-          </motion.div>
-
-          <motion.div
-            className="bg-gray-800/50 rounded-xl p-6 border border-gray-700"
-            whileHover={{ scale: 1.05, borderColor: '#22d3ee' }}
-            transition={{ duration: 0.2 }}
-          >
-            <div className="text-4xl font-bold text-cyan-400 mb-2">
-              {Math.round(
+          {[
+            { v: String(modules.length), l: 'Модулей' },
+            {
+              v: String(modules.reduce((sum, m) => sum + m.questions.length, 0)),
+              l: 'Вопросов',
+            },
+            {
+              v: `${Math.round(
                 modules.reduce((sum, m) => {
                   const time = parseInt(m.estimatedTime, 10);
                   return sum + (Number.isNaN(time) ? 20 : time);
                 }, 0) / 60,
-              )}
-              ч
+              )} ч`,
+              l: 'Материала',
+            },
+            { v: '∞', l: 'Попыток' },
+          ].map((s) => (
+            <div
+              key={s.l}
+              className="rounded-2xl p-5 md:p-6 bg-cyber-card/80 border border-white/[0.06]"
+            >
+              <div className="text-2xl md:text-3xl font-semibold bg-gradient-to-r from-primary-200 to-cyber-blue bg-clip-text text-transparent mb-1">
+                {s.v}
+              </div>
+              <div className="text-xs text-slate-500 uppercase tracking-wide">{s.l}</div>
             </div>
-            <div className="text-gray-400">Обучения</div>
-          </motion.div>
-
-          <motion.div
-            className="bg-gray-800/50 rounded-xl p-6 border border-gray-700"
-            whileHover={{ scale: 1.05, borderColor: '#22d3ee' }}
-            transition={{ duration: 0.2 }}
-          >
-            <div className="text-4xl font-bold text-cyan-400 mb-2">∞</div>
-            <div className="text-gray-400">Попыток</div>
-          </motion.div>
+          ))}
         </motion.div>
-      </div>
+      </Container>
     </div>
   );
 }

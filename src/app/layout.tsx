@@ -120,7 +120,7 @@ export default function RootLayout({
         {GA_ID && <GoogleAnalytics GA_MEASUREMENT_ID={GA_ID} />}
         {YM_ID && <YandexMetrica YM_ID={YM_ID} />}
         <Header />
-        <main>{children}</main>
+        <main className="min-h-[45vh]">{children}</main>
         <Footer />
         <Chatbot />
         <Analytics />

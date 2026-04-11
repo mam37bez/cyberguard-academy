@@ -1,9 +1,23 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Inter подключается через next/font в layout.tsx — без дублирования */
+
 @layer base {
-  html { scroll-behavior: smooth; }
-  body { @apply bg-cyber-darker text-white font-sans; overflow-x: hidden; }
-  ::selection { @apply bg-primary-500/30 text-white; }
+  html {
+    scroll-behavior: smooth;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+  body {
+    @apply bg-cyber-darker text-white font-sans antialiased;
+    overflow-x: hidden;
+  }
+  ::selection {
+    @apply bg-primary-500/30 text-white;
+  }
 }

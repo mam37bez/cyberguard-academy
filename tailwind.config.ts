@@ -11,8 +11,14 @@ const config: Config = {
           800:'#3730a3',900:'#312e81',950:'#1e1b4b',
         },
         cyber: {
-          green:'#00ff41',blue:'#00d4ff',purple:'#a855f7',red:'#ff3131',
-          dark:'#0a0a1a',darker:'#050510',card:'#111127',border:'#1e1e3f',
+          green: '#00ff41',
+          blue: '#00d4ff',
+          purple: '#a855f7',
+          red: '#ff3131',
+          dark: '#0a0a1a',
+          darker: '#050510',
+          card: '#111127',
+          border: '#1e1e3f',
         },
       },
       fontFamily: {
