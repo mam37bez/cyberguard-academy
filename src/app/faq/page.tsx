@@ -1,11 +1,12 @@
 import type { Metadata } from 'next';
+import { SITE_URL } from '@/lib/site';
 
 export const metadata: Metadata = {
   title: 'FAQ — вопросы и ответы о курсах CyberGuard Academy',
   description:
     'Ответы на частые вопросы о курсах CyberGuard Academy: возраст, формат обучения, запись, пробное занятие и программа обучения.',
   alternates: {
-    canonical: 'https://cyberguard-academy.vercel.app/faq',
+    canonical: `${SITE_URL}/faq`,
   },
 };
 
@@ -52,9 +53,26 @@ const faqItems = [
   },
 ];
 
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqItems.map((item) => ({
+    '@type': 'Question',
+    name: item.question,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: item.answer,
+    },
+  })),
+};
+
 export default function FaqPage() {
   return (
     <div className="pt-24 pb-16">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
       <div className="max-w-4xl mx-auto px-4">
         <h1 className="text-3xl md:text-4xl font-bold text-white mb-6">
           Частые вопросы

@@ -3,8 +3,7 @@
 import React, { useState } from 'react';
 import { Card, CardContent } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
-
-const SITE_URL = 'https://cyberguard-academy.vercel.app';
+import { SITE_URL } from '@/lib/site';
 const SHARE_TITLE = 'CyberGuard Academy';
 const SHARE_TEXT =
   'Посмотрите CyberGuard Academy — сайт о кибербезопасности, курсах, полезных материалах и цифровой защите для детей, подростков и родителей.';

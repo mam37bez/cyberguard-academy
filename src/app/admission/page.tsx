@@ -1,11 +1,12 @@
 import type { Metadata } from 'next';
+import { SITE_URL } from '@/lib/site';
 
 export const metadata: Metadata = {
   title: 'Условия обучения и записи — CyberGuard Academy',
   description:
     'Условия обучения и записи в CyberGuard Academy: как выбрать курс, как проходит пробное занятие, что происходит после заявки и как начинается обучение.',
   alternates: {
-    canonical: 'https://cyberguard-academy.vercel.app/admission',
+    canonical: `${SITE_URL}/admission`,
   },
 };
 

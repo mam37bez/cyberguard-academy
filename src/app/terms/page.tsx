@@ -1,11 +1,12 @@
 import type { Metadata } from 'next';
+import { SITE_URL } from '@/lib/site';
 
 export const metadata: Metadata = {
   title: 'Условия использования — CyberGuard Academy',
   description:
     'Условия использования сайта CyberGuard Academy: правила работы с материалами, формами, заявками и образовательной информацией.',
   alternates: {
-    canonical: 'https://cyberguard-academy.vercel.app/terms',
+    canonical: `${SITE_URL}/terms`,
   },
 };
 

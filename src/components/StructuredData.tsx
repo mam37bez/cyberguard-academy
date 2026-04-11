@@ -1,5 +1,7 @@
+import { SITE_URL } from '@/lib/site';
+
 export function StructuredData() {
-  const siteUrl = 'https://cyberguard-academy.vercel.app';
+  const siteUrl = SITE_URL;
 
   const organization = {
     '@context': 'https://schema.org',

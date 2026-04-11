@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { SITE_URL } from '@/lib/site';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { Card, CardContent } from '@/components/ui/Card';
 
@@ -7,7 +8,7 @@ export const metadata: Metadata = {
   description:
     'Филиалы и локации CyberGuard Academy: города, адреса, контактные данные и информация о площадках для обучения.',
   alternates: {
-    canonical: 'https://cyberguard-academy.vercel.app/locations',
+    canonical: `${SITE_URL}/locations`,
   },
 };
 

@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { SITE_URL } from '@/lib/site';
 import Link from 'next/link';
 import { Card, CardContent } from '@/components/ui/Card';
 import { Badge } from '@/components/ui/Badge';
@@ -12,7 +13,7 @@ export const metadata: Metadata = {
   description:
     'Блог CyberGuard Academy: статьи о кибербезопасности, цифровой защите, фишинге, безопасности детей в интернете и полезных практиках цифровой безопасности.',
   alternates: {
-    canonical: 'https://cyberguard-academy.vercel.app/blog',
+    canonical: `${SITE_URL}/blog`,
   },
 };
 

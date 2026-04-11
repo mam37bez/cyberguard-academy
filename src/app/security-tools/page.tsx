@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { SITE_URL } from '@/lib/site';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { SecurityChecker } from '@/components/security/SecurityChecker';
 import { PasswordStrengthChecker } from '@/components/security/PasswordStrengthChecker';
@@ -19,7 +20,7 @@ export const metadata: Metadata = {
   description:
     'Пройдите проверку кибербезопасности на CyberGuard Academy и получите рекомендации по защите аккаунтов, устройств и личных данных.',
   alternates: {
-    canonical: 'https://cyberguard-academy.vercel.app/security-tools',
+    canonical: `${SITE_URL}/security-tools`,
   },
 };
 

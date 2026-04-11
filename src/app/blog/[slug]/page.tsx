@@ -5,6 +5,7 @@ import { Badge } from '@/components/ui/Badge';
 import { Button } from '@/components/ui/Button';
 import { blogPosts, getBlogPostBySlug } from '@/data/blog';
 import { formatDate } from '@/lib/utils';
+import { SITE_URL } from '@/lib/site';
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -24,8 +25,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     };
   }
 
-  const url = `https://cyberguard-academy.vercel.app/blog/${post.slug}`;
+  const url = `${SITE_URL}/blog/${post.slug}`;
   const description = post.excerpt || `Статья "${post.title}" в блоге CyberGuard Academy.`;
+  const publishedTime = new Date(post.date).toISOString();
 
   return {
     title: post.title,
@@ -38,6 +40,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       description,
       url,
       type: 'article',
+      publishedTime,
+      authors: [post.author],
     },
     twitter: {
       card: 'summary_large_image',
@@ -53,7 +57,7 @@ export default async function BlogPostPage({ params }: PageProps) {
 
   if (!post) notFound();
 
-  const postUrl = `https://cyberguard-academy.vercel.app/blog/${post.slug}`;
+  const postUrl = `${SITE_URL}/blog/${post.slug}`;
 
   const relatedPosts = blogPosts
     .filter((p) => p.slug !== post.slug)
@@ -77,7 +81,7 @@ export default async function BlogPostPage({ params }: PageProps) {
     publisher: {
       '@type': 'EducationalOrganization',
       name: 'CyberGuard Academy',
-      url: 'https://cyberguard-academy.vercel.app',
+      url: SITE_URL,
     },
     datePublished: post.date,
     dateModified: post.date,

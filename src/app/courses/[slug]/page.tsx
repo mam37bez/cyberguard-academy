@@ -5,6 +5,7 @@ import { Card, CardContent } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { courses, getCourseBySlug } from '@/data/courses';
 import { formatPrice } from '@/lib/utils';
+import { SITE_URL } from '@/lib/site';
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -24,7 +25,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     };
   }
 
-  const url = `https://cyberguard-academy.vercel.app/courses/${course.slug}`;
+  const url = `${SITE_URL}/courses/${course.slug}`;
   const description =
     course.fullDescription || course.description || `Курс ${course.title} в CyberGuard Academy.`;
 
@@ -318,7 +319,7 @@ export default async function CoursePage({ params }: PageProps) {
 
   if (!course) notFound();
 
-  const courseUrl = `https://cyberguard-academy.vercel.app/courses/${course.slug}`;
+  const courseUrl = `${SITE_URL}/courses/${course.slug}`;
 
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -328,7 +329,7 @@ export default async function CoursePage({ params }: PageProps) {
     provider: {
       '@type': 'EducationalOrganization',
       name: 'CyberGuard Academy',
-      url: 'https://cyberguard-academy.vercel.app',
+      url: SITE_URL,
     },
     educationalLevel: course.level,
     timeRequired: course.duration,

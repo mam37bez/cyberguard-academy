@@ -2,9 +2,10 @@ import type { MetadataRoute } from 'next';
 import { courses } from '@/data/courses';
 import { blogPosts } from '@/data/blog';
 import { modules } from '@/data/modules';
+import { SITE_URL } from '@/lib/site';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://cyberguard-academy.vercel.app';
+  const baseUrl = SITE_URL;
   const now = new Date();
 
   const staticPages: MetadataRoute.Sitemap = [

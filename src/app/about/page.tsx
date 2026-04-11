@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { SITE_URL } from '@/lib/site';
 import { Card, CardContent } from '@/components/ui/Card';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 
@@ -7,7 +8,7 @@ export const metadata: Metadata = {
   description:
     'Узнайте больше о CyberGuard Academy: миссия, ценности, преподаватели и подход к обучению кибербезопасности для детей, подростков и родителей.',
   alternates: {
-    canonical: 'https://cyberguard-academy.vercel.app/about',
+    canonical: `${SITE_URL}/about`,
   },
 };
 

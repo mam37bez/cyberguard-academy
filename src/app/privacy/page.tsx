@@ -1,11 +1,12 @@
 import type { Metadata } from 'next';
+import { SITE_URL } from '@/lib/site';
 
 export const metadata: Metadata = {
   title: 'Политика конфиденциальности — CyberGuard Academy',
   description:
     'Политика конфиденциальности CyberGuard Academy: как мы обрабатываем персональные данные, заявки и обращения пользователей.',
   alternates: {
-    canonical: 'https://cyberguard-academy.vercel.app/privacy',
+    canonical: `${SITE_URL}/privacy`,
   },
 };
 

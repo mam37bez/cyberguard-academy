@@ -6,14 +6,30 @@ import { Button } from '@/components/ui/Button';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { courses } from '@/data/courses';
 import { formatPrice } from '@/lib/utils';
+import { SITE_URL } from '@/lib/site';
 
 export const metadata: Metadata = {
   title: 'Курсы кибербезопасности — CyberGuard Academy',
   description:
     'Курсы CyberGuard Academy по кибербезопасности для детей, подростков и родителей: базовый, средний и продвинутый уровни.',
   alternates: {
-    canonical: 'https://cyberguard-academy.vercel.app/courses',
+    canonical: `${SITE_URL}/courses`,
   },
+};
+
+const coursesListJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'Курсы CyberGuard Academy',
+  description: 'Программы обучения кибербезопасности для детей, подростков и родителей.',
+  numberOfItems: courses.length,
+  itemListElement: courses.map((course, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    name: course.title,
+    url: `${SITE_URL}/courses/${course.slug}`,
+    description: course.description,
+  })),
 };
 
 export default function CoursesPage() {
@@ -31,6 +47,10 @@ export default function CoursesPage() {
 
   return (
     <div className="pt-24 pb-16">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(coursesListJsonLd) }}
+      />
       <div className="max-w-7xl mx-auto px-4">
         <SectionHeading
           as="h1"

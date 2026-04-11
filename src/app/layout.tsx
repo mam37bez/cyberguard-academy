@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
+import { Analytics } from '@vercel/analytics/next';
 import './globals.css';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
@@ -7,6 +8,7 @@ import { StructuredData } from '@/components/StructuredData';
 import { GoogleAnalytics } from '@/components/GoogleAnalytics';
 import { YandexMetrica } from '@/components/YandexMetrica';
 import { Chatbot } from '@/components/Chatbot';
+import { SITE_URL } from '@/lib/site';
 
 const inter = Inter({ subsets: ['latin', 'cyrillic'] });
 
@@ -18,7 +20,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://cyberguard-academy.vercel.app'),
+  metadataBase: new URL(SITE_URL),
   title: {
     default: 'CyberGuard Academy — обучение кибербезопасности для детей и родителей',
     template: '%s | CyberGuard Academy',
@@ -60,7 +62,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'ru_RU',
-    url: 'https://cyberguard-academy.vercel.app',
+    url: SITE_URL,
     siteName: 'CyberGuard Academy',
     title: 'CyberGuard Academy — обучение кибербезопасности для детей и родителей',
     description:
@@ -83,7 +85,7 @@ export const metadata: Metadata = {
     creator: '@cyberguard_academy',
   },
   alternates: {
-    canonical: 'https://cyberguard-academy.vercel.app',
+    canonical: SITE_URL,
   },
   verification: {
     google: '7OXKptXRHyST3rxYOYBpeSf4KxSu94uswVnYSfbFFr8',
@@ -121,6 +123,7 @@ export default function RootLayout({
         <main>{children}</main>
         <Footer />
         <Chatbot />
+        <Analytics />
       </body>
     </html>
   );
