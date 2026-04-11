@@ -75,7 +75,6 @@ function analyze(url: URL): { type: 'info' | 'warn' | 'danger'; text: string }[]
     });
   }
 
-  const mainDomain = parts.slice(-2).join('.');
   if (SHORTENER_HINTS.some((s) => host === s || host.endsWith(`.${s}`))) {
     notes.push({
       type: 'warn',

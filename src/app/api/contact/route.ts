@@ -142,17 +142,13 @@ ${message}
 `,
     });
 
-    console.log('Contact submission sent:', {
-      email,
-      branch,
-      subject,
-      recipient,
-      createdAt: new Date().toISOString(),
-    });
+    if (process.env.NODE_ENV === 'development') {
+      console.log('Contact submission sent', { branch, subjectLength: subject.length });
+    }
 
     return NextResponse.json({ success: true }, { status: 200 });
-  } catch (error) {
-    console.error('Contact route error:', error);
+  } catch {
+    console.error('Contact route error');
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 }

@@ -145,17 +145,13 @@ Email: ${pe}
 `,
     });
 
-    console.log('Enrollment submission sent:', {
-      parentEmail: pe,
-      courseId: ci,
-      branch,
-      recipient,
-      createdAt: new Date().toISOString(),
-    });
+    if (process.env.NODE_ENV === 'development') {
+      console.log('Enrollment submission sent', { courseId: ci, branch });
+    }
 
     return NextResponse.json({ success: true }, { status: 200 });
-  } catch (error) {
-    console.error('Enrollment route error:', error);
+  } catch {
+    console.error('Enrollment route error');
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 }
