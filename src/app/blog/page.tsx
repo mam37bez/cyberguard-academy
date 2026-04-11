@@ -64,6 +64,62 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
       postLabel: 'Как сделать пароли надёжнее',
       note: 'Простые принципы + менеджер паролей + 2FA.',
     },
+    {
+      title: 'Голос «родственника», ИИ и срочные переводы',
+      toolHref: '/security-tools#suspicious-link',
+      toolLabel: 'Сценарий подозрительного контакта',
+      postHref: '/blog/ai-golos-feyki-i-zvonki-2026',
+      postLabel: 'Статья про дипфейки и звонки',
+      note: 'Проверка по второму каналу и правила до любых переводов.',
+    },
+    {
+      title: 'Passkeys вместо пароля',
+      toolHref: '/security-tools#password-strength',
+      toolLabel: 'Про пароли и усиление входа',
+      postHref: '/blog/passkeys-vmesto-parolya-prosto',
+      postLabel: 'Что такое ключи доступа',
+      note: 'Зачем passkey обычному пользователю и что важно настроить.',
+    },
+    {
+      title: 'Онлайн-покупки и «перевод продавцу»',
+      toolHref: '/security-tools#suspicious-link',
+      toolLabel: 'Проверить ссылку и сценарий',
+      postHref: '/blog/pokupki-onlayn-moshennichestvo-2026',
+      postLabel: 'Статья про маркетплейсы',
+      note: 'Защищённая сделка, реквизиты и фейковая доставка.',
+    },
+    {
+      title: 'Игры, Discord и чаты',
+      toolHref: '/security-tools#family-security',
+      toolLabel: 'Семейный чеклист',
+      postHref: '/blog/igry-messendzhery-i-moshenniki',
+      postLabel: 'Статья для подростков и родителей',
+      note: 'Скины, фейковые модераторы и кража сессии — как не отдать аккаунт.',
+    },
+    {
+      title: 'Малый бизнес и B2B: письма, доступы, сотрудники',
+      toolHref: '/security-tools#email-audit',
+      toolLabel: 'Мини-аудит почты',
+      postHref: '/blog/kiberbezopasnost-malogo-biznesa-2026',
+      postLabel: 'Статья для бизнеса',
+      note: 'Роли, общие почты, фишинг «от руководства» и базовый порядок.',
+    },
+    {
+      title: 'Школа: данные, чаты и учётные записи',
+      toolHref: '/security-tools#family-security',
+      toolLabel: 'Семейная и школьная гигиена',
+      postHref: '/blog/shkola-tsifrovaya-bezopasnost-2026',
+      postLabel: 'Статья для школы',
+      note: 'Электронный дневник, мессенджеры класса и персональные данные.',
+    },
+    {
+      title: 'Банки: коды, звонки и «служба безопасности»',
+      toolHref: '/security-tools#suspicious-link',
+      toolLabel: 'Подозрительный контакт',
+      postHref: '/blog/banki-moshenniki-i-bezopasnye-privychki-2026',
+      postLabel: 'Статья про банки',
+      note: 'Официальные каналы, push вместо голоса и что никому не называть.',
+    },
   ];
 
   const postCardLinkClass =
@@ -150,7 +206,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
 
         <section className="max-w-5xl mx-auto mb-14">
           <h2 className="text-xl font-semibold text-white mb-6 tracking-tight">Если вы пришли из инструментов</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5 md:gap-6">
             {toolToArticle.map((x) => (
               <Card key={x.title} variant="default" className="h-full border-white/[0.06]">
                 <CardContent className="flex flex-col h-full">
