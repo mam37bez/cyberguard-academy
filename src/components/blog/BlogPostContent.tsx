@@ -3,9 +3,11 @@ import Link from 'next/link';
 
 /**
  * Пути внутри сайта в тексте статей превращаются в <Link> для явной перелинковки (краулеры видят <a href>).
- * Поддерживаются только относительные URL из контента блога: /blog/... и /security-tools (# необязателен).
+ * Узнаёт: /blog/slug, /security-tools#anchor, /courses[/slug], /quiz[/module], а также «голый» / в конце строки
+ * после двоеточия или пробела (как «Главная: /»), чтобы не ловить «a / b» в середине фразы.
  */
-const INTERNAL_PATH_RE = /(\/blog\/[a-zA-Z0-9\-]+|\/security-tools(?:#[a-zA-Z0-9\-]+)?)/g;
+const INTERNAL_PATH_RE =
+  /(\/blog\/[a-zA-Z0-9\-]+|\/security-tools(?:#[a-zA-Z0-9\-]+)?|\/courses(?:\/[a-zA-Z0-9\-]+)?|\/quiz(?:\/[a-zA-Z0-9\-]+)?|^\/(?=\s*(?:\n|$))|(?<=[\s:])\/(?=\s*(?:\n|$)))/g;
 
 type BlogPostContentProps = {
   content: string;
