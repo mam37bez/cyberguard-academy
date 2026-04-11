@@ -110,10 +110,18 @@ function analyze(url: URL): { type: 'info' | 'warn' | 'danger'; text: string }[]
   return notes;
 }
 
+type SbState =
+  | { phase: 'idle' }
+  | { phase: 'loading' }
+  | { phase: 'clean'; message: string }
+  | { phase: 'threat'; message: string; threats: string[] }
+  | { phase: 'error'; message: string };
+
 export function UrlQuickCheck() {
   const [input, setInput] = useState('');
   const [parsed, setParsed] = useState<URL | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [sb, setSb] = useState<SbState>({ phase: 'idle' });
 
   const notes = useMemo(() => (parsed ? analyze(parsed) : []), [parsed]);
 
@@ -121,12 +129,71 @@ export function UrlQuickCheck() {
     const u = tryParseUrl(input);
     if (!u) {
       setParsed(null);
+      setSb({ phase: 'idle' });
       setError('Не удалось разобрать ссылку. Вставьте адрес целиком, например https://example.com/path');
       return;
     }
     setError(null);
     setParsed(u);
+    setSb({ phase: 'idle' });
     track('url_quick_check', { host: u.hostname.slice(0, 80) });
+  };
+
+  const runSafeBrowsing = async () => {
+    if (!parsed) return;
+    setSb({ phase: 'loading' });
+    try {
+      const res = await fetch('/api/safe-browsing', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ url: parsed.href }),
+      });
+      const data = (await res.json()) as {
+        ok?: boolean;
+        status?: string;
+        message?: string;
+        threats?: string[];
+        error?: string;
+        code?: string;
+      };
+
+      if (res.status === 429) {
+        setSb({ phase: 'error', message: data.error || 'Слишком много запросов. Попробуйте через час.' });
+        track('url_safe_browsing', { result: 'rate_limited' });
+        return;
+      }
+
+      if (!data.ok) {
+        setSb({
+          phase: 'error',
+          message: data.error || 'Проверка недоступна.',
+        });
+        track('url_safe_browsing', { result: 'error', code: data.code || 'unknown' });
+        return;
+      }
+
+      if (data.status === 'clean') {
+        setSb({ phase: 'clean', message: data.message || 'Совпадений не найдено.' });
+        track('url_safe_browsing', { result: 'clean' });
+        return;
+      }
+
+      if (data.status === 'threat' && data.threats?.length) {
+        setSb({
+          phase: 'threat',
+          message: data.message || 'Обнаружены совпадения.',
+          threats: data.threats,
+        });
+        track('url_safe_browsing', { result: 'threat' });
+        return;
+      }
+
+      setSb({ phase: 'error', message: 'Неожиданный ответ сервера.' });
+      track('url_safe_browsing', { result: 'unexpected' });
+    } catch {
+      setSb({ phase: 'error', message: 'Сеть недоступна. Попробуйте позже.' });
+      track('url_safe_browsing', { result: 'network' });
+    }
   };
 
   return (
@@ -135,13 +202,14 @@ export function UrlQuickCheck() {
         <CardContent>
           <h2 className="text-2xl font-bold text-white mb-3">Быстрый разбор ссылки</h2>
           <p className="text-slate-400 text-sm leading-relaxed mb-2">
-            Вставьте ссылку из SMS, мессенджера или письма. Разбор выполняется{' '}
-            <strong className="text-slate-300">только в вашем браузере</strong> — мы не открываем ссылку и не
-            отправляем её на сервер. Это <strong className="text-slate-300">не антивирус</strong> и не замена Google
-            Safe Browsing: вредоносная страница может выглядеть «нормально».
+            Вставьте ссылку из SMS, мессенджера или письма. Кнопка «Разобрать» анализирует адрес{' '}
+            <strong className="text-slate-300">только в браузере</strong> — без перехода по ссылке. Ниже можно
+            дополнительно запросить проверку через{' '}
+            <strong className="text-slate-300">Google Safe Browsing</strong> на нашем сервере (адрес уходит к Google).
           </p>
           <p className="text-xs text-slate-500 mb-6 leading-relaxed">
-            Не переходите по ссылке, если не уверены. Лучше зайти на сервис через закладку или поиск.
+            Это не гарантия безопасности: часть угроз может отсутствовать в базах. Не переходите по ссылке, если
+            сомневаетесь — лучше открыть сервис вручную.
           </p>
 
           <div className="flex flex-col gap-3 sm:flex-row sm:items-stretch">
@@ -186,6 +254,40 @@ export function UrlQuickCheck() {
                   </li>
                 ))}
               </ul>
+
+              <div className="rounded-xl border border-primary-500/20 bg-primary-500/5 p-4">
+                <p className="text-sm font-medium text-white mb-2">Проверка Google Safe Browsing (v4)</p>
+                <p className="text-xs text-slate-500 mb-3 leading-relaxed">
+                  Запрос уходит на сервер CyberGuard Academy, затем в Google. Не более 30 проверок в час с одного IP.
+                </p>
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="md"
+                  disabled={sb.phase === 'loading'}
+                  onClick={runSafeBrowsing}
+                >
+                  {sb.phase === 'loading' ? 'Проверяем…' : 'Проверить в Safe Browsing'}
+                </Button>
+
+                {sb.phase === 'clean' && (
+                  <p className="mt-3 text-sm text-emerald-300/95 leading-relaxed">{sb.message}</p>
+                )}
+                {sb.phase === 'threat' && (
+                  <div className="mt-3 rounded-lg border border-red-500/35 bg-red-500/10 p-3 text-sm text-red-100">
+                    <p className="mb-2 font-medium">Обнаружены совпадения</p>
+                    <p className="mb-2 leading-relaxed">{sb.message}</p>
+                    <ul className="list-disc pl-5 text-red-100/90">
+                      {sb.threats.map((t) => (
+                        <li key={t}>{t}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+                {sb.phase === 'error' && (
+                  <p className="mt-3 text-sm text-amber-400 leading-relaxed">{sb.message}</p>
+                )}
+              </div>
             </div>
           )}
         </CardContent>
