@@ -8,6 +8,7 @@ import { blogPosts, getBlogPostBySlug } from '@/data/blog';
 import { formatDate } from '@/lib/utils';
 import { SITE_URL } from '@/lib/site';
 import { buildBlogPostJsonLd } from '@/lib/schema/blog-post';
+import { BlogPostContent } from '@/components/blog/BlogPostContent';
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -97,8 +98,8 @@ export default async function BlogPostPage({ params }: PageProps) {
           </div>
         </div>
 
-        <article className="text-slate-400 leading-relaxed whitespace-pre-line mb-12 text-[15px] md:text-base">
-          {post.content}
+        <article className="text-slate-400 leading-relaxed mb-12 text-[15px] md:text-base">
+          <BlogPostContent content={post.content} />
         </article>
 
         <div className="flex flex-wrap gap-2 mb-12">
