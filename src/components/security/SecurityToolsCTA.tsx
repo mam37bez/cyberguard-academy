@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/Button';
 
 export function SecurityToolsCTA() {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
       <div className="rounded-2xl border border-white/[0.06] bg-white/[0.02] p-6 text-center">
         <div className="text-3xl mb-3"> </div>
         <h3 className="text-lg font-semibold text-white mb-2">Перейти к статьям по теме</h3>
@@ -67,6 +67,26 @@ export function SecurityToolsCTA() {
           }
         >
           <Button variant="outline">Записаться на консультацию</Button>
+        </Link>
+      </div>
+
+      <div className="rounded-2xl border border-white/[0.06] bg-white/[0.02] p-6 text-center">
+        <div className="text-3xl mb-3"> </div>
+        <h3 className="text-lg font-semibold text-white mb-2">Продолжить в квизах</h3>
+        <p className="text-sm text-slate-400 mb-4">
+          12 модулей и 120+ вопросов с пояснениями — бесплатно, можно проходить с телефона.
+        </p>
+        <Link
+          href="/quiz"
+          onClick={() =>
+            track('security_tools_to_quiz', {
+              source: 'security-tools',
+              destination: 'quiz',
+              placement: 'bottom-cta',
+            })
+          }
+        >
+          <Button variant="secondary">Перейти к квизам</Button>
         </Link>
       </div>
     </div>

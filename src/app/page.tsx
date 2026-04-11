@@ -13,6 +13,7 @@ import { AfterSubmissionSection } from '@/components/sections/AfterSubmissionSec
 import { FAQSection } from '@/components/sections/FAQSection';
 import { CTASection } from '@/components/sections/CTASection';
 import { ShareSiteCard } from '@/components/ShareSiteCard';
+import { RecentBlogTeaser } from '@/components/sections/RecentBlogTeaser';
 
 export const metadata: Metadata = {
   title: 'CyberGuard Academy — кибербезопасность для детей и родителей',
@@ -37,6 +38,7 @@ export default function HomePage() {
       <HowItWorksSection />
       <AfterSubmissionSection />
       <FAQSection />
+      <RecentBlogTeaser />
       <ShareSiteCard />
       <CTASection />
     </>
