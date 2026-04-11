@@ -13,20 +13,31 @@ export const metadata: Metadata = {
   },
 };
 
+const MINSK_PHONE = '+375 (29) 633-27-79';
+const MINSK_EMAIL = 'minsk@kiber-one.com';
+
 const locations = [
   {
     city: 'Минск (основная)',
-    address: 'ул. Аэродромная, 125',
-    phone: 'Уточняйте через форму',
-    email: 'Уточняйте через форму',
-    note: 'Основная локация проекта. Для уточнения деталей используйте форму связи на сайте.',
+    address: 'ул. Аэродромная, 125 (юр. адрес: каб. 29)',
+    phone: MINSK_PHONE,
+    email: MINSK_EMAIL,
+    note: 'Контакты по данным официальной площадки KIBERone в Минске. Расписание и запись — по телефону, почте или форме на сайте.',
   },
   {
     city: 'Минск / Arena City',
     address: 'Пр. Победителей, 84, Arena City (2-й этаж)',
-    phone: 'Уточняйте через форму',
-    email: 'Уточняйте через форму',
-    note: 'Дополнительная площадка в Минске. Детали записи и формата уточняйте через сайт.',
+    phone: MINSK_PHONE,
+    email: MINSK_EMAIL,
+    note: 'Дополнительная площадка в Минске.',
+  },
+  {
+    city: 'Минск — другие площадки',
+    address:
+      'ул. Максима Богдановича, 132\nул. Неманская, 24\nул. Петра Мстиславца, 1\nул. Чюрлёниса, 24\n(занятия по выходным; уточняйте расписание)',
+    phone: MINSK_PHONE,
+    email: MINSK_EMAIL,
+    note: 'Дополнительные адреса занятий в Минске по данным kiber-one.by.',
   },
   {
     city: 'Гродно',
@@ -45,9 +56,9 @@ const locations = [
   {
     city: 'Борисов',
     address: 'ул. Строителей, 26',
-    phone: '+375 29 633-27-79',
-    email: 'Уточняйте через форму',
-    note: 'Если по филиалу Борисов нужны детали, рекомендуем использовать страницу контактов для уточнения информации.',
+    phone: MINSK_PHONE,
+    email: MINSK_EMAIL,
+    note: 'Заявки с сайта направляются на минский ящик франшизы; в теме письма укажите филиал «Борисов».',
   },
 ];
 
@@ -73,7 +84,7 @@ export default function LocationsPage() {
                 <div className="space-y-4 text-sm">
                   <div>
                     <div className="text-slate-500 mb-1">Адрес</div>
-                    <div className="text-slate-400">{location.address}</div>
+                    <div className="text-slate-400 whitespace-pre-line">{location.address}</div>
                   </div>
 
                   <div>

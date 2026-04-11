@@ -260,8 +260,10 @@ export default function EnrollmentPage() {
                     className={fieldControlClass()}
                   >
                     <option value="">Выберите филиал...</option>
+                    <option value="minsk">Минск</option>
                     <option value="grodno">Гродно</option>
                     <option value="brest">Брест</option>
+                    <option value="borisov">Борисов</option>
                   </select>
                 </div>
 

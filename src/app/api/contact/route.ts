@@ -47,6 +47,7 @@ async function verifyTurnstile(token: string, ip?: string | null) {
 function getRecipientByBranch(branch: string): string | null {
   const normalized = branch.toLowerCase();
 
+  if (normalized === 'minsk' || normalized === 'borisov') return 'minsk@kiber-one.com';
   if (normalized === 'grodno') return 'grodno@kiber-one.com';
   if (normalized === 'brest') return 'brest@kiber-one.com';
 

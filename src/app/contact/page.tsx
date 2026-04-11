@@ -23,22 +23,35 @@ declare global {
 
 const SITE_KEY = '0x4AAAAAACyDT_0NEyBK5SxM';
 
+const MINSK_PHONE = '+375296332779';
+const MINSK_PHONE_LABEL = '+375 (29) 633-27-79';
+const MINSK_EMAIL = 'minsk@kiber-one.com';
+
 const locations = [
   {
     city: 'Минск (основная)',
-    address: 'ул. Аэродромная, 125',
-    phone: null,
-    phoneLabel: 'Уточняйте через форму',
-    email: null,
-    emailLabel: 'Уточняйте через форму',
+    address: 'ул. Аэродромная, 125 (юр. адрес: каб. 29)',
+    phone: MINSK_PHONE,
+    phoneLabel: MINSK_PHONE_LABEL,
+    email: MINSK_EMAIL,
+    emailLabel: MINSK_EMAIL,
   },
   {
     city: 'Минск / Arena City',
     address: 'Пр. Победителей, 84, Arena City (2-й этаж)',
-    phone: null,
-    phoneLabel: 'Уточняйте через форму',
-    email: null,
-    emailLabel: 'Уточняйте через форму',
+    phone: MINSK_PHONE,
+    phoneLabel: MINSK_PHONE_LABEL,
+    email: MINSK_EMAIL,
+    emailLabel: MINSK_EMAIL,
+  },
+  {
+    city: 'Минск — другие площадки',
+    address:
+      'ул. Максима Богдановича, 132\nул. Неманская, 24\nул. Петра Мстиславца, 1\nул. Чюрлёниса, 24\n(занятия по выходным; расписание — уточняйте по телефону или форме)',
+    phone: MINSK_PHONE,
+    phoneLabel: MINSK_PHONE_LABEL,
+    email: MINSK_EMAIL,
+    emailLabel: MINSK_EMAIL,
   },
   {
     city: 'Гродно',
@@ -59,10 +72,10 @@ const locations = [
   {
     city: 'Борисов',
     address: 'ул. Строителей, 26',
-    phone: '+375296332779',
-    phoneLabel: '+375 29 633-27-79',
-    email: null,
-    emailLabel: 'Уточняйте через форму',
+    phone: MINSK_PHONE,
+    phoneLabel: MINSK_PHONE_LABEL,
+    email: MINSK_EMAIL,
+    emailLabel: MINSK_EMAIL,
   },
 ];
 
@@ -298,8 +311,10 @@ export default function ContactPage() {
                         className={fieldControlClass()}
                       >
                         <option value="">Выберите филиал...</option>
+                        <option value="minsk">Минск</option>
                         <option value="grodno">Гродно</option>
                         <option value="brest">Брест</option>
+                        <option value="borisov">Борисов</option>
                       </select>
                     </div>
 
@@ -356,7 +371,7 @@ export default function ContactPage() {
                     <div className="space-y-3 text-sm">
                       <div>
                         <div className="text-xs uppercase tracking-wide text-slate-500 mb-1">Адрес</div>
-                        <div className="text-slate-400 leading-relaxed">{location.address}</div>
+                        <div className="text-slate-400 leading-relaxed whitespace-pre-line">{location.address}</div>
                       </div>
 
                       <div>
