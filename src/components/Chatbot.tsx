@@ -3,7 +3,41 @@
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { cn } from '@/lib/utils';
-import { chatbotKnowledge, greetings, noAnswerMessages, quickReplies } from '@/data/chatbot-knowledge';
+import type { ChatMessage } from '@/data/chatbot-knowledge';
+import {
+  assistantDisplayName,
+  assistantShortLabel,
+  chatbotKnowledge,
+  greetings,
+  noAnswerMessages,
+  quickReplies,
+} from '@/data/chatbot-knowledge';
+
+function ShieldAssistantIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={1.65}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden
+    >
+      <path d="M12 21.5c4.2-1.1 7.5-4.6 7.5-9.4V6.3L12 3.5 4.5 6.3v5.8c0 4.8 3.3 8.3 7.5 9.4Z" />
+      <path d="M9.2 12.3h5.6M12 9.5v5.6" />
+    </svg>
+  );
+}
+
+function CloseIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} aria-hidden>
+      <path d="M6 6l12 12M18 6L6 18" strokeLinecap="round" />
+    </svg>
+  );
+}
 
 interface Message {
   id: string;
@@ -61,24 +95,37 @@ export function Chatbot() {
   };
 
   const findAnswer = (query: string): string | null => {
-    const lowerQuery = query.toLowerCase();
-    
-    // Точное совпадение вопроса
-    const exactMatch = chatbotKnowledge.find(
-      (item) => item.question.toLowerCase() === lowerQuery
-    );
+    const lowerQuery = query.toLowerCase().trim();
+    const normalized = lowerQuery.replace(/[^\p{L}\p{N}\s]+/gu, ' ').replace(/\s+/g, ' ');
+
+    const exactMatch = chatbotKnowledge.find((item) => item.question.toLowerCase() === lowerQuery);
     if (exactMatch) return exactMatch.answer;
 
-    // Поиск по ключевым словам
-    const keywordMatch = chatbotKnowledge.find((item) =>
-      item.keywords.some((keyword) => lowerQuery.includes(keyword.toLowerCase()))
-    );
-    if (keywordMatch) return keywordMatch.answer;
+    let best: { item: ChatMessage; score: number } | null = null;
 
-    // Поиск в вопросе
-    const questionMatch = chatbotKnowledge.find((item) =>
-      lowerQuery.includes(item.question.toLowerCase().slice(0, 10))
-    );
+    for (const item of chatbotKnowledge) {
+      let score = 0;
+      for (const keyword of item.keywords) {
+        const k = keyword.toLowerCase();
+        if (k.length >= 2 && (normalized.includes(k) || lowerQuery.includes(k))) {
+          score += k.length >= 6 ? 4 : 2;
+        }
+      }
+      const qLower = item.question.toLowerCase();
+      for (const word of qLower.split(/\s+/).filter((w) => w.length > 3)) {
+        if (normalized.includes(word)) score += 1;
+      }
+      if (score > 0 && (!best || score > best.score)) {
+        best = { item, score };
+      }
+    }
+
+    if (best && best.score >= 2) return best.item.answer;
+
+    const questionMatch = chatbotKnowledge.find((item) => {
+      const q = item.question.toLowerCase();
+      return q.length >= 8 && (lowerQuery.includes(q.slice(0, 12)) || normalized.includes(q.slice(0, 10)));
+    });
     if (questionMatch) return questionMatch.answer;
 
     return null;
@@ -116,15 +163,17 @@ export function Chatbot() {
         onClick={() => setIsOpen(!isOpen)}
         aria-expanded={isOpen}
         aria-controls="cyberguard-chat-panel"
-        className="fixed bottom-6 right-6 z-[60] flex h-16 w-16 items-center justify-center rounded-2xl border border-white/10 bg-gradient-to-br from-primary-600 to-primary-500 text-3xl text-white shadow-xl shadow-primary-950/40 ring-1 ring-white/10 transition-transform hover:scale-[1.03] motion-reduce:transition-none motion-reduce:hover:scale-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300/70 focus-visible:ring-offset-2 focus-visible:ring-offset-cyber-darker"
+        className="fixed bottom-6 right-6 z-[60] flex h-16 w-16 items-center justify-center rounded-2xl border border-white/10 bg-gradient-to-br from-primary-600 to-primary-500 text-white shadow-xl shadow-primary-950/40 ring-1 ring-white/10 transition-transform hover:scale-[1.03] motion-reduce:transition-none motion-reduce:hover:scale-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300/70 focus-visible:ring-offset-2 focus-visible:ring-offset-cyber-darker"
         whileHover={reduceMotion ? undefined : { scale: 1.06 }}
         whileTap={reduceMotion ? undefined : { scale: 0.94 }}
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
         transition={{ type: 'spring', stiffness: 260, damping: 20 }}
       >
-        <span className="sr-only">{isOpen ? 'Закрыть помощник' : 'Открыть помощник'}</span>
-        <span aria-hidden>{isOpen ? '✕' : '🤖'}</span>
+        <span className="sr-only">{isOpen ? 'Закрыть чат консультанта' : 'Открыть чат консультанта по безопасности'}</span>
+        <span aria-hidden className="flex items-center justify-center">
+          {isOpen ? <CloseIcon className="h-7 w-7" /> : <ShieldAssistantIcon className="h-8 w-8" />}
+        </span>
       </motion.button>
 
       <AnimatePresence>
@@ -142,15 +191,15 @@ export function Chatbot() {
           >
             <div className="border-b border-white/[0.06] bg-gradient-to-r from-primary-600/95 to-primary-500/90 p-4 text-white">
               <div className="flex items-center gap-3">
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/15 text-2xl ring-1 ring-white/20">
-                  🤖
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/15 text-white ring-1 ring-white/20">
+                  <ShieldAssistantIcon className="h-6 w-6" />
                 </div>
                 <div>
                   <h3 id="chatbot-title" className="text-lg font-semibold tracking-tight">
-                    Помощник
+                    {assistantDisplayName}
                   </h3>
                   <p className="text-xs text-white/75">
-                    {isTyping ? 'Печатает…' : 'CyberGuard Academy'}
+                    {isTyping ? 'Формулирует ответ…' : assistantShortLabel}
                   </p>
                 </div>
               </div>
