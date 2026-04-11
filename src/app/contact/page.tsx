@@ -7,7 +7,10 @@ import { Card, CardContent } from '@/components/ui/Card';
 import { Input } from '@/components/ui/Input';
 import { Textarea } from '@/components/ui/Textarea';
 import { Button } from '@/components/ui/Button';
+import { ButtonLink } from '@/components/ui/ButtonLink';
 import { SectionHeading } from '@/components/ui/SectionHeading';
+import { Container } from '@/components/layout/Container';
+import { fieldControlClass, fieldLabelClass } from '@/lib/field-styles';
 
 declare global {
   interface Window {
@@ -165,34 +168,30 @@ export default function ContactPage() {
   if (done) {
     return (
       <div className="pt-24 pb-16">
-        <div className="max-w-3xl mx-auto px-4">
-          <div className="rounded-2xl border border-cyber-border bg-cyber-card p-8 text-center">
-            <div className="text-6xl mb-6">✅</div>
-            <h1 className="text-3xl font-bold text-white mb-4">Сообщение отправлено!</h1>
-            <p className="text-gray-300 mb-4">
+        <Container className="max-w-2xl">
+          <div className="rounded-2xl border border-white/[0.08] bg-cyber-card/90 p-8 md:p-10 text-center shadow-xl shadow-black/20">
+            <div className="text-5xl mb-5" aria-hidden>
+              ✓
+            </div>
+            <h1 className="text-2xl md:text-3xl font-semibold text-white mb-3 tracking-tight">Сообщение отправлено</h1>
+            <p className="text-slate-400 mb-3 leading-relaxed">
               Мы получили ваше обращение и свяжемся с вами в течение 24 часов.
             </p>
-            <p className="text-gray-400 text-sm mb-8">
-              Пока вы ждёте ответ, можете посмотреть курсы, изучить ответы на частые
-              вопросы или почитать материалы по кибербезопасности.
+            <p className="text-slate-600 text-sm mb-8 leading-relaxed">
+              Пока вы ждёте ответ, можете посмотреть курсы, изучить ответы на частые вопросы или почитать материалы по
+              кибербезопасности.
             </p>
 
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
-              <Link href="/courses">
-                <Button variant="primary" size="lg">
-                  Смотреть курсы
-                </Button>
-              </Link>
-              <Link href="/faq">
-                <Button variant="outline" size="lg">
-                  Открыть FAQ
-                </Button>
-              </Link>
-              <Link href="/blog">
-                <Button variant="ghost" size="lg">
-                  Читать блог
-                </Button>
-              </Link>
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 mb-8">
+              <ButtonLink href="/courses" variant="primary" size="lg">
+                Смотреть курсы
+              </ButtonLink>
+              <ButtonLink href="/faq" variant="outline" size="lg">
+                Открыть FAQ
+              </ButtonLink>
+              <ButtonLink href="/blog" variant="ghost" size="lg">
+                Читать блог
+              </ButtonLink>
             </div>
 
             <Button
@@ -206,7 +205,7 @@ export default function ContactPage() {
               Отправить ещё
             </Button>
           </div>
-        </div>
+        </Container>
       </div>
     );
   }
@@ -220,28 +219,31 @@ export default function ContactPage() {
       />
 
       <div className="pt-24 pb-16">
-        <div className="max-w-7xl mx-auto px-4">
+        <Container>
           <SectionHeading
+            dense
             badge="Контакты"
             title="Свяжитесь с нами"
             subtitle="Мы рады помочь, ответить на вопросы и подсказать подходящую программу"
           />
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 mb-16">
-            <div className="space-y-6">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12 mb-16">
+            <div className="space-y-4">
               {[
                 { i: '📍', t: 'Основная локация', v: 'г. Минск' },
                 { i: '📞', t: 'Телефон', v: 'Уточняйте через форму' },
                 { i: '✉️', t: 'Email', v: 'Уточняйте через форму' },
                 { i: '🕒', t: 'Время', v: 'Пн-Сб: 9-20' },
               ].map((x) => (
-                <Card key={x.t} variant="default">
+                <Card key={x.t} variant="default" className="border-white/[0.06]">
                   <CardContent>
-                    <div className="flex gap-4">
-                      <span className="text-2xl">{x.i}</span>
+                    <div className="flex gap-3">
+                      <span className="text-xl opacity-90" aria-hidden>
+                        {x.i}
+                      </span>
                       <div>
-                        <div className="text-sm text-gray-500">{x.t}</div>
-                        <div className="text-white font-medium">{x.v}</div>
+                        <div className="text-xs font-medium uppercase tracking-wide text-slate-500">{x.t}</div>
+                        <div className="text-white text-sm font-medium mt-0.5">{x.v}</div>
                       </div>
                     </div>
                   </CardContent>
@@ -250,7 +252,7 @@ export default function ContactPage() {
             </div>
 
             <div className="lg:col-span-2">
-              <Card variant="glow">
+              <Card variant="glow" className="border-white/[0.06]">
                 <CardContent>
                   <form onSubmit={sub} className="space-y-6">
                     <div className="hidden" aria-hidden="true">
@@ -284,15 +286,16 @@ export default function ContactPage() {
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-gray-300 mb-2">
+                      <label htmlFor="contact-branch" className={fieldLabelClass}>
                         Филиал для обращения
                       </label>
                       <select
+                        id="contact-branch"
                         name="branch"
                         value={f.branch}
                         onChange={ch}
                         required
-                        className="w-full rounded-xl bg-cyber-dark border border-cyber-border px-4 py-3 text-white focus:ring-2 focus:ring-primary-500"
+                        className={fieldControlClass()}
                       >
                         <option value="">Выберите филиал...</option>
                         <option value="grodno">Гродно</option>
@@ -311,15 +314,18 @@ export default function ContactPage() {
 
                     <div id="turnstile-contact" className="pt-2 min-h-[70px]" />
 
-                    {error && <p className="text-red-400 text-sm">{error}</p>}
+                    {error && <p className="text-rose-400 text-sm">{error}</p>}
 
                     <Button type="submit" size="lg" isLoading={loading} className="w-full">
                       Отправить
                     </Button>
 
-                    <p className="text-center text-sm text-gray-500">
+                    <p className="text-center text-xs text-slate-600 leading-relaxed">
                       Отправляя сообщение, вы соглашаетесь с{' '}
-                      <Link href="/privacy" className="text-primary-400 hover:text-primary-300 underline">
+                      <Link
+                        href="/privacy"
+                        className="text-primary-400/90 hover:text-primary-300 underline underline-offset-2"
+                      >
                         политикой конфиденциальности
                       </Link>
                       .
@@ -330,31 +336,37 @@ export default function ContactPage() {
             </div>
           </div>
 
-          <section>
+          <div className="mt-14 md:mt-20 pt-12 border-t border-white/[0.06]">
             <SectionHeading
+              dense
               badge="Наши локации"
               title="Где нас можно найти"
               subtitle="Актуальные адреса филиалов и площадок. Если данных недостаточно, уточняйте детали через форму выше."
             />
 
-            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 md:gap-6">
               {locations.map((location) => (
-                <Card key={location.city + location.address} variant="default">
+                <Card key={location.city + location.address} variant="default" className="border-white/[0.06]">
                   <CardContent>
-                    <div className="text-2xl mb-3">📍</div>
-                    <h3 className="text-lg font-semibold text-white mb-3">{location.city}</h3>
+                    <div className="text-xl mb-3 opacity-90" aria-hidden>
+                      📍
+                    </div>
+                    <h3 className="text-base font-semibold text-white mb-4 tracking-tight">{location.city}</h3>
 
                     <div className="space-y-3 text-sm">
                       <div>
-                        <div className="text-gray-500 mb-1">Адрес</div>
-                        <div className="text-gray-300">{location.address}</div>
+                        <div className="text-xs uppercase tracking-wide text-slate-500 mb-1">Адрес</div>
+                        <div className="text-slate-400 leading-relaxed">{location.address}</div>
                       </div>
 
                       <div>
-                        <div className="text-gray-500 mb-1">Телефон</div>
-                        <div className="text-gray-300">
+                        <div className="text-xs uppercase tracking-wide text-slate-500 mb-1">Телефон</div>
+                        <div className="text-slate-400">
                           {location.phone ? (
-                            <a href={`tel:${location.phone}`} className="hover:text-white underline">
+                            <a
+                              href={`tel:${location.phone}`}
+                              className="hover:text-white underline underline-offset-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500/40 rounded"
+                            >
                               {location.phoneLabel}
                             </a>
                           ) : (
@@ -364,10 +376,13 @@ export default function ContactPage() {
                       </div>
 
                       <div>
-                        <div className="text-gray-500 mb-1">Email</div>
-                        <div className="text-gray-300 break-all">
+                        <div className="text-xs uppercase tracking-wide text-slate-500 mb-1">Email</div>
+                        <div className="text-slate-400 break-all">
                           {location.email ? (
-                            <a href={`mailto:${location.email}`} className="hover:text-white underline">
+                            <a
+                              href={`mailto:${location.email}`}
+                              className="hover:text-white underline underline-offset-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500/40 rounded"
+                            >
                               {location.emailLabel}
                             </a>
                           ) : (
@@ -380,8 +395,8 @@ export default function ContactPage() {
                 </Card>
               ))}
             </div>
-          </section>
-        </div>
+          </div>
+        </Container>
       </div>
     </>
   );

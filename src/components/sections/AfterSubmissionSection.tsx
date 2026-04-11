@@ -1,5 +1,7 @@
 import React from 'react';
 import { SectionHeading } from '@/components/ui/SectionHeading';
+import { Section } from '@/components/layout/Section';
+import { Container } from '@/components/layout/Container';
 
 const steps = [
   {
@@ -30,29 +32,30 @@ const steps = [
 
 export function AfterSubmissionSection() {
   return (
-    <section className="py-24 bg-cyber-darker relative">
-      <div className="absolute inset-0 bg-glow-gradient opacity-20" />
+    <Section className="bg-cyber-darker relative overflow-hidden">
+      <div className="absolute inset-0 bg-glow-gradient opacity-15" aria-hidden />
 
-      <div className="max-w-7xl mx-auto px-4 relative z-10">
+      <Container className="relative z-10">
         <SectionHeading
+          dense
           badge="После заявки"
           title="Что происходит после отправки формы"
           subtitle="Мы стараемся сделать путь от заявки до старта обучения максимально понятным и спокойным"
         />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6">
           {steps.map((item) => (
             <div
               key={item.step}
-              className="rounded-2xl border border-cyber-border bg-cyber-card p-6 transition-all duration-300 hover:border-primary-500/50 hover:shadow-lg hover:shadow-primary-500/10"
+              className="rounded-2xl border border-white/[0.06] bg-cyber-card/80 p-6 transition-all duration-300 hover:border-primary-500/30 hover:shadow-lg hover:shadow-black/20 motion-reduce:transition-none"
             >
-              <div className="text-sm font-mono text-cyber-green mb-3">{item.step}</div>
-              <h3 className="text-lg font-semibold text-white mb-3">{item.title}</h3>
-              <p className="text-sm text-gray-300 leading-relaxed">{item.description}</p>
+              <div className="text-xs font-mono text-primary-300/90 mb-3 tracking-wider">{item.step}</div>
+              <h3 className="text-lg font-semibold text-white mb-3 tracking-tight">{item.title}</h3>
+              <p className="text-sm text-slate-500 leading-relaxed">{item.description}</p>
             </div>
           ))}
         </div>
-      </div>
-    </section>
+      </Container>
+    </Section>
   );
 }

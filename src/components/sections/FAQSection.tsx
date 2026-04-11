@@ -1,7 +1,8 @@
 import React from 'react';
-import Link from 'next/link';
 import { SectionHeading } from '@/components/ui/SectionHeading';
-import { Button } from '@/components/ui/Button';
+import { ButtonLink } from '@/components/ui/ButtonLink';
+import { Section } from '@/components/layout/Section';
+import { Container } from '@/components/layout/Container';
 
 const faqItems = [
   {
@@ -28,34 +29,33 @@ const faqItems = [
 
 export function FAQSection() {
   return (
-    <section className="py-24 bg-cyber-darker">
-      <div className="max-w-7xl mx-auto px-4">
+    <Section className="bg-cyber-darker">
+      <Container>
         <SectionHeading
+          dense
           badge="FAQ"
           title="Частые вопросы"
           subtitle="Краткие ответы на самые важные вопросы об обучении"
         />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6 mb-10">
           {faqItems.map((item) => (
             <div
               key={item.question}
-              className="rounded-2xl border border-cyber-border bg-cyber-card p-6"
+              className="rounded-2xl border border-white/[0.06] bg-cyber-card/80 p-6 md:p-7"
             >
-              <h3 className="text-lg font-semibold text-white mb-3">{item.question}</h3>
-              <p className="text-gray-300 leading-relaxed text-sm">{item.answer}</p>
+              <h3 className="text-base font-semibold text-white mb-3 leading-snug tracking-tight">{item.question}</h3>
+              <p className="text-slate-500 text-sm leading-relaxed">{item.answer}</p>
             </div>
           ))}
         </div>
 
         <div className="text-center">
-          <Link href="/faq">
-            <Button variant="outline" size="lg">
-              Смотреть все вопросы
-            </Button>
-          </Link>
+          <ButtonLink href="/faq" variant="outline" size="lg">
+            Смотреть все вопросы
+          </ButtonLink>
         </div>
-      </div>
-    </section>
+      </Container>
+    </Section>
   );
 }
